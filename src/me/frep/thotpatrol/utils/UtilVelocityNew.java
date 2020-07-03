@@ -19,12 +19,12 @@ public class UtilVelocityNew implements Listener {
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
 			if (data.isLastVelUpdateBoolean()) {
-				if (UtilTimer.elapsed(data.getLastVelUpdate(),Values.VelTimeReset_1_FORCE_RESET)) {
+				if (UtilTime.elapsed(data.getLastVelUpdate(),Values.VelTimeReset_1_FORCE_RESET)) {
 					data.setLastVelUpdateBoolean(false);
 				}
-				if (UtilTimer.elapsed(data.getLastVelUpdate(),Values.VelTimeReset_1)) {
+				if (UtilTime.elapsed(data.getLastVelUpdate(),Values.VelTimeReset_1)) {
 					if (!p.isOnGround()) {
-						data.setLastVelUpdate(UtilTimer.nowlong());
+						data.setLastVelUpdate(UtilTime.nowlong());
 					} else {
 						data.setLastVelUpdateBoolean(false);
 					}
@@ -40,7 +40,7 @@ public class UtilVelocityNew implements Listener {
 			if (p.getNoDamageTicks() > 0 == false) {
 				if (!data.isLastVelUpdateBoolean()) {
 					data.setLastVelUpdateBoolean(true);
-					data.setLastVelUpdate(UtilTimer.nowlong());
+					data.setLastVelUpdate(UtilTime.nowlong());
 				}
 			}
 		}

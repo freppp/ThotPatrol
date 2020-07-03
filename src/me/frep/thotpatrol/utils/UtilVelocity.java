@@ -18,7 +18,7 @@ public class UtilVelocity implements Listener {
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
 			if (data.isDidTakeVelocity()) {
-				if (UtilTimer.elapsed(data.getLastVelMS(),2000L)) {
+				if (UtilTime.elapsed(data.getLastVelMS(),2000L)) {
 					data.setDidTakeVelocity(false);
 				}
 			}
@@ -30,7 +30,7 @@ public class UtilVelocity implements Listener {
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
 			data.setDidTakeVelocity(true);
-			data.setLastVelMS(UtilTimer.nowlong());
+			data.setLastVelMS(UtilTime.nowlong());
 		}
 	}
 	public static boolean didTakeVelocity(Player p) {

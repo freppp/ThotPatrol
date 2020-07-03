@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class AimPatternA extends Check {
 
-    float lastYaw;
+    private float lastYaw;
     private Map<UUID, Integer> verbose = new HashMap<>();
 
     public AimPatternA(me.frep.thotpatrol.ThotPatrol ThotPatrol) {

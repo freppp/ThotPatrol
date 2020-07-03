@@ -69,12 +69,6 @@ public class NoFallB extends Check {
 			final Location from = e.getFrom();
 			final double diff = to.toVector().distance(from.toVector());
 			final int dist = UtilPlayer.getDistanceToGround(p);
-	        Material below2 = p.getLocation().subtract(0, 1, 0).getBlock().getType();
-	        Material below3 = p.getLocation().subtract(0, 2, 0).getBlock().getType();
-	        if (below2.toString().contains("PISTON") ||
-	        		below3.toString().contains("PISTON")) {
-	        	return;
-	        }
 	        for (final Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 3)) {
 	        	if (b.getType().toString().contains("PISTON")) {
 	        		return;

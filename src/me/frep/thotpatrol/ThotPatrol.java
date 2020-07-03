@@ -260,6 +260,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new SpeedF(this));
         Checks.add(new SpeedG(this));
         Checks.add(new SpeedH(this));
+        Checks.add(new SpeedI(this));
         Checks.add(new FlyA(this));
         Checks.add(new FlyB(this));
         Checks.add(new FlyC(this));

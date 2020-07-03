@@ -82,10 +82,9 @@ public class SpeedC extends Check {
             if (b.getType().toString().contains("PISTON")) {
                 return;
             }
-        }
-        if (p.getLocation().clone().add(0, .5, 0).getBlock().getType().toString().contains("DOOR")
-                || p.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")) {
-            Airmaxspeed += .02;
+            if (b.getType().equals(Material.TRAP_DOOR) || b.getType().equals(Material.IRON_TRAPDOOR)) {
+                Airmaxspeed += .02;
+            }
         }
         double tps = getThotPatrol().getLag().getTPS();
         double ping = getThotPatrol().getLag().getPing(p);

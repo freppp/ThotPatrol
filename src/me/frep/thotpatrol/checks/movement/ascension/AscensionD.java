@@ -4,17 +4,26 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilBlock;
+import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class AscensionD extends Check {
+
+    private Map<UUID, Long> explosionTicks = new HashMap<>();
 
     public AscensionD(ThotPatrol ThotPatrol) {
         super("AscensionD", "Ascension (Type D)", ThotPatrol);
@@ -24,11 +33,25 @@ public class AscensionD extends Check {
     }
 
     @EventHandler
+    public void onDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)
+                || e.getCause().equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION)) {
+                Player p = (Player)e.getEntity();
+                explosionTicks.put(p.getUniqueId(), System.currentTimeMillis());
+            }
+        }
+    }
+
+    @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         double yDiff = e.getTo().getY() - e.getFrom().getY();
         if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
             || p.hasPermission("thotpatrol.bypass")) {
+            return;
+        }
+        if (!UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 2500)) {
             return;
         }
         if (e.getTo().getBlock().getType().toString().contains("SLIME")

@@ -143,7 +143,7 @@ public class SpeedA extends Check {
             LimitXZ += (speed > 0.2F ? speed * 10.0F * 0.33F : 0.0F);
             for (PotionEffect effect : player.getActivePotionEffects()) {
                 if (effect.getType().equals(PotionEffectType.SPEED)) {
-                    if (player.isOnGround()) {
+                    if (UtilPlayer.isOnGround(player)) {
                         LimitXZ += 0.1D * (effect.getAmplifier() + 1);
                     } else {
                         LimitXZ += 0.1D * (effect.getAmplifier() + 1);
@@ -214,7 +214,7 @@ public class SpeedA extends Check {
         	getThotPatrol().logToFile(player, this, "Average", "Percent: " + Math.round(percent)
         	+ " | TPS: " + tps + " | Ping: " + ping);
         }
-        if (!player.isOnGround()) {
+        if (!UtilPlayer.isOnGround(player)) {
             velocity.put(uuid, player.getVelocity().length());
         } else {
             velocity.put(uuid, -1.0D);

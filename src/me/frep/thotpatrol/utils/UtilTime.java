@@ -80,4 +80,8 @@ public class UtilTime {
     public enum TimeUnit {
         FIT, DAYS, HOURS, MINUTES, SECONDS, MILLISECONDS
     }
+
+    public long getCurrentMS() {
+        return System.nanoTime() / 1000000L;
+    }
 }
