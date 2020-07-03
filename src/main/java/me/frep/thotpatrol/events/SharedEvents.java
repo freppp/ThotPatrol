@@ -17,7 +17,7 @@ import java.util.*;
 public class SharedEvents implements Listener {
 	
 	private static Map<Player, Long> lastSprintStart = new HashMap<>();
-	private static Map<Player, Long> lastJoin = new HashMap<>();
+	private static Map<UUID, Long> lastJoin = new HashMap<>();
 	private static Map<Player, Long> lastSprintStop = new HashMap<>();
 	public static Set<UUID> teleported = new HashSet<>();
 	public static Set<UUID> worldChange = new HashSet<>();
@@ -49,7 +49,7 @@ public class SharedEvents implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 		final Player p = e.getPlayer();
 		final UUID u = p.getUniqueId();
-		lastJoin.put(e.getPlayer(), System.currentTimeMillis());
+		lastJoin.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
 		teleported.add(u);
 		lastSprintStart.remove(p);
 		lastSprintStop.remove(p);
@@ -71,10 +71,10 @@ public class SharedEvents implements Listener {
     	}, 100);
 	}
 
-	public static Map<Player, Long> getLastJoin() {
+	public static Map<UUID, Long> getLastJoin() {
 		return lastJoin;
 	}
-	public void setLastJoin(Map<Player, Long> lastJoin) {
+	public void setLastJoin(Map<UUID, Long> lastJoin) {
 		SharedEvents.lastJoin = lastJoin;
 	}
 	public static Map<Player, Long> getLastSprintStart() {
