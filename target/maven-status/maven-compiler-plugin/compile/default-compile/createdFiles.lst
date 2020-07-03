@@ -48,7 +48,6 @@ me\frep\thotpatrol\checks\movement\ascension\AscensionD.class
 me\frep\thotpatrol\checks\player\scaffold\ScaffoldA.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraM.class
 me\frep\thotpatrol\checks\combat\reach\ReachB.class
-me\frep\thotpatrol\checks\movement\speed\SpeedC$1.class
 me\frep\thotpatrol\checks\movement\speed\SpeedA.class
 me\frep\thotpatrol\packets\PacketCore$3.class
 me\frep\thotpatrol\packets\PacketPlayerType.class
@@ -65,7 +64,6 @@ me\frep\thotpatrol\utils\UtilPlayer.class
 me\frep\thotpatrol\events\MoveEvent.class
 me\frep\thotpatrol\checks\combat\misc\NoSwingA.class
 me\frep\thotpatrol\checks\movement\ascension\AscensionC.class
-me\frep\thotpatrol\checks\movement\speed\SpeedC$2.class
 me\frep\thotpatrol\commands\GetLogCommand.class
 me\frep\thotpatrol\packets\events\PacketKillAuraEvent.class
 me\frep\thotpatrol\utils\UtilJDay$1.class
