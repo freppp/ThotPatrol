@@ -23,7 +23,7 @@ import java.util.UUID;
 
 public class AscensionD extends Check {
 
-    private Map<UUID, Long> explosionTicks = new HashMap<>();
+    public static Map<UUID, Long> explosionTicks = new HashMap<>();
 
     public AscensionD(ThotPatrol ThotPatrol) {
         super("AscensionD", "Ascension (Type D)", ThotPatrol);
