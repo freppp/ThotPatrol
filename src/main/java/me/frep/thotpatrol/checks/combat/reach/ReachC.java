@@ -16,16 +16,13 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ReachC extends Check {
 	
-    private Map<Player, Map.Entry<Double, Double>> offsets = new HashMap<Player, Map.Entry<Double, Double>>();
-    private Map<Player, Long> reachTicks = new HashMap<Player, Long>();
-    private ArrayList<Player> projectileHit = new ArrayList<Player>();
+    private Map<UUID, Map.Entry<Double, Double>> offsets = new HashMap<>();
+    private Map<UUID, Long> reachTicks = new HashMap<>();
+    private HashSet<UUID> projectileHit = new HashSet<>();
 	
     public ReachC(ThotPatrol ThotPatrol) {
         super("ReachC", "Reach (Type C)", ThotPatrol);
@@ -41,7 +38,7 @@ public class ReachC extends Check {
                 UtilMath.getHorizontalVector(e.getTo().toVector()));
         double horizontal = Math.sqrt(Math.pow(e.getTo().getX() - e.getFrom().getX(), 2.0)
                 + Math.pow(e.getTo().getZ() - e.getFrom().getZ(), 2.0));
-        this.offsets.put(e.getPlayer(), new AbstractMap.SimpleEntry<>(OffsetXZ, horizontal));
+        this.offsets.put(e.getPlayer().getUniqueId(), new AbstractMap.SimpleEntry<>(OffsetXZ, horizontal));
     }
 
     @EventHandler
@@ -49,14 +46,14 @@ public class ReachC extends Check {
         if (!(e.getDamager() instanceof Player)
                 || e.getCause() != DamageCause.PROJECTILE) return;
         Player player = (Player) e.getDamager();
-        this.projectileHit.add(player);
+        this.projectileHit.add(player.getUniqueId());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onLogout(PlayerQuitEvent e) {
-        offsets.remove(e.getPlayer());
-        reachTicks.remove(e.getPlayer());
-        projectileHit.remove(e.getPlayer());
+        offsets.remove(e.getPlayer().getUniqueId());
+        reachTicks.remove(e.getPlayer().getUniqueId());
+        projectileHit.remove(e.getPlayer().getUniqueId());
     }
 
     @EventHandler
@@ -80,8 +77,8 @@ public class ReachC extends Check {
 			return;
 		}
         long attackTime = System.currentTimeMillis();
-        if (this.reachTicks.containsKey(damager)) {
-            attackTime = reachTicks.get(damager);
+        if (this.reachTicks.containsKey(damager.getUniqueId())) {
+            attackTime = reachTicks.get(damager.getUniqueId());
         }
         if (Reach > 7) {
         	return;
@@ -90,13 +87,13 @@ public class ReachC extends Check {
         double offsetsp = 0.0D;
         double lastHorizontal = 0.0D;
         double offsetsd = 0.0D;
-        if (this.offsets.containsKey(damager)) {
-            offsetsd = (this.offsets.get(damager)).getKey();
-            lastHorizontal = (this.offsets.get(damager)).getValue();
+        if (this.offsets.containsKey(damager.getUniqueId())) {
+            offsetsd = (this.offsets.get(damager.getUniqueId())).getKey();
+            lastHorizontal = (this.offsets.get(damager.getUniqueId())).getValue();
         }
-        if (this.offsets.containsKey(player)) {
-            offsetsp = (this.offsets.get(player)).getKey();
-            lastHorizontal = (this.offsets.get(player)).getValue();
+        if (this.offsets.containsKey(player.getUniqueId())) {
+            offsetsp = (this.offsets.get(player.getUniqueId())).getKey();
+            lastHorizontal = (this.offsets.get(player.getUniqueId())).getValue();
         }
         Reach -= UtilMath.trim(2, offsetsd);
         Reach -= UtilMath.trim(2, offsetsp);
@@ -109,12 +106,12 @@ public class ReachC extends Check {
         if (damager.isSprinting()) {
         	maxReach2 += .55;
         }
-        if (Reach > maxReach2 && UtilTime.elapsed(attackTime, 1100) && !projectileHit.contains(player)) {
+        if (Reach > maxReach2 && UtilTime.elapsed(attackTime, 1100) && !projectileHit.contains(player.getUniqueId())) {
         	getThotPatrol().logCheat(this, damager, Reach + " > " + maxReach2 + " | Ping: " + PingD + " | TPS: " + tps);
         	getThotPatrol().logToFile(damager, this, "First Hit [Packet]", "Reach: " + Reach 
         			+ " > " + maxReach2 + " | TPS: " + tps + " | Ping: " + PingD);
         }
-        reachTicks.put(damager, UtilTime.nowlong());
-        projectileHit.remove(player);
+        reachTicks.put(damager.getUniqueId(), UtilTime.nowlong());
+        projectileHit.remove(player.getUniqueId());
     }
 }

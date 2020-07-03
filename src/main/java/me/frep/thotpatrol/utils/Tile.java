@@ -4,6 +4,7 @@
 package me.frep.thotpatrol.utils;
 
 import java.beans.ConstructorProperties;
+import java.util.Objects;
 
 public final class Tile {
 	
@@ -98,7 +99,7 @@ public final class Tile {
         }
         Tile this$parent = this.getParent();
         Tile other$parent = other.getParent();
-        return this$parent == null ? other$parent == null : this$parent.equals(other$parent);
+        return Objects.equals(this$parent, other$parent);
     }
 
     public int hashCode() {

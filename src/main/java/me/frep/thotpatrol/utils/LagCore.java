@@ -48,7 +48,7 @@ public class LagCore implements Listener {
     }
 
     public double getTPS() {
-        return this.tps + 1.0D > 20.0D ? 20.0D : this.tps + 1.0D;
+        return Math.min(this.tps + 1.0D, 20.0D);
     }
 
     public double getLag() {

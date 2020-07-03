@@ -786,8 +786,8 @@ public class DataPlayer {
 	public static int getWasFlying() {
 		return wasFlying;
 	}
-	public static int setWasFlying(int flying) {
-		return wasFlying = flying;
+	public static void setWasFlying(int flying) {
+		wasFlying = flying;
 	}
 
 	public static int getWasSpider() {

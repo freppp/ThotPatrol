@@ -439,7 +439,7 @@ public class ChecksGUI implements Listener {
         } else if (e.getInventory().getName().startsWith(Color.Gold + "Checks: Toggle")) {
             Player player = (Player) e.getWhoClicked();
             String[] spl = e.getInventory().getName().split("\\[");
-            int page = Integer.parseInt(spl[1].replaceAll("\\]", ""));
+            int page = Integer.parseInt(spl[1].replaceAll("]", ""));
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
             if (e.getCurrentItem() == null) {
@@ -486,7 +486,7 @@ public class ChecksGUI implements Listener {
         } else if (e.getInventory().getName().startsWith(Color.Gold + "Checks: Bannable")) {
             Player player = (Player) e.getWhoClicked();
             String[] spl = e.getInventory().getName().split("\\[");
-            int page = Integer.parseInt(spl[1].replaceAll("\\]", ""));
+            int page = Integer.parseInt(spl[1].replaceAll("]", ""));
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
             if (e.getCurrentItem() == null) {
@@ -534,7 +534,7 @@ public class ChecksGUI implements Listener {
         } else if (e.getInventory().getName().startsWith(Color.Gold + "Checks: BanTimer")) {
             Player player = (Player) e.getWhoClicked();
             String[] spl = e.getInventory().getName().split("\\[");
-            int page = Integer.parseInt(spl[1].replaceAll("\\]", ""));
+            int page = Integer.parseInt(spl[1].replaceAll("]", ""));
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
             if (e.getCurrentItem() == null) {

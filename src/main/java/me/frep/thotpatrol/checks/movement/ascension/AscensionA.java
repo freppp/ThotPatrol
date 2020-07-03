@@ -59,8 +59,8 @@ public class AscensionA extends Check {
 		long Time = System.currentTimeMillis();
 		double TotalBlocks = 0.0D;
 		if (AscensionTicks.containsKey(uuid)) {
-			Time = AscensionTicks.get(uuid).getKey().longValue();
-			TotalBlocks = AscensionTicks.get(uuid).getValue().doubleValue();
+			Time = AscensionTicks.get(uuid).getKey();
+			TotalBlocks = AscensionTicks.get(uuid).getValue();
 		}
 		long MS = System.currentTimeMillis() - Time;
 		double OffsetY = UtilMath.offset(UtilMath.getVerticalVector(e.getFrom().toVector()), UtilMath.getVerticalVector(e.getTo().toVector()));

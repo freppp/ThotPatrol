@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ConfigFile {
@@ -91,6 +92,6 @@ public class ConfigFile {
             }
             return strings;
         }
-        return Arrays.asList("String List at path: " + path + " not found!");
+        return Collections.singletonList("String List at path: " + path + " not found!");
     }
 }

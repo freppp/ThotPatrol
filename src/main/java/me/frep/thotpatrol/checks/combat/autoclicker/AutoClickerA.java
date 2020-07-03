@@ -30,14 +30,13 @@ public class AutoClickerA extends Check {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
     	if (attackTicks.containsKey(e.getPlayer().getUniqueId())) {
-    		return;
-    	}
+        }
     }
     
 	@EventHandler(ignoreCancelled=true, priority=EventPriority.HIGH)
     public void UseEntity(PacketUseEntityEvent e) {
         if (e.getAction() != EnumWrappers.EntityUseAction.ATTACK
-        		|| !(e.getAttacker() instanceof Player)) {
+        		|| e.getAttacker() == null) {
             return;
         }
         Player p = e.getAttacker();
@@ -45,8 +44,8 @@ public class AutoClickerA extends Check {
         int CPS = 0;
         long Time = System.currentTimeMillis();
         if (attackTicks.containsKey(uuid)) {
-            CPS = (attackTicks.get(uuid).getKey()).intValue();
-            Time = (attackTicks.get(uuid).getValue()).longValue();
+            CPS = attackTicks.get(uuid).getKey();
+            Time = attackTicks.get(uuid).getValue();
         }
 		if (p.hasPermission("thotpatrol.bypass")) {
 			return;
@@ -77,6 +76,6 @@ public class AutoClickerA extends Check {
         	dumplog(p, "[Instant Ban] CPS: " + CPS + " | TPS: " + tps + " | Ping: " + ping);
         	getThotPatrol().logToFile(p, this, "Click Speed [Instant Ban]", "CPS: " + CPS + " | TPS: " + tps + " | Ping: " + ping);
         }
-        attackTicks.put(uuid, new AbstractMap.SimpleEntry<Integer, Long>(Integer.valueOf(CPS), Long.valueOf(Time)));
+        attackTicks.put(uuid, new AbstractMap.SimpleEntry<Integer, Long>(CPS, Time));
     }
 }

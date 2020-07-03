@@ -37,7 +37,7 @@ public class UtilVelocityNew implements Listener {
 		final Player p = e.getPlayer();
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
-			if (p.getNoDamageTicks() > 0 == false) {
+			if (p.getNoDamageTicks() <= 0) {
 				if (!data.isLastVelUpdateBoolean()) {
 					data.setLastVelUpdateBoolean(true);
 					data.setLastVelUpdate(UtilTimer.nowlong());

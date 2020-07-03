@@ -94,10 +94,7 @@ public class AutoClickerB extends Check {
 
         private boolean isConstant() {
             if (threeSecondsAgoCPS >= 8.0) {
-                if (lastCPS == twoSecondsAgoCPS && twoSecondsAgoCPS == threeSecondsAgoCPS) {
-                    return true;
-                }
-                return false;
+                return lastCPS == twoSecondsAgoCPS && twoSecondsAgoCPS == threeSecondsAgoCPS;
             }
             return false;
         }

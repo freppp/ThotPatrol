@@ -155,7 +155,7 @@ public class SpeedA extends Check {
                 TooFastCount = tooFastTicks.get(uuid).getKey()
                         + 3;
             } else {
-                TooFastCount = TooFastCount > -150 ? TooFastCount-- : -150;
+                TooFastCount = TooFastCount--;
             }
             if (player.getLocation().clone().add(0, .5, 0).getBlock().getType().toString().contains("DOOR")
                     || player.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")) {

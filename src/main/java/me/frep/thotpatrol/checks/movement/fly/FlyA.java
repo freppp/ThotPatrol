@@ -53,7 +53,7 @@ public class FlyA extends Check {
             return;
         }
         if (SharedEvents.placedBlock.containsKey(player)) {
-            if (System.currentTimeMillis() - SharedEvents.placedBlock.get(player).longValue() < 2000) {
+            if (System.currentTimeMillis() - SharedEvents.placedBlock.get(player) < 2000) {
                 return;
             }
         }
@@ -71,7 +71,7 @@ public class FlyA extends Check {
             Time = flyTicksA.get(uuid);
         }
         long MS = System.currentTimeMillis() - Time;
-        if (MS > 200L || MS > 300L && ping < 300) {
+        if (MS > 200L) {
             dumplog(player, "Logged Fly. MS: " + MS);
             getThotPatrol().logCheat(this, player,
                     "Hovering for " + UtilMath.trim(1, (double) (MS / 1000)) + " second(s)" + " | Ping: " + ping + " | TPS: " + tps);

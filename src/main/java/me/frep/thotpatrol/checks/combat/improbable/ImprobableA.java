@@ -32,8 +32,7 @@ public class ImprobableA extends Check {
 	public void onMove(PacketAttackEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		if(e.getType() != PacketPlayerType.USE
-				|| p == null) {
+		if(e.getType() != PacketPlayerType.USE) {
 			return;
 		}
 		double ping = getThotPatrol().getLag().getPing(p);

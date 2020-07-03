@@ -141,7 +141,7 @@ public class SpeedF extends Check {
 					&& !loc.getBlock().isLiquid() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 					&& above.getBlock().getType() == Material.AIR && above3.getBlock().getType() == Material.AIR
 					&& blockLoc.getBlock().getType() != Material.AIR && !UtilVelocityNew.didTakeVel(p) && !UtilBlock.isNearStair(p)) {
-				if (!UtilVelocityNew.didTakeVel(p) && UtilPlayer.getDistanceToGround(p) > 4 == false) {
+				if (!UtilVelocityNew.didTakeVel(p) && UtilPlayer.getDistanceToGround(p) <= 4) {
 					if (data.getSpeed2Verbose() >= 8 || p.getNoDamageTicks() == 0 == false && !UtilVelocity.didTakeVelocity(p) && !UtilVelocityNew.didTakeVel(p)
 							&& p.getLocation().add(0, 1.94, 0).getBlock().getType() != Material.AIR) {
 						getThotPatrol().logCheat(this, p, "Check [1] | Ping: " + ping + " TPS: " + tps);
@@ -196,7 +196,7 @@ public class SpeedF extends Check {
 						&& !loc.getBlock().isLiquid() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 						&& above.getBlock().getType() == Material.AIR && above3.getBlock().getType() == Material.AIR
 						&& blockLoc.getBlock().getType() != Material.AIR && !UtilVelocityNew.didTakeVel(p) && !UtilBlock.isNearStair(p)) {
-					if (!UtilVelocityNew.didTakeVel(p) && UtilPlayer.getDistanceToGround(p) > 4 == false) {
+					if (!UtilVelocityNew.didTakeVel(p) && UtilPlayer.getDistanceToGround(p) <= 4) {
 						if (data.getSpeed2Verbose() >= 8 || p.getNoDamageTicks() == 0 == false && !UtilVelocity.didTakeVelocity(p) && !UtilVelocityNew.didTakeVel(p)
 								&& p.getLocation().add(0, 1.94, 0).getBlock().getType() != Material.AIR) {
 							getThotPatrol().logCheat(this, p, "Check [4] | Ping: " + ping + " TPS: " + tps);
@@ -215,8 +215,6 @@ public class SpeedF extends Check {
 						}
 					}
 					if (speed > 0.29 && UtilPlayer.isOnGround(p) && !data.isNearIce() && !UtilBlock.isNearStair(p) && !UtilVelocityNew.didTakeVel(p) && !speedPot) {
-						if (data.getSpeed_OnGround_Verbose() >= 5) {
-						}
 						if (speed > Max && !UtilPlayer.isAir(p) && onGroundDiff <= -0.4 && p.getFallDistance() <= 0.4 && blockLoc.getBlock().getType() != Material.ICE
 								&& e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 								&& loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR

@@ -34,7 +34,7 @@ public class NoSwingA extends Check {
         if (!(e.getDamager() instanceof Player)) {
             return;
         }
-        if (!e.getCause().equals((Object)EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
+        if (!e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
             return;
         }
         if (getThotPatrol().getLag().getTPS() < 17.0) {
@@ -45,7 +45,7 @@ public class NoSwingA extends Check {
 		double ping = getThotPatrol().getLag().getPing(p);
 		for (Plugin plugin : Bukkit.getServer().getPluginManager().getPlugins()) {
             if (plugin.getName().equals("StrikePractice")) {
-                if (p.getName().toString().startsWith("BOT_") && p.getName().endsWith("Bot")) {
+                if (p.getName().startsWith("BOT_") && p.getName().endsWith("Bot")) {
                     return;
                 }
             }
@@ -68,10 +68,7 @@ public class NoSwingA extends Check {
         if (!this.LastArmSwing.containsKey(p.getUniqueId())) {
             return false;
         }
-        if (UtilTime.nowlong() < this.LastArmSwing.get(p.getUniqueId()) + time) {
-            return true;
-        }
-        return false;
+        return UtilTime.nowlong() < this.LastArmSwing.get(p.getUniqueId()) + time;
     }
 
     @EventHandler

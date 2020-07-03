@@ -62,7 +62,7 @@ public class UtilMath {
             format = String.valueOf(format) + "#";
         }
         DecimalFormat twoDForm = new DecimalFormat(format);
-        return Double.valueOf(twoDForm.format(d).replaceAll(",", "."));
+        return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
     }
 
     public static double abs(double a) {

@@ -38,7 +38,7 @@ public class FlyB extends Check {
 		final Location to = e.getTo();
 		final Player p = e.getPlayer();
 		if (SharedEvents.placedBlock.containsKey(p)) {
-			if (System.currentTimeMillis() - SharedEvents.placedBlock.get(p).longValue() < 2000) {
+			if (System.currentTimeMillis() - SharedEvents.placedBlock.get(p) < 2000) {
 				return;
 			}
 		}

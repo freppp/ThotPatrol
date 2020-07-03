@@ -54,7 +54,7 @@ public class JDayCommand implements CommandExecutor {
 			final String playerName = args[1];
 			final Player player = Bukkit.getServer().getPlayer(playerName);
 			final String lowerCase;
-			if (ThotPatrol.getConfig().getBoolean("testmode") == true) {
+			if (ThotPatrol.getConfig().getBoolean("testmode")) {
 				sender.sendMessage(Color.Red + "Test mode is enabled therefore this is disabled!");
 			} else {
 				final OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
@@ -66,7 +66,7 @@ public class JDayCommand implements CommandExecutor {
 					str.append(args[i]).append(" ");
 				}
 				reason = str.toString();
-				if (reason.equalsIgnoreCase(null) || reason.isEmpty() || reason.equals(" ")) {
+				if (reason.isEmpty() || reason.equals(" ")) {
 					reason = "No Reason Specified. ";
 				} else {
 					reason = str.toString();

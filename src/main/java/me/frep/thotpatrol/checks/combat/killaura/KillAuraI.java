@@ -113,11 +113,8 @@ public class KillAuraI extends Check {
     			maxAccel += (e.getAmplifier() + 1) * .0585;
     		}
     	}
-    	if (lastAccel > maxAccel) {
-    		return true;
-    	}
-    	return false;
-    }
+		return lastAccel > maxAccel;
+	}
 
     private boolean nearIce(Player p) {
     	for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2) ){

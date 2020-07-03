@@ -37,11 +37,10 @@ public class UtilBlock {
 	}
 
 	public static boolean containsBlockType(Material[] arrmaterial, Block block) {
-		final Material[] arrmaterial2 = arrmaterial;
-		final int n = arrmaterial2.length;
+		final int n = arrmaterial.length;
 		int n2 = 0;
 		while (n2 < n) {
-			final Material material = arrmaterial2[n2];
+			final Material material = arrmaterial[n2];
 			if (material == block.getType()) {
 				return true;
 			}
@@ -85,10 +84,7 @@ public class UtilBlock {
 
 
 	public static boolean isAir(Block block) {
-		if (block.getType().equals(Material.AIR)) {
-			return true;
-		}
-		return false;
+		return block.getType().equals(Material.AIR);
 	}
 
 	public static boolean isNearStair(Player p) {
@@ -514,15 +510,14 @@ public class UtilBlock {
 	}
 
 	public static Block getHighest(Location location, HashSet<Material> ignore) {
-		Location loc = location;
-		loc.setY(0);
+		location.setY(0);
 		for (int i = 0; i < 256; i++) {
-			loc.setY(256 - i);
-			if (solid(loc.getBlock())) {
+			location.setY(256 - i);
+			if (solid(location.getBlock())) {
 				break;
 			}
 		}
-		return loc.getBlock().getRelative(BlockFace.UP);
+		return location.getBlock().getRelative(BlockFace.UP);
 	}
 
 	public static boolean isInAir(Player player) {

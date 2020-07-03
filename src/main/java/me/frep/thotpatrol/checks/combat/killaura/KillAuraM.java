@@ -47,7 +47,7 @@ public class KillAuraM extends Check {
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
-        long delta = System.currentTimeMillis() - lastPacket.getOrDefault(p.getUniqueId(), 0L).longValue();
+        long delta = System.currentTimeMillis() - lastPacket.getOrDefault(p.getUniqueId(), 0L);
         if (delta < 8 && ping < 400) {
             count++;
             getThotPatrol().verbose(this, p, ping, tps, delta + " < 10");

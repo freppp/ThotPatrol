@@ -128,7 +128,7 @@ public class PacketCore {
 			}
 		});
 		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(PacketCore.ThotPatrol,
-				new PacketType[] { PacketType.Play.Client.POSITION_LOOK }) {
+				PacketType.Play.Client.POSITION_LOOK) {
 			@Override
 			public void onPacketReceiving(final PacketEvent event) {
 				final Player player = event.getPlayer();

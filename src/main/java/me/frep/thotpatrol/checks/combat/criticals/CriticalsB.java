@@ -63,7 +63,7 @@ public class CriticalsB extends Check {
 				verbose--;
 			}
 			data.setCriticalsVerbose(verbose);
-		} catch (final Exception ex) {
+		} catch (final Exception ignored) {
 		}
 	}
 }

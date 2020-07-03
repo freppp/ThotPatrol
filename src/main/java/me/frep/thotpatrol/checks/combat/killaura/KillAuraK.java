@@ -92,10 +92,7 @@ public class KillAuraK extends Check {
                 maxAirSpeed = (maxAirSpeed * (((level * 20) * 0.05) + 1));
             }
         }
-        if (lastSpeed > maxAirSpeed) {
-            return true;
-        }
-        return false;
+        return lastSpeed > maxAirSpeed;
     }
 
     private int getPotionEffectLevel(Player p, PotionEffectType pet) {

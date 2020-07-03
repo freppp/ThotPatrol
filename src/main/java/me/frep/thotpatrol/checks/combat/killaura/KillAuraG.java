@@ -63,8 +63,6 @@ public class KillAuraG extends Check {
 	
 	@EventHandler
 	public void onInventoryClose(InventoryCloseEvent e) {
-		if (inInventory.contains(e.getPlayer().getUniqueId()) ) {
-			inInventory.remove(e.getPlayer().getUniqueId());
-		}
+		inInventory.remove(e.getPlayer().getUniqueId());
 	}
 }

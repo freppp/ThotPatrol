@@ -35,17 +35,14 @@ public class MoveEvent implements Listener {
 		if(ticksLeft.isEmpty() || !ticksLeft.containsKey(player.getName().toString())) {
 			return false;
 		}
-		if(ticksLeft.containsKey(player.getName().toString())) {
-			return true;
-		}
-		return false;
+		return ticksLeft.containsKey(player.getName().toString());
 	}
 
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
 		lastMove.put(p.getUniqueId(), System.currentTimeMillis());
-		if(inTimer(p) == true) {
+		if(inTimer(p)) {
 			return;
 		} else {
 			ThotPatrol.Instance.startTimer(p);
@@ -125,35 +122,31 @@ public class MoveEvent implements Listener {
 
 		final Block block = loc.getWorld().getBlockAt(loc);
 		if(block.getType().equals(Material.AIR)) {
-			if (!(DataPlayer.lastAir.contains(p.getPlayer().getName().toString()))) {
-				DataPlayer.lastAir.add(p.getPlayer().getName().toString());
+			if (!(DataPlayer.lastAir.contains(p.getPlayer().getName()))) {
+				DataPlayer.lastAir.add(p.getPlayer().getName());
 			}
 		}
 		if(!(block.getType().equals(Material.AIR))) {
 			if (e.getFrom().getX() != e.getTo().getX() || e.getFrom().getZ() != e.getTo().getZ()) {
-				if (DataPlayer.lastAir.contains(p.getPlayer().getName().toString())) {
-					DataPlayer.lastAir.remove(p.getPlayer().getName().toString());
-				}
+				DataPlayer.lastAir.remove(p.getPlayer().getName());
 			}
 		}
 		if(UtilPlayer.isNearSlime(p.getLocation())) {
-			if (!(DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString()))) {
-				DataPlayer.lastNearSlime.add(p.getPlayer().getName().toString());
+			if (!(DataPlayer.lastNearSlime.contains(p.getPlayer().getName()))) {
+				DataPlayer.lastNearSlime.add(p.getPlayer().getName());
 			}
 		}
 		if(!(UtilPlayer.isNearSlime(p.getLocation()))) {
 			if (e.getFrom().getX() != e.getTo().getX() || e.getFrom().getZ() != e.getTo().getZ()) {
-				if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
-					DataPlayer.lastNearSlime.remove(p.getPlayer().getName().toString());
-				}
+				DataPlayer.lastNearSlime.remove(p.getPlayer().getName());
 			}
 		}
-		if(DataPlayer.lastAir.contains(p.getPlayer().getName().toString())) {
+		if(DataPlayer.lastAir.contains(p.getPlayer().getName())) {
 			if (DataPlayer.getWasSpider() < 2) {
 				DataPlayer.setWasSpider(2);
 			}
 		}
-		if(!DataPlayer.lastAir.contains(p.getPlayer().getName().toString())) {
+		if(!DataPlayer.lastAir.contains(p.getPlayer().getName())) {
 			if (DataPlayer.getWasSpider() > 0) {
 				DataPlayer.setWasSpider(DataPlayer.getWasSpider() - 1);
 			}

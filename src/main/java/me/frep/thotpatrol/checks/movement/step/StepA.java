@@ -117,7 +117,6 @@ public class StepA extends Check {
                     "Speed: " + YSpeed + " Block: " + below + " | Ping: " + ping + " TPS: " + tps);
         	getThotPatrol().logToFile(player, this, "Speed", "Speed: " + YSpeed + " | Below: " + below
         			+ " | TPS: " + tps + " | Ping: " + ping);
-            return;
         }
     }
 }

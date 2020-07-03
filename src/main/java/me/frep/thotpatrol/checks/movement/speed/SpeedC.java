@@ -95,12 +95,7 @@ public class SpeedC extends Check {
         if (below.equals(Material.ICE) || below.equals(Material.PACKED_ICE) 
         		|| below2.equals(Material.ICE) || below2.equals(Material.PACKED_ICE)) {
         	jumpingOnIce.add(p.getUniqueId());
-        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, new Runnable() {
-        		@Override
-        		public void run() {
-        			jumpingOnIce.remove(p.getUniqueId());
-        		}
-        	}, 50);
+        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> jumpingOnIce.remove(p.getUniqueId()), 50);
         }
         if (jumpingOnIce.contains(p.getUniqueId())) {
         	return;
@@ -114,7 +109,7 @@ public class SpeedC extends Check {
 			Airmaxspeed += p.getWalkSpeed() * 1;
 		}
         if (p.hasPotionEffect(PotionEffectType.SPEED)) {
-            int level = getPotionEffectLevel(p, PotionEffectType.SPEED);
+            int level = getPotionEffectLevel(p);
             if (level > 0) {
                 Airmaxspeed = (Airmaxspeed * (((level * 20) * 0.011) + 1));
             }
@@ -162,9 +157,9 @@ public class SpeedC extends Check {
     }
 
 
-    private int getPotionEffectLevel(Player p, PotionEffectType pet) {
+    private int getPotionEffectLevel(Player p) {
         for (PotionEffect pe : p.getActivePotionEffects()) {
-            if (pe.getType().getName().equals(pet.getName())) {
+            if (pe.getType().getName().equals(PotionEffectType.SPEED.getName())) {
                 return pe.getAmplifier() + 1;
             }
         }
@@ -191,12 +186,7 @@ public class SpeedC extends Check {
         Player v = (Player)e.getEntity();
         if (p.getItemInHand().getEnchantmentLevel(Enchantment.KNOCKBACK) > 3) {
             highKb.add(v.getUniqueId());
-            Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, new Runnable() {
-                @Override
-                public void run() {
-                    highKb.remove(v.getUniqueId());
-                }
-            }, 100);
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> highKb.remove(v.getUniqueId()), 100);
         }
     }
 }

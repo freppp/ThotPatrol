@@ -121,7 +121,7 @@ public class SpeedB extends Check {
         double maxSpeed = 0.42;
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         if (p.hasPotionEffect(PotionEffectType.SPEED)) {
-            int level = getPotionEffectLevel(p, PotionEffectType.SPEED);
+            int level = getPotionEffectLevel(p);
             if (level > 0) {
                 maxSpeed = (maxSpeed * (((level * 20) * 0.015) + 1));
             }
@@ -196,9 +196,9 @@ public class SpeedB extends Check {
         lastHit.remove(e.getPlayer().getUniqueId());
     }
 
-    private int getPotionEffectLevel(Player p, PotionEffectType pet) {
+    private int getPotionEffectLevel(Player p) {
         for (PotionEffect pe : p.getActivePotionEffects()) {
-            if (pe.getType().getName().equals(pet.getName())) {
+            if (pe.getType().getName().equals(PotionEffectType.SPEED.getName())) {
                 return pe.getAmplifier() + 1;
             }
         }

@@ -60,9 +60,7 @@ public class DataManager {
 	}
 
 	public void removeCheck(Check c) {
-		if(checks.contains(c)) {
-			checks.remove(c);
-		}
+		checks.remove(c);
 	}
 
 	public boolean isCheck(Check c) {

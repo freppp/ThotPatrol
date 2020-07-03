@@ -19,11 +19,7 @@ public class UtilServer {
 	private static final String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
 	
     public static ArrayList<Player> getOnlinePlayers() {
-        ArrayList<Player> list = new ArrayList<>();
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            list.add(player);
-        }
-        return list;
+		return new ArrayList<>(Bukkit.getOnlinePlayers());
     }
 
     public static List<Entity> getEntities(final World world) {
@@ -114,9 +110,7 @@ public class UtilServer {
 				if (UtilBlock.isSolid(world.getBlockAt(n2, n3, n4 - 1))) {
 					return true;
 				}
-				if (UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 - 1))) {
-					return true;
-				}
+				return UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 - 1));
 			} else if (d4 > 0.7) {
 				if (UtilBlock.isSolid(world.getBlockAt(n2 - 1, n3, n4 + 1))) {
 					return true;
@@ -124,9 +118,7 @@ public class UtilServer {
 				if (UtilBlock.isSolid(world.getBlockAt(n2, n3, n4 + 1))) {
 					return true;
 				}
-				if (UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 + 1))) {
-					return true;
-				}
+				return UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 + 1));
 			}
 		} else if (d3 > 0.7) {
 			if (UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4))) {
@@ -139,9 +131,7 @@ public class UtilServer {
 				if (UtilBlock.isSolid(world.getBlockAt(n2, n3, n4 - 1))) {
 					return true;
 				}
-				if (UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 - 1))) {
-					return true;
-				}
+				return UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 - 1));
 			} else if (d4 > 0.7) {
 				if (UtilBlock.isSolid(world.getBlockAt(n2 - 1, n3, n4 + 1))) {
 					return true;
@@ -149,9 +139,7 @@ public class UtilServer {
 				if (UtilBlock.isSolid(world.getBlockAt(n2, n3, n4 + 1))) {
 					return true;
 				}
-				if (UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 + 1))) {
-					return true;
-				}
+				return UtilBlock.isSolid(world.getBlockAt(n2 + 1, n3, n4 + 1));
 			}
 		} else if (d4 < 0.3 ? UtilBlock.isSolid(world.getBlockAt(n2, n3, n4 - 1)) : d4 > 0.7 && UtilBlock.isSolid(world.getBlockAt(n2, n3, n4 + 1))) {
 			return true;
@@ -186,9 +174,7 @@ public class UtilServer {
 				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 - 1))) {
 					return true;
 				}
-				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4 - 1))) {
-					return true;
-				}
+				return UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4 - 1));
 			} else if (d4 > 0.7) {
 				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 - 1, n3, n4 + 1))) {
 					return true;
@@ -196,9 +182,7 @@ public class UtilServer {
 				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 + 1))) {
 					return true;
 				}
-				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4 + 1))) {
-					return true;
-				}
+				return UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4 + 1));
 			}
 		} else if (d3 > 0.7) {
 			if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4))) {
@@ -211,9 +195,7 @@ public class UtilServer {
 				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 - 1))) {
 					return true;
 				}
-				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4 - 1))) {
-					return true;
-				}
+				return UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 + 1, n3, n4 - 1));
 			} else if (d4 > 0.7) {
 				if (UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2 - 1, n3, n4 + 1))) {
 					return true;
@@ -225,9 +207,7 @@ public class UtilServer {
 					return true;
 				}
 			}
-		} else if (d4 < 0.3 ? UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 - 1)) : d4 > 0.7 && UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 + 1))) {
-			return true;
-		}
+		} else return d4 < 0.3 ? UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 - 1)) : d4 > 0.7 && UtilBlock.containsBlockType(arrmaterial, world.getBlockAt(n2, n3, n4 + 1));
 		return false;
 	}
 
@@ -268,9 +248,7 @@ public class UtilServer {
 				if (UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 + 1))) {
 					return true;
 				}
-				if (UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4 + 1))) {
-					return true;
-				}
+				return UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4 + 1));
 			}
 		} else if (d3 > 0.7) {
 			if (UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4))) {
@@ -283,9 +261,7 @@ public class UtilServer {
 				if (UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 - 1))) {
 					return true;
 				}
-				if (UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4 - 1))) {
-					return true;
-				}
+				return UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4 - 1));
 			} else if (d4 > 0.7) {
 				if (UtilBlock.isLiquid(world.getBlockAt(n2 - 1, n3, n4 + 1))) {
 					return true;
@@ -293,13 +269,9 @@ public class UtilServer {
 				if (UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 + 1))) {
 					return true;
 				}
-				if (UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4 + 1))) {
-					return true;
-				}
+				return UtilBlock.isLiquid(world.getBlockAt(n2 + 1, n3, n4 + 1));
 			}
-		} else if (d4 < 0.3 ? UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 - 1)) : d4 > 0.7 && UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 + 1))) {
-			return true;
-		}
+		} else return d4 < 0.3 ? UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 - 1)) : d4 > 0.7 && UtilBlock.isLiquid(world.getBlockAt(n2, n3, n4 + 1));
 		return false;
 	}
 

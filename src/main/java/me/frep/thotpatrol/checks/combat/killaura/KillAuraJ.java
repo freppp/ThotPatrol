@@ -101,9 +101,6 @@ public class KillAuraJ extends Check {
                 maxAccel += (e.getAmplifier() + 1) * .0585;
             }
         }
-        if (lastAccel > maxAccel) {
-            return true;
-        }
-        return false;
+        return lastAccel > maxAccel;
     }
 }

@@ -43,7 +43,7 @@ public class TxtFile {
             }
             bw.close();
             fw.close();
-        } catch (Exception localException) {
+        } catch (Exception ignored) {
         }
     }
 

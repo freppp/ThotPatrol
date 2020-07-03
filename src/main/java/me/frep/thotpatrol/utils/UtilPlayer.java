@@ -66,11 +66,7 @@ public class UtilPlayer {
 		loc.setY(loc.getY() - 1);
 
 		final Block block = loc.getWorld().getBlockAt(loc);
-		if (block.getType().equals(Material.AIR)) {
-			return true;
-		} else {
-			return false;
-		}
+		return block.getType().equals(Material.AIR);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -80,9 +76,7 @@ public class UtilPlayer {
 				&& user.getSetbackLocation() != null) {
 			final Location location = user.getSetbackLocation().clone().subtract(0.0D, 1.0D, 0.0D);
 
-			if (location.getBlock().getType().getId() == 165) {
-				return true;
-			}
+			return location.getBlock().getType().getId() == 165;
 		}
 		return false;
 	}
@@ -138,11 +132,7 @@ public class UtilPlayer {
 		final Location loc = p.getLocation();
 		loc.setY(loc.getY());
 		final Block block = loc.getWorld().getBlockAt(loc);
-		if (!block.getType().equals(Material.AIR)) {
-			return true;
-		} else {
-			return false;
-		}
+		return !block.getType().equals(Material.AIR);
 	}
 
 	public static boolean isAir(Player player) {
@@ -159,19 +149,11 @@ public class UtilPlayer {
 		loc.setY(loc.getY() - 2);
 
 		final Block block = loc.getWorld().getBlockAt(loc);
-		if (block.getType().equals(Material.AIR)) {
-			return true;
-		} else {
-			return false;
-		}
+		return block.getType().equals(Material.AIR);
 	}
 
 	public static boolean onGround2(Player p) {
-		if (p.getLocation().getBlock().getType() == Material.AIR) {
-			return false;
-		} else {
-			return true;
-		}
+		return p.getLocation().getBlock().getType() != Material.AIR;
 	}
 
 	public static boolean isNearPiston(Player p) {

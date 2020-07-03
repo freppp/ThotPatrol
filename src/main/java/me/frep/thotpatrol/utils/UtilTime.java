@@ -18,23 +18,24 @@ public class UtilTime {
     }
 
     public static long a(String a) {
+        final long l = Long.parseLong(a.substring(0, a.length() - 1));
         if (a.endsWith("s")) {
-            return Long.valueOf(a.substring(0, a.length() - 1)) * 1000L;
+            return l * 1000L;
         }
         if (a.endsWith("m")) {
-            return Long.valueOf(a.substring(0, a.length() - 1)) * 60000L;
+            return l * 60000L;
         }
         if (a.endsWith("h")) {
-            return Long.valueOf(a.substring(0, a.length() - 1)) * 3600000L;
+            return l * 3600000L;
         }
         if (a.endsWith("d")) {
-            return Long.valueOf(a.substring(0, a.length() - 1)) * 86400000L;
+            return l * 86400000L;
         }
         if (a.endsWith("M")) {
-            return Long.valueOf(a.substring(0, a.length() - 1)) * 2592000000L;
+            return l * 2592000000L;
         }
         if (a.endsWith("y")) {
-            return Long.valueOf(a.substring(0, a.length() - 1)) * 31104000000L;
+            return l * 31104000000L;
         }
         return -1L;
     }

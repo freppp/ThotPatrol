@@ -66,8 +66,8 @@ public class AscensionC extends Check {
 		int Count = 0;
 		long Time = UtilTime.nowlong();
 		if (flyTicks.containsKey(uuid)) {
-			Count = flyTicks.get(uuid).getKey().intValue();
-			Time = flyTicks.get(uuid).getValue().longValue();
+			Count = flyTicks.get(uuid).getKey();
+			Time = flyTicks.get(uuid).getValue();
 		}
 		if (flyTicks.containsKey(uuid)) {
 			final double Offset = to.getY() - from.getY();

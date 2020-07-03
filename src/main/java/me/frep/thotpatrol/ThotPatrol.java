@@ -1,9 +1,6 @@
 package me.frep.thotpatrol;
 
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.checks.movement.fastclimb.FastClimbA;
-import me.frep.thotpatrol.checks.player.client.HackedClientA;
-import me.frep.thotpatrol.checks.player.client.HackedClientB;
 import me.frep.thotpatrol.checks.combat.aimpattern.AimPatternA;
 import me.frep.thotpatrol.checks.combat.aimpattern.AimPatternB;
 import me.frep.thotpatrol.checks.combat.autoclicker.AutoClickerA;
@@ -23,31 +20,35 @@ import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionB;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionC;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
+import me.frep.thotpatrol.checks.movement.fastclimb.FastClimbA;
 import me.frep.thotpatrol.checks.movement.fly.FlyA;
 import me.frep.thotpatrol.checks.movement.fly.FlyB;
 import me.frep.thotpatrol.checks.movement.fly.FlyC;
 import me.frep.thotpatrol.checks.movement.fly.FlyD;
 import me.frep.thotpatrol.checks.movement.jesus.JesusA;
+import me.frep.thotpatrol.checks.movement.misc.GravityA;
+import me.frep.thotpatrol.checks.movement.misc.VClipA;
 import me.frep.thotpatrol.checks.movement.nofall.NoFallA;
 import me.frep.thotpatrol.checks.movement.nofall.NoFallB;
 import me.frep.thotpatrol.checks.movement.noslowdown.NoSlowdownA;
 import me.frep.thotpatrol.checks.movement.noslowdown.NoSlowdownB;
-import me.frep.thotpatrol.checks.movement.misc.GravityA;
-import me.frep.thotpatrol.checks.movement.misc.VClipA;
 import me.frep.thotpatrol.checks.movement.sneak.SneakA;
 import me.frep.thotpatrol.checks.movement.speed.*;
 import me.frep.thotpatrol.checks.movement.sprint.SprintA;
 import me.frep.thotpatrol.checks.movement.step.StepA;
 import me.frep.thotpatrol.checks.movement.timer.TimerA;
-import me.frep.thotpatrol.checks.player.badpackets.*;
+import me.frep.thotpatrol.checks.player.badpackets.BadPacketsA;
+import me.frep.thotpatrol.checks.player.badpackets.BadPacketsB;
+import me.frep.thotpatrol.checks.player.badpackets.BadPacketsC;
+import me.frep.thotpatrol.checks.player.badpackets.BadPacketsD;
+import me.frep.thotpatrol.checks.player.client.HackedClientA;
+import me.frep.thotpatrol.checks.player.client.HackedClientB;
 import me.frep.thotpatrol.checks.player.scaffold.ScaffoldA;
 import me.frep.thotpatrol.checks.player.scaffold.ScaffoldB;
 import me.frep.thotpatrol.commands.*;
 import me.frep.thotpatrol.data.DataManager;
 import me.frep.thotpatrol.events.MoveEvent;
 import me.frep.thotpatrol.events.SharedEvents;
-import me.frep.thotpatrol.utils.ChecksGUI;
-import me.frep.thotpatrol.utils.LagCore;
 import me.frep.thotpatrol.packets.PacketCore;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
@@ -70,14 +71,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ThotPatrol extends JavaPlugin implements Listener {
-	
+
     public static ThotPatrol Instance;
     public String PREFIX;
     public PacketCore packet;
     public LagCore lag;
-	private DataManager dataManager;
+    private DataManager dataManager;
     public List<Check> Checks;
-	public static long MS_PluginLoad;
+    public static long MS_PluginLoad;
     public Map<UUID, Map<Check, Integer>> Violations;
     public Map<UUID, Map<Check, Long>> ViolationReset;
     public List<Player> AlertsOn;
@@ -88,7 +89,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public ArrayList<UUID> hasInvOpen = new ArrayList<>();
     public Integer pingToCancel = getConfig().getInt("settings.latency.ping");
     public Integer tpsToCancel = getConfig().getInt("settings.latency.tps");
-    
+
     public ThotPatrol() {
         super();
         Checks = new ArrayList<>();
@@ -103,10 +104,10 @@ public class ThotPatrol extends JavaPlugin implements Listener {
 
     public void onEnable() {
         ThotPatrol.Instance = this;
-		new UtilBlock();
-		dataManager = new DataManager();
-		registerListeners();
-		addDataPlayers();
+        new UtilBlock();
+        dataManager = new DataManager();
+        registerListeners();
+        addDataPlayers();
         PacketCore.init();
         packet = new PacketCore(this);
         lag = new LagCore(this);
@@ -120,7 +121,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             }
         }
         File file = new File(getDataFolder(), "config.yml");
-		getCommand("jday").setExecutor(new JDayCommand(this));
+        getCommand("jday").setExecutor(new JDayCommand(this));
         getCommand("alerts").setExecutor(new AlertsCommand(this));
         getCommand("autoban").setExecutor(new AutobanCommand(this));
         getCommand("thotpatrol").setExecutor(new ThotPatrolCommand(this));
@@ -194,32 +195,32 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         }
         PREFIX = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix"));
         new BukkitRunnable() {
-        	@Override
+            @Override
             public void run() {
-        		for (Player online : Bukkit.getServer().getOnlinePlayers()) {
-        			if (getConfig().getBoolean("settings.resetViolationsAutomatically")) {
-        				if (online.hasPermission("thotpatrol.admin")) {
-        					System.out.println("[Thot Patrol] Reset violations for all players!");
-        					online.sendMessage(PREFIX + ChatColor.translateAlternateColorCodes('&', "&7Reset violations for all players!"));
-        				}
-        			}
-        			resetAllViolations();
-        		}
-        	}
+                for (Player online : Bukkit.getServer().getOnlinePlayers()) {
+                    if (getConfig().getBoolean("settings.resetViolationsAutomatically")) {
+                        if (online.hasPermission("thotpatrol.admin")) {
+                            System.out.println("[Thot Patrol] Reset violations for all players!");
+                            online.sendMessage(PREFIX + ChatColor.translateAlternateColorCodes('&', "&7Reset violations for all players!"));
+                        }
+                    }
+                    resetAllViolations();
+                }
+            }
         }.runTaskTimer(this, 0L, getConfig().getLong("settings.violationResetTime") * 20);
-        for (Player p: Bukkit.getOnlinePlayers()) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.hasPermission("thotpatrol.alerts") || p.hasPermission("thotpatrol.admin")) {
                 toggleAlerts(p);
             }
         }
     }
-    
+
     public void onDisable() {
-    	Instance = null;
+        Instance = null;
     }
-    
+
     public void addChecks() {
-    	Checks.add(new ImprobableA(this));
+        Checks.add(new ImprobableA(this));
         Checks.add(new AutoClickerA(this));
         Checks.add(new AutoClickerB(this));
         Checks.add(new AutoClickerC(this));
@@ -301,58 +302,32 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         try {
             resetAllViolations();
             clearNamesBanned();
-            if (!CriticalsA.CritTicks.isEmpty())
-                CriticalsA.CritTicks.clear();
-            if (!KillAuraA.ClickTicks.isEmpty())
-                KillAuraA.ClickTicks.clear();
-            if (!KillAuraA.Clicks.isEmpty())
-                KillAuraA.Clicks.clear();
-            if (!KillAuraA.LastMS.isEmpty())
-                KillAuraA.LastMS.clear();
-            if (!KillAuraB.AuraTicks.isEmpty())
-                KillAuraB.AuraTicks.clear();
-            if (!KillAuraC.Differences.isEmpty())
-                KillAuraC.Differences.clear();
-            if (!KillAuraC.LastLocation.isEmpty())
-                KillAuraC.LastLocation.clear();
-            if (!KillAuraC.AimbotTicks.isEmpty())
-                KillAuraC.AimbotTicks.clear();
-            if (!KillAuraD.lastAttack.isEmpty())
-                KillAuraD.lastAttack.clear();
-            if (!BadPacketsA.FastHealTicks.isEmpty())
-                BadPacketsA.FastHealTicks.clear();
-            if (!BadPacketsA.LastHeal.isEmpty())
-                BadPacketsA.LastHeal.clear();
-            if (!AscensionA.AscensionTicks.isEmpty())
-                AscensionA.AscensionTicks.clear();
-            if (!FlyA.flyTicksA.isEmpty())
-                FlyA.flyTicksA.clear();
-            if (!FlyD.flyTicks.isEmpty())
-                FlyD.flyTicks.clear();
-            if (!NoFallA.FallDistance.isEmpty())
-                NoFallA.FallDistance.clear();
-            if (!NoFallA.NoFallTicks.isEmpty())
-                NoFallA.NoFallTicks.clear();
-            if (!NoSlowdownA.speedTicks.isEmpty())
-                NoSlowdownA.speedTicks.clear();
-            if (!SpeedA.speedTicks.isEmpty())
-                SpeedA.speedTicks.clear();
-            if (!SpeedA.tooFastTicks.isEmpty())
-                SpeedA.tooFastTicks.clear();
-            if (!SpeedA.lastHit.isEmpty())
-                SpeedA.lastHit.clear();
-            if (!BadPacketsD.lastPacket.isEmpty())
-                BadPacketsD.lastPacket.clear();
-            if (!BadPacketsD.packetTicks.isEmpty())
-                BadPacketsD.packetTicks.clear();
-            if (!SneakA.sneakTicks.isEmpty())
-                SneakA.sneakTicks.clear();
-            if (!FastBowA.count.isEmpty())
-                FastBowA.count.clear();
-            if (!ReachA.verbose.isEmpty())
-            	ReachA.verbose.clear();
-            if (!ReachB.verbose.isEmpty())
-            	ReachB.verbose.clear();
+            CriticalsA.CritTicks.clear();
+            KillAuraA.ClickTicks.clear();
+            KillAuraA.Clicks.clear();
+            KillAuraA.LastMS.clear();
+            KillAuraB.AuraTicks.clear();
+            KillAuraC.Differences.clear();
+            KillAuraC.LastLocation.clear();
+            KillAuraC.AimbotTicks.clear();
+            KillAuraD.lastAttack.clear();
+            BadPacketsA.FastHealTicks.clear();
+            BadPacketsA.LastHeal.clear();
+            AscensionA.AscensionTicks.clear();
+            FlyA.flyTicksA.clear();
+            FlyD.flyTicks.clear();
+            NoFallA.FallDistance.clear();
+            NoFallA.NoFallTicks.clear();
+            NoSlowdownA.speedTicks.clear();
+            SpeedA.speedTicks.clear();
+            SpeedA.tooFastTicks.clear();
+            SpeedA.lastHit.clear();
+            BadPacketsD.lastPacket.clear();
+            BadPacketsD.packetTicks.clear();
+            SneakA.sneakTicks.clear();
+            FastBowA.count.clear();
+            ReachA.verbose.clear();
+            ReachB.verbose.clear();
         } catch (Exception e) {
             return ChatColor.translateAlternateColorCodes('&', PREFIX + Color.Red + "Unknown error occurred!");
         }
@@ -378,38 +353,36 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public Map<String, Check> getNamesBanned() {
         return new HashMap<>(NamesBanned);
     }
-    
+
     public void clearNamesBanned() {
-    	NamesBanned.clear();
+        NamesBanned.clear();
     }
 
     public List<Player> getAutoBanQueue() {
         return new ArrayList<>(AutoBan.keySet());
     }
-    
-	private void registerListeners() {
-		getServer().getPluginManager().registerEvents(new SharedEvents(), this);
-		getServer().getPluginManager().registerEvents(new MoveEvent(), this);
-		getServer().getPluginManager().registerEvents(new UtilVelocity(), this);
-		getServer().getPluginManager().registerEvents(new UtilVelocityNew(), this);
-	}
-	
-	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
-		getDataManager().addPlayerData(e.getPlayer());
-		if (NamesBanned.containsKey(e.getPlayer().getName())) {
-		    NamesBanned.remove(e.getPlayer().getName());
-        }
-	}
-	
-	public Check getCheckByName(String identifier) {
+
+    private void registerListeners() {
+        getServer().getPluginManager().registerEvents(new SharedEvents(), this);
+        getServer().getPluginManager().registerEvents(new MoveEvent(), this);
+        getServer().getPluginManager().registerEvents(new UtilVelocity(), this);
+        getServer().getPluginManager().registerEvents(new UtilVelocityNew(), this);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        getDataManager().addPlayerData(e.getPlayer());
+        NamesBanned.remove(e.getPlayer().getName());
+    }
+
+    public Check getCheckByName(String identifier) {
         for (Check checkcheck : getChecks()) {
             if (checkcheck.getIdentifier().equalsIgnoreCase(identifier)) {
                 return checkcheck;
             }
         }
         return null;
-	}
+    }
 
     public void createLog(Player player, Check checkBanned) {
         TxtFile logFile = new TxtFile(this, File.separator + "banlogs", player.getName());
@@ -436,23 +409,23 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         }
         logFile.write();
     }
-    
-    public void logToFile(Player p, Check c, String checkType, String message) { 
+
+    public void logToFile(Player p, Check c, String checkType, String message) {
         try {
-        	if (p == null
+            if (p == null
                     || !p.isOnline()
-    				|| getNamesBanned().containsKey(p.getName())
-    				|| getAutoBanQueue().contains(p)
+                    || getNamesBanned().containsKey(p.getName())
+                    || getAutoBanQueue().contains(p)
                     || NamesBanned.containsKey(p.getName())
                     || getConfig().getBoolean("settings.disableLogFile")) {
-        		return;
-        	}
+                return;
+            }
             File dataFolder = getInstance().getDataFolder();
             Map<Check, Integer> Checks = getViolations(p);
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("MM-dd|HH:mm:ss");
             Integer vl = Checks.get(c);
-            if(!dataFolder.exists()) {
+            if (!dataFolder.exists()) {
                 dataFolder.mkdir();
             }
             File saveTo = new File(getInstance().getDataFolder(), "violations.txt");
@@ -462,20 +435,20 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             FileWriter fw = new FileWriter(saveTo, true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println("[" + sdf.format(cal.getTime()) + "]"
-            		+ "[" + p.getUniqueId().toString() + "] " + p.getName() 
-            		+ " failed " + (c.isJudgmentDay() ? "[JD] " : "") + c.getName() 
-            		+ (!c.getName().toString().contains("#") ? " [@]" : "")
-            		+ " (Check: " + checkType + ")" + " [VL: " + vl + "] | " + message);
+                    + "[" + p.getUniqueId().toString() + "] " + p.getName()
+                    + " failed " + (c.isJudgmentDay() ? "[JD] " : "") + c.getName()
+                    + (!c.getName().contains("#") ? " [@]" : "")
+                    + " (Check: " + checkType + ")" + " [VL: " + vl + "] | " + message);
             pw.flush();
             pw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-	public static ThotPatrol getInstance() {
-		return Instance;
-	}
+
+    public static ThotPatrol getInstance() {
+        return Instance;
+    }
 
     public void removeFromAutoBanQueue(Player p) {
         AutoBan.remove(p);
@@ -516,13 +489,13 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     @EventHandler
     public void Join(PlayerJoinEvent e) {
         if (!e.getPlayer().hasPermission("thotpatrol.alerts")
-        		|| !e.getPlayer().hasPermission("thotpatrol.admin")) return;
+                || !e.getPlayer().hasPermission("thotpatrol.admin")) return;
         AlertsOn.add(e.getPlayer());
     }
 
     public void verbose(Check check, Player player, Integer ping, Double tps, String info) {
         if (player.hasPermission("thotpatrol.bypass")
-            || player.isOp() && getConfig().getBoolean("settings.bypassOP")) {
+                || player.isOp() && getConfig().getBoolean("settings.bypassOP")) {
             return;
         }
         for (Player p : verboseOn) {
@@ -539,9 +512,9 @@ public class ThotPatrol extends JavaPlugin implements Listener {
 
     public Integer getViolations(Player player, Check check) {
         if (Violations.containsKey(player.getUniqueId())) {
-        	if (Violations.get(player.getUniqueId()).containsKey(check)) {
-        		return Violations.get(player.getUniqueId()).get(check);
-        	}
+            if (Violations.get(player.getUniqueId()).containsKey(check)) {
+                return Violations.get(player.getUniqueId()).get(check);
+            }
         }
         return 0;
     }
@@ -644,13 +617,12 @@ public class ThotPatrol extends JavaPlugin implements Listener {
                 NamesBanned.put(p.getName(), check);
             }
         }.runTaskLater(this, 1L);
-        if (Violations.containsKey(p.getUniqueId()))
-            Violations.remove(p.getUniqueId());
+        Violations.remove(p.getUniqueId());
     }
 
     public void alert(String msg) {
         for (Player p : AlertsOn) {
-            p.sendMessage(String.valueOf(PREFIX) + msg);
+            p.sendMessage(PREFIX + msg);
         }
     }
 
@@ -716,32 +688,31 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             }
         }
     }
-    
-	public void startTimer(Player p) {
-		MoveEvent.ticksLeft.put(p.getName(), MoveEvent.defaultWait);
-		MoveEvent.cooldownTask.put(p.getName(), new BukkitRunnable(){
-			@Override
-			public void run() {
-				MoveEvent.ticksLeft.put(p.getName(), Integer.valueOf(MoveEvent.ticksLeft.get(p.getName()).intValue() - 1));
-				if (MoveEvent.ticksLeft.get(p.getName()).intValue() == 0){
-					MoveEvent.ticksLeft.remove(p.getName());
-					MoveEvent.cooldownTask.remove(p.getName());
-					Bukkit.getServer().getScheduler().cancelTask(getTaskId());
-					cancel();
-					return;
-				}
-			}
-		});
-		MoveEvent.cooldownTask.get(p.getName()).runTaskTimer(this, 0L, 1L);
-	}
-	
-	private void addDataPlayers() {
-		for (final Player playerLoop : Bukkit.getOnlinePlayers()) {
-			Instance.getDataManager().addPlayerData(playerLoop);
-		}
-	}
-	
-	public DataManager getDataManager() {
-		return dataManager;
-	}
+
+    public void startTimer(Player p) {
+        MoveEvent.ticksLeft.put(p.getName(), MoveEvent.defaultWait);
+        MoveEvent.cooldownTask.put(p.getName(), new BukkitRunnable() {
+            @Override
+            public void run() {
+                MoveEvent.ticksLeft.put(p.getName(), MoveEvent.ticksLeft.get(p.getName()) - 1);
+                if (MoveEvent.ticksLeft.get(p.getName()) == 0) {
+                    MoveEvent.ticksLeft.remove(p.getName());
+                    MoveEvent.cooldownTask.remove(p.getName());
+                    Bukkit.getServer().getScheduler().cancelTask(getTaskId());
+                    cancel();
+                }
+            }
+        });
+        MoveEvent.cooldownTask.get(p.getName()).runTaskTimer(this, 0L, 1L);
+    }
+
+    private void addDataPlayers() {
+        for (final Player playerLoop : Bukkit.getOnlinePlayers()) {
+            Instance.getDataManager().addPlayerData(playerLoop);
+        }
+    }
+
+    public DataManager getDataManager() {
+        return dataManager;
+    }
 }
