@@ -38,6 +38,7 @@ public class SpeedI extends Check {
         Player p = e.getPlayer();
         double delta = UtilMath.offset(getHV(e.getTo().toVector()), getHV(e.getFrom().toVector()));
         double maxDelta = .35;
+        Bukkit.broadcastMessage(Double.toString(delta));
         if (UtilBlock.isStair(p.getLocation().clone().subtract(0, 1, 0).getBlock())
                 || (p.getLocation().subtract(0, 1, 0).getBlock().getType().toString().contains("SLIME")
                 || p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("SLIME"))) {
