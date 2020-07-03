@@ -49,7 +49,6 @@ public class SpeedH extends Check {
             || p.getVehicle() != null
             || p.getAllowFlight()
             || e.isCancelled()
-            || SharedEvents.worldChange.contains(p.getUniqueId())
             || SpeedC.jumpingOnIce.contains(p.getUniqueId())
             || !UtilTime.elapsed(airTicks.getOrDefault(p.getUniqueId(), 0L), 500)
             || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
@@ -57,8 +56,7 @@ public class SpeedH extends Check {
             || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
             || p.hasPermission("thotpatrol.bypass")
             || SpeedC.highKb.contains(p.getUniqueId())
-            || !UtilPlayer.isOnGround(p.getLocation())
-            || !p.isOnGround()) {
+            || !UtilPlayer.isOnGround(p.getLocation())) {
             return;
         }
         int count = verbose.getOrDefault(p.getUniqueId(), 0);

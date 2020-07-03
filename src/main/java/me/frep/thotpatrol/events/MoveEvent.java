@@ -5,7 +5,7 @@ import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilTimer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -23,7 +23,6 @@ import java.util.UUID;
 import java.util.WeakHashMap;
 
 public class MoveEvent implements Listener {
-	
 
 	public static int defaultWait = 15;
 	public static Map<UUID, Long> lastMove = new WeakHashMap<>();
@@ -70,11 +69,11 @@ public class MoveEvent implements Listener {
 		}
 		DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data.isNearIce()) {
-			if (UtilTimer.elapsed(data.getIsNearIceTicks(), 500L)) {
+			if (UtilTime.elapsed(data.getIsNearIceTicks(), 500L)) {
 				if (!UtilPlayer.isNearIce(p)) {
 					data.setNearIce(false);
 				} else {
-					data.setIsNearIceTicks(UtilTimer.nowlong());
+					data.setIsNearIceTicks(UtilTime.nowlong());
 				}
 			}
 		}
@@ -86,25 +85,25 @@ public class MoveEvent implements Listener {
 		if (loc1.getBlock().getType() != Material.AIR) {
 			if (!data.isBlockAbove_Set()) {
 				data.setBlockAbove_Set(true);
-				data.setBlockAbove(UtilTimer.nowlong());
+				data.setBlockAbove(UtilTime.nowlong());
 			} else {
-				if (UtilTimer.elapsed(data.getBlockAbove(),1000L)) {
+				if (UtilTime.elapsed(data.getBlockAbove(),1000L)) {
 					if (loc1.getBlock().getType() == Material.AIR) {
 						data.setBlockAbove_Set(false);
 					} else {
 						data.setBlockAbove_Set(true);
-						data.setBlockAbove(UtilTimer.nowlong());
+						data.setBlockAbove(UtilTime.nowlong());
 					}
 				}
 			}
 		} else {
 			if (data.isBlockAbove_Set()) {
-				if (UtilTimer.elapsed(data.getBlockAbove(), 1000L)) {
+				if (UtilTime.elapsed(data.getBlockAbove(), 1000L)) {
 					if (loc1.getBlock().getType() == Material.AIR) {
 						data.setBlockAbove_Set(false);
 					} else {
 						data.setBlockAbove_Set(true);
-						data.setBlockAbove(UtilTimer.nowlong());
+						data.setBlockAbove(UtilTime.nowlong());
 					}
 				}
 			}
@@ -164,22 +163,22 @@ public class MoveEvent implements Listener {
 		if (UtilBlock.isHalfBlock(p.getLocation().add(0,-0.50,0).getBlock())|| UtilBlock.isLessThanBlock(p.getLocation().add(0,-0.50,0).getBlock()) || UtilPlayer.isNearHalfBlock(p)) {
 			if (!data.isHalfBlocks_MS_Set()) {
 				data.setHalfBlocks_MS_Set(true);
-				data.setHalfBlocks_MS(UtilTimer.nowlong());
+				data.setHalfBlocks_MS(UtilTime.nowlong());
 			} else {
-				if (UtilTimer.elapsed(data.getHalfBlocks_MS(),900L)) {
+				if (UtilTime.elapsed(data.getHalfBlocks_MS(),900L)) {
 					if (UtilBlock.isHalfBlock(p.getLocation().add(0,-0.50,0).getBlock()) || UtilPlayer.isNearHalfBlock(p)) {
 						data.setHalfBlocks_MS_Set(true);
-						data.setHalfBlocks_MS(UtilTimer.nowlong());
+						data.setHalfBlocks_MS(UtilTime.nowlong());
 					} else {
 						data.setHalfBlocks_MS_Set(false);
 					}
 				}
 			}
 		} else {
-			if (UtilTimer.elapsed(data.getHalfBlocks_MS(),900L)) {
+			if (UtilTime.elapsed(data.getHalfBlocks_MS(),900L)) {
 				if (UtilBlock.isHalfBlock(p.getLocation().add(0,-0.50,0).getBlock()) || UtilPlayer.isNearHalfBlock(p)) {
 					data.setHalfBlocks_MS_Set(true);
-					data.setHalfBlocks_MS(UtilTimer.nowlong());
+					data.setHalfBlocks_MS(UtilTime.nowlong());
 				} else {
 					data.setHalfBlocks_MS_Set(false);
 				}
@@ -187,9 +186,9 @@ public class MoveEvent implements Listener {
 		}
 		if (UtilPlayer.isNearIce(p) && !data.isNearIce()) {
 			data.setNearIce(true);
-			data.setIsNearIceTicks(UtilTimer.nowlong());
+			data.setIsNearIceTicks(UtilTime.nowlong());
 		} else if (UtilPlayer.isNearIce(p)) {
-			data.setIsNearIceTicks(UtilTimer.nowlong());
+			data.setIsNearIceTicks(UtilTime.nowlong());
 		}
 
 		final double distance = UtilMath.getVerticalDistance(e.getFrom(), e.getTo());

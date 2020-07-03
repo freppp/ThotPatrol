@@ -33,16 +33,14 @@ public class AimPatternB extends Check {
             || p.isBlocking()
             || p.getItemInHand().getType().equals(Material.BOW)
             || !UtilPlayer.isOnGround(p)
-            || !p.isOnGround()) {
+            || !p.isOnGround()
+            || p.getNearbyEntities(5, 5, 5).isEmpty()) {
             return;
         }
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         float yawDiff = Math.abs(e.getFrom().getYaw() - e.getTo().getYaw()) % 180;
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
-        if (p.getNearbyEntities(5, 5, 5).isEmpty()) {
-            return;
-        }
         if (yawDiff - 2 > lastYawDiff && yawDiff + 2 < lastYawDiff && yawDiff < 10 && yawDiff < 170 || yawDiff > 150 && yawDiff > 1) {
             return;
         }

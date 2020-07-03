@@ -55,6 +55,7 @@ public class NoSlowdownB extends Check {
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);
+        //todo calc walkspeed values
         if (e.getTo().getX() == e.getFrom().getX()
                 || e.getFrom().getZ() == e.getTo().getZ()
                 || !UtilPlayer.isOnGround(p)
@@ -74,7 +75,7 @@ public class NoSlowdownB extends Check {
         if (count > 5 && isActuallySprinting(p)) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Ping: " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Reach (Consecutive)", "Delta: " + lastDist.getOrDefault(p.getUniqueId(), 0D) + " |  TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Blocking while Running", "Delta: " + lastDist.getOrDefault(p.getUniqueId(), 0D) + " |  TPS: " + tps + " | Ping: " + ping);
         }
         verbose.put(p.getUniqueId(), count);
         blocking.remove(p.getUniqueId());

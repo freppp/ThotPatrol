@@ -44,6 +44,7 @@ public class SharedEvents implements Listener {
 			}, 100);
 		}
 	}
+
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	public void onJoin(PlayerJoinEvent e) {
 		final Player p = e.getPlayer();

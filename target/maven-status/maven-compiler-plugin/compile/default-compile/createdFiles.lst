@@ -3,6 +3,7 @@ me\frep\thotpatrol\checks\movement\speed\SpeedF.class
 me\frep\thotpatrol\checks\movement\jesus\JesusA$1.class
 me\frep\thotpatrol\packets\PacketCore$11.class
 me\frep\thotpatrol\utils\Config.class
+me\frep\thotpatrol\checks\movement\speed\SpeedI.class
 me\frep\thotpatrol\packets\PacketCore$8.class
 me\frep\thotpatrol\packets\events\PacketKeepAliveEvent.class
 me\frep\thotpatrol\checks\movement\sprint\SprintA.class
@@ -92,7 +93,6 @@ me\frep\thotpatrol\packets\events\PacketBlockDigEvent.class
 me\frep\thotpatrol\checks\movement\fly\FlyD.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsB.class
 me\frep\thotpatrol\packets\PacketCore$10.class
-me\frep\thotpatrol\utils\Tile.class
 me\frep\thotpatrol\events\SharedEvents.class
 me\frep\thotpatrol\checks\combat\reach\ReachA.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraE.class
@@ -140,6 +140,5 @@ me\frep\thotpatrol\checks\player\badpackets\BadPacketsA.class
 me\frep\thotpatrol\checks\movement\timer\TimerA.class
 me\frep\thotpatrol\commands\AlertsCommand.class
 me\frep\thotpatrol\utils\UtilMath.class
-me\frep\thotpatrol\utils\UtilTimer.class
 me\frep\thotpatrol\checks\combat\aimpattern\AimPatternA.class
 me\frep\thotpatrol\packets\PacketCore$7.class
