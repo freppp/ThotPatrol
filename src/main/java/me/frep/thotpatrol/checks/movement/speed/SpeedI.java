@@ -13,6 +13,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -32,6 +33,13 @@ public class SpeedI extends Check {
         setEnabled(true);
         setBannable(false);
         setMaxViolations(8);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        verbose.remove(e.getPlayer().getUniqueId());
+        invalidBlock.remove(e.getPlayer().getUniqueId());
+        belowBlock.remove(e.getPlayer().getUniqueId());
     }
 
     @EventHandler
@@ -61,7 +69,7 @@ public class SpeedI extends Check {
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p)
                 || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(p.getUniqueId(), 0L), 2500)
-                || !UtilTime.elapsed(belowBlock.getOrDefault(p.getUniqueId(), 0L), 1000L)
+                || !UtilTime.elapsed(belowBlock.getOrDefault(p.getUniqueId(), 0L), 750L)
                 || !UtilTime.elapsed(invalidBlock.getOrDefault(p.getUniqueId(), 0L), 1000L)
                 || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)

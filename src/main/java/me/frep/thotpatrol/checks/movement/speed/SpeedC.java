@@ -94,7 +94,7 @@ public class SpeedC extends Check {
         if (below.equals(Material.ICE) || below.equals(Material.PACKED_ICE) 
         		|| below2.equals(Material.ICE) || below2.equals(Material.PACKED_ICE)) {
         	jumpingOnIce.add(p.getUniqueId());
-        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> jumpingOnIce.remove(p.getUniqueId()), 50);
+        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> jumpingOnIce.remove(p.getUniqueId()), 40);
         }
         if (jumpingOnIce.contains(p.getUniqueId())) {
         	return;
