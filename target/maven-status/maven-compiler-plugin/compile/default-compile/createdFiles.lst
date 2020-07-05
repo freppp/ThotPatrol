@@ -42,6 +42,7 @@ me\frep\thotpatrol\checks\combat\killaura\KillAuraF.class
 me\frep\thotpatrol\packets\events\PacketAttackEvent.class
 me\frep\thotpatrol\events\PacketListener.class
 me\frep\thotpatrol\packets\events\PacketEntityActionEvent$PlayerAction.class
+me\frep\thotpatrol\ThotPatrol$4.class
 me\frep\thotpatrol\packets\PacketCore$13.class
 me\frep\thotpatrol\utils\UtilServer.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraB.class
@@ -53,6 +54,7 @@ me\frep\thotpatrol\checks\movement\speed\SpeedA.class
 me\frep\thotpatrol\packets\PacketCore$3.class
 me\frep\thotpatrol\packets\PacketPlayerType.class
 me\frep\thotpatrol\utils\UtilBlock.class
+me\frep\thotpatrol\checks\movement\fly\FlyE.class
 me\frep\thotpatrol\checks\combat\reach\ReachC.class
 me\frep\thotpatrol\packets\PacketCore$12.class
 me\frep\thotpatrol\utils\UtilCheat$1.class

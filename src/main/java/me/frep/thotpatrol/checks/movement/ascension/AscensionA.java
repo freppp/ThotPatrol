@@ -41,20 +41,21 @@ public class AscensionA extends Check {
 
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	public void onMove(PlayerMoveEvent e) {
-		final Player p = e.getPlayer();
+		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")) {
-			return;
-		}
 		if (e.getFrom().getY() >= e.getTo().getY()
 				|| p.getAllowFlight()
 				|| p.getVehicle() != null
+				|| p.hasPermission("thotpatrol.bypass")
+				|| p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
 				|| !UtilTime.elapsed(toggleFlight.getOrDefault(uuid, 0L), 5000L)
 				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(uuid, 0L), 4200L)) {
 			return;
 		}
-		if (p.hasPermission("thotpatrol.bypass")) {
-			return;
+		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+			if (b.getType().equals(Material.SLIME_BLOCK)) {
+				return;
+			}
 		}
 		long Time = System.currentTimeMillis();
 		double TotalBlocks = 0.0D;
@@ -70,20 +71,6 @@ public class AscensionA extends Check {
 		final Location a = p.getLocation().subtract(0.0D, 1.0D, 0.0D);
 		if (UtilCheat.blocksNear(a)) {
 			TotalBlocks = 0.0D;
-		}
-		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
-			if (b.getType().equals(Material.SLIME_BLOCK)) {
-				return;
-			}
-		}
-		if (e.getTo().getBlock().getType().equals(Material.SLIME_BLOCK)
-				|| e.getTo().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.SLIME_BLOCK)) {
-			return;
-		}
-		if (DataPlayer.lastNearSlime !=null) {
-			if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
-				return;
-			}
 		}
 		double Limit = 1.05D;
 		if (p.hasPotionEffect(PotionEffectType.JUMP)) {

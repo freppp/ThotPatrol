@@ -21,10 +21,7 @@ import me.frep.thotpatrol.checks.movement.ascension.AscensionB;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionC;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.checks.movement.fastclimb.FastClimbA;
-import me.frep.thotpatrol.checks.movement.fly.FlyA;
-import me.frep.thotpatrol.checks.movement.fly.FlyB;
-import me.frep.thotpatrol.checks.movement.fly.FlyC;
-import me.frep.thotpatrol.checks.movement.fly.FlyD;
+import me.frep.thotpatrol.checks.movement.fly.*;
 import me.frep.thotpatrol.checks.movement.jesus.JesusA;
 import me.frep.thotpatrol.checks.movement.misc.GravityA;
 import me.frep.thotpatrol.checks.movement.misc.VClipA;
@@ -86,7 +83,6 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public Map<Player, Map.Entry<Check, Long>> AutoBan;
     public Map<String, Check> NamesBanned;
     public Map<UUID, Long> LastVelocity;
-    public ArrayList<UUID> hasInvOpen = new ArrayList<>();
     public Integer pingToCancel = getConfig().getInt("settings.latency.ping");
     public Integer tpsToCancel = getConfig().getInt("settings.latency.tps");
 
@@ -266,6 +262,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new FlyB(this));
         Checks.add(new FlyC(this));
         Checks.add(new FlyD(this));
+        Checks.add(new FlyE(this));
         Checks.add(new StepA(this));
         Checks.add(new JesusA(this));
         Checks.add(new NoFallA(this));
@@ -565,6 +562,9 @@ public class ThotPatrol extends JavaPlugin implements Listener {
 
     public void autoBan(Check check, Player player) {
         if (lag.getTPS() < 17.0) return;
+        if (NamesBanned.containsKey(player.getName())) {
+            return;
+        }
         if (check.hasBanTimer()) {
             if (AutoBan.containsKey(player)) {
                 return;
@@ -588,6 +588,12 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             }
         } else {
             banPlayer(player, check);
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, new Runnable() {
+                @Override
+                public void run() {
+                    NamesBanned.remove(player.getUniqueId());
+                }
+            }, 60);
         }
     }
 

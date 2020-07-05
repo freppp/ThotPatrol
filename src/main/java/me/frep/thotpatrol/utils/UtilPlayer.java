@@ -17,32 +17,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class UtilPlayer {
 
-	public static void clear(Player player) {
-		player.setGameMode(GameMode.SURVIVAL);
-		player.setAllowFlight(false);
-		player.setSprinting(false);
-		player.setFoodLevel(20);
-		player.setSaturation(3.0f);
-		player.setExhaustion(0.0f);
-		player.setMaxHealth(20.0);
-		player.setHealth(player.getMaxHealth());
-		player.setFireTicks(0);
-		player.setFallDistance(0.0f);
-		player.setLevel(0);
-		player.setExp(0.0f);
-		player.setWalkSpeed(0.2f);
-		player.setFlySpeed(0.1f);
-		player.getInventory().clear();
-		player.getInventory().setHelmet(null);
-		player.getInventory().setChestplate(null);
-		player.getInventory().setLeggings(null);
-		player.getInventory().setBoots(null);
-		player.updateInventory();
-		for (final PotionEffect potion : player.getActivePotionEffects()) {
-			player.removePotionEffect(potion.getType());
-		}
-	}
-
 	private static ImmutableSet<Material> ground = Sets.immutableEnumSet(Material.SUGAR_CANE, Material.SUGAR_CANE_BLOCK,
 			Material.TORCH, Material.ACTIVATOR_RAIL, Material.AIR, Material.CARROT, Material.CROPS, Material.DEAD_BUSH,
 			Material.DETECTOR_RAIL, Material.DIODE_BLOCK_OFF, Material.DIODE_BLOCK_ON, Material.DOUBLE_PLANT,

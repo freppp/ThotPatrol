@@ -48,14 +48,10 @@ public class AscensionD extends Check {
         Player p = e.getPlayer();
         double yDiff = e.getTo().getY() - e.getFrom().getY();
         if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
-            || p.hasPermission("thotpatrol.bypass")) {
-            return;
-        }
-        if (!UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 2500)) {
-            return;
-        }
-        if (e.getTo().getBlock().getType().toString().contains("SLIME")
-                || e.getTo().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("SLIME")) {
+            || p.hasPermission("thotpatrol.bypass")
+            || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 2500)
+            || p.getAllowFlight()
+            || !inAir(p)) {
             return;
         }
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
@@ -64,19 +60,9 @@ public class AscensionD extends Check {
                 return;
             }
         }
-        if (DataPlayer.lastNearSlime != null) {
-            if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
-                return;
-            }
-        }
-        if (p.getAllowFlight()
-                || p.isFlying()
-                || !inAir(p)) {
-            return;
-        }
+        double maxDist = .55;
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);
-        double maxDist = .55;
         for (PotionEffect eff : p.getActivePotionEffects()) {
             if (eff.getType().equals(PotionEffectType.JUMP)) {
                 maxDist += (eff.getAmplifier() + 1) + .1;

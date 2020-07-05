@@ -52,7 +52,7 @@ public class SprintA extends Check {
     	Vector movement = new Vector(e.getTo().getX() - e.getFrom().getX(), 0, e.getTo().getZ() - e.getFrom().getZ()),
     			direction = new Vector(-Math.sin(e.getPlayer().getEyeLocation().getYaw() * 3.141592653589F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(e.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F);
     	double delta = movement.distanceSquared(direction);
-    	double maxDelta = .27;
+    	double maxDelta = .35;
     	if (ping > 250) {
     		maxDelta += .04;
     	}

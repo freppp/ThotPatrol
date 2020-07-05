@@ -12,22 +12,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class FastClimbA extends Check {
 
-    //todo find better fix for this
-    double jumped = .41999998688697815;
-    double jumped2 = .16477328182606676;
-    double jumped3 = .33319999363422337;
-    double jumped4 = 0.24813599859094548;
-    double jumped5 = 0.164773281826065;
-    double jumped6 = .33319999363422426;
-    double jumped7 = .24813599859094637;
-
+    private static List<Double> jumpedValues = new ArrayList<>();
     private Map<UUID, Integer> verbose = new HashMap<>();
+
+    static {
+        jumpedValues.add(.41999998688697815);
+        jumpedValues.add(.16477328182606676);
+        jumpedValues.add(.33319999363422337);
+        jumpedValues.add(.24813599859094548);
+        jumpedValues.add(.164773281826065);
+        jumpedValues.add(.33319999363422426);
+        jumpedValues.add(.24813599859094637);
+    }
 
     public FastClimbA(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("FastClimbA", "Fast Climb (Type A) [#]", ThotPatrol);
@@ -39,27 +39,21 @@ public class FastClimbA extends Check {
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+        double yDiff = e.getTo().getY() - e.getFrom().getY();
+        int count = verbose.getOrDefault(p.getUniqueId(), 0);
         if (e.isCancelled()
             || e.getFrom().getY() == e.getTo().getY()
             || p.getAllowFlight()
             || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1500)
             || p.hasPermission("thotpatrol.bypass")
             || !UtilPlayer.isOnClimbable(p, 1)
-            || !UtilPlayer.isOnClimbable(p, 0)) {
-            return;
-        }
-        int count = verbose.getOrDefault(p.getUniqueId(), 0);
-        double yDiff = e.getTo().getY() - e.getFrom().getY();
-        if (yDiff <= 0) {
-            return;
-        }
-        if (p.getEyeLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)) {
+            || !UtilPlayer.isOnClimbable(p, 0)
+            || p.getEyeLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)
+            || yDiff <= 0
+            || jumpedValues.contains(yDiff)) {
             return;
         }
         double offset = UtilMath.offset(UtilMath.getVerticalVector(e.getFrom().toVector()), UtilMath.getVerticalVector(e.getTo().toVector()));
-        if (offset == jumped || offset == jumped2 || offset == jumped3 || offset == jumped4 || offset == jumped5 || offset == jumped6 || offset == jumped7)  {
-            return;
-        }
         double limit = .13;
         if (offset > limit) {
             count++;

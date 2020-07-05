@@ -88,7 +88,8 @@ public class TimerA extends Check {
             if (getThotPatrol().getConfig().getBoolean("instantBans.TimerA.enabled") 
             		&& packets > getThotPatrol().getConfig().getInt("instantBans.TimerA.maxPackets")
             		&& isBannable()
-            		&& !getThotPatrol().getNamesBanned().containsKey(p.getName())
+                    && !getThotPatrol().NamesBanned.containsKey(p.getName())
+                    && !getThotPatrol().getNamesBanned().containsKey(p.getName())
             		&& getThotPatrol().getLag().getTPS() > getThotPatrol().getConfig().getDouble("instantBans.TimerA.minTPS")
             		&& ping > 1
             		&& ping < getThotPatrol().getConfig().getDouble("instantBans.TimerA.maxPing")

@@ -44,14 +44,14 @@ public class AimPatternB extends Check {
         if (yawDiff - 2 > lastYawDiff && yawDiff + 2 < lastYawDiff && yawDiff < 10 && yawDiff < 170 || yawDiff > 150 && yawDiff > 1) {
             return;
         }
-        if (yawDiff > 8 && e.getFrom().getPitch() == e.getTo().getPitch()) {
+        if (yawDiff > 9 && e.getFrom().getPitch() == e.getTo().getPitch()) {
             count++;
         } else {
             if (count > 0) {
-                count -= .75;
+                count--;
             }
         }
-        if (count > 8) {
+        if (count > 10) {
             getThotPatrol().logCheat(this, p, "Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Invalid Pitch Change", "Ping: " + ping + " | TPS: " + tps);
             count = 0;

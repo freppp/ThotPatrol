@@ -34,13 +34,11 @@ public class AscensionC extends Check {
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")) {
-			return;
-		}
 		if (p.getVehicle() != null
 				|| getThotPatrol().getLag().getTPS() < getThotPatrol().getTPSCancel()
 				|| e.getFrom().getY() >= e.getTo().getY()
 				|| p.getAllowFlight()
+				|| p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
 				|| p.getGameMode().equals(GameMode.CREATIVE)
 				|| UtilPlayer.isNearSlime(e.getFrom())
 				|| UtilPlayer.isNearSlime(e.getTo())
@@ -49,11 +47,6 @@ public class AscensionC extends Check {
 				|| p.hasPermission("thotpatrol.bypass")
 				|| getThotPatrol().getLastVelocity().containsKey(uuid)) {
 			return;
-		}
-		if (DataPlayer.lastNearSlime != null) {
-			if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
-				return;
-			}
 		}
 		if (!UtilServer.isBukkitVerison("1_8")
 				&&!UtilServer.isBukkitVerison("1_7")) {

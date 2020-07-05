@@ -37,5 +37,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib-API:4.4.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cglib:cglib-nodep:3.2.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.executors:BukkitExecutors:1.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
   </component>
 </module>
