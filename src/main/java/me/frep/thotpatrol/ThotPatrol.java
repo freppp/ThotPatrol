@@ -8,6 +8,7 @@ import me.frep.thotpatrol.checks.combat.autoclicker.AutoClickerB;
 import me.frep.thotpatrol.checks.combat.autoclicker.AutoClickerC;
 import me.frep.thotpatrol.checks.combat.criticals.CriticalsA;
 import me.frep.thotpatrol.checks.combat.criticals.CriticalsB;
+import me.frep.thotpatrol.checks.combat.criticals.CriticalsC;
 import me.frep.thotpatrol.checks.combat.improbable.ImprobableA;
 import me.frep.thotpatrol.checks.combat.killaura.*;
 import me.frep.thotpatrol.checks.combat.misc.FastBowA;
@@ -40,6 +41,7 @@ import me.frep.thotpatrol.checks.player.badpackets.BadPacketsC;
 import me.frep.thotpatrol.checks.player.badpackets.BadPacketsD;
 import me.frep.thotpatrol.checks.player.client.HackedClientA;
 import me.frep.thotpatrol.checks.player.client.HackedClientB;
+import me.frep.thotpatrol.checks.player.client.HackedClientC;
 import me.frep.thotpatrol.checks.player.scaffold.ScaffoldA;
 import me.frep.thotpatrol.checks.player.scaffold.ScaffoldB;
 import me.frep.thotpatrol.commands.*;
@@ -274,10 +276,12 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new NoSlowdownB(this));
         Checks.add(new CriticalsA(this));
         Checks.add(new CriticalsB(this));
+        Checks.add(new CriticalsC(this));
         Checks.add(new TimerA(this));
         Checks.add(new SneakA(this));
         Checks.add(new HackedClientA(this));
         Checks.add(new HackedClientB(this));
+        Checks.add(new HackedClientC(this));
         Checks.add(new GravityA(this));
         Checks.add(new ScaffoldA(this));
         Checks.add(new ScaffoldB(this));
@@ -319,7 +323,6 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             NoSlowdownA.speedTicks.clear();
             SpeedA.speedTicks.clear();
             SpeedA.tooFastTicks.clear();
-            SpeedA.lastHit.clear();
             BadPacketsD.lastPacket.clear();
             BadPacketsD.packetTicks.clear();
             SneakA.sneakTicks.clear();
@@ -645,6 +648,12 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public void onKick(PlayerKickEvent e) {
         if (e.getReason().equals("Flying is not enabled on this server")) {
             alert(Color.Purple + e.getPlayer().getName() + Color.Gray + " was kicked for flying!");
+        }
+        if (e.getReason().equals("Invalid move packet recieved")) {
+            alert(Color.Purple + e.getPlayer().getName() + Color.Gray + " was kicked for invalid move packets!");
+        }
+        if (e.getReason().contains("Too many packet")) {
+            alert(Color.Purple + e.getPlayer().getName() + Color.Gray + " was kicked for too many packets!");
         }
     }
 

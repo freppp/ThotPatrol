@@ -29,10 +29,8 @@ public class AscensionB extends Check {
 		double yDelta = e.getTo().getY() - e.getFrom().getY();
 		if (p.getAllowFlight()
 				|| !lastYMovement.containsKey(p)
+				|| p.hasPermission("thotpatrol.bypass")
 				|| Math.abs(yDelta - lastYMovement.get(p)) > 0.002) {
-			return;
-		}
-		if (p.hasPermission("thotpatrol.bypass")) {
 			return;
 		}
 		verbose++;

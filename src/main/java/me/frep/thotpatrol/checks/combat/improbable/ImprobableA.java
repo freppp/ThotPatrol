@@ -29,7 +29,7 @@ public class ImprobableA extends Check {
     }
 
 	@EventHandler
-	public void onMove(PacketAttackEvent e) {
+	public void onAttack(PacketAttackEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
 		if(e.getType() != PacketPlayerType.USE) {
@@ -40,7 +40,7 @@ public class ImprobableA extends Check {
 		int totalVL = getTotalBlatantViolations(p);
 		if (totalVL > 2 
 				&& totalVL % 5 == 0
-				&& totalVL != lastTotalVL.get(uuid)) {
+				&& totalVL != lastTotalVL.getOrDefault(p.getUniqueId(), 0)) {
 			getThotPatrol().logCheat(this, p, "Improbable (Combat)" + " | Ping: " + ping + " | TPS: " + tps);
 			getThotPatrol().logToFile(p, this, "Combined", "TPS: " + tps + " | Ping: " + ping);
 		}

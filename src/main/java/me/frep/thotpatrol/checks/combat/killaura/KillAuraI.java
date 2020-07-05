@@ -86,7 +86,7 @@ public class KillAuraI extends Check {
 			count++;
 		} else {
 			if (count > 0) {
-				count--;
+				count -= .75;
 			}
 		}
 		if (count >= 5) {

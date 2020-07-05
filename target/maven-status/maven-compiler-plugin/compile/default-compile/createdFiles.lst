@@ -14,6 +14,7 @@ me\frep\thotpatrol\checks\movement\speed\SpeedA$1.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsC.class
 me\frep\thotpatrol\utils\ChecksGUI$1.class
 me\frep\thotpatrol\checks\combat\autoclicker\AutoClickerB$ClickProfile.class
+me\frep\thotpatrol\checks\player\client\HackedClientC.class
 me\frep\thotpatrol\utils\UtilVelocity.class
 me\frep\thotpatrol\packets\PacketCore$17.class
 me\frep\thotpatrol\ThotPatrol$2.class
@@ -141,6 +142,7 @@ me\frep\thotpatrol\checks\movement\fly\FlyB.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsA.class
 me\frep\thotpatrol\checks\movement\timer\TimerA.class
 me\frep\thotpatrol\commands\AlertsCommand.class
+me\frep\thotpatrol\checks\combat\criticals\CriticalsC.class
 me\frep\thotpatrol\utils\UtilMath.class
 me\frep\thotpatrol\checks\combat\aimpattern\AimPatternA.class
 me\frep\thotpatrol\packets\PacketCore$7.class

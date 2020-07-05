@@ -59,17 +59,16 @@ public class SpeedH extends Check {
             || !UtilPlayer.isOnGround(p.getLocation())) {
             return;
         }
-        int count = verbose.getOrDefault(p.getUniqueId(), 0);
-        double speed = UtilMath.getHorizontalDistance(e.getFrom(), e.getTo());
-        double maxSpeed = .29;
-        double tps = getThotPatrol().getLag().getTPS();
-        int ping = getThotPatrol().getLag().getPing(p);
-        //TODO calc these values
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
             if (b.getType().toString().contains("ICE")) {
                 return;
             }
         }
+        double maxSpeed = .29;
+        double tps = getThotPatrol().getLag().getTPS();
+        int count = verbose.getOrDefault(p.getUniqueId(), 0);
+        double speed = UtilMath.getHorizontalDistance(e.getFrom(), e.getTo());
+        int ping = getThotPatrol().getLag().getPing(p);
         if (p.getLocation().clone().add(0, .5, 0).getBlock().getType().toString().contains("DOOR")
             || p.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")) {
             maxSpeed += .08;
@@ -96,7 +95,7 @@ public class SpeedH extends Check {
                 }
             }
         }
-        if (count > 12) {
+        if (count > 11) {
             getThotPatrol().logCheat(this, p, speed + " > " + maxSpeed + " | Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Ground", "Speed: " + speed + " > " +  maxSpeed + " | TPS: " + tps + " | Ping: " + ping);
             dumplog(p, "[Flag] Speed: " + speed + " > " + maxSpeed + " | Ping: " + ping + " | TPS: " + tps);

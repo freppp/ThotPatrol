@@ -74,6 +74,8 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\m
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\ConfigFile.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\reach\ReachD.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\Latency.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\client\HackedClientC.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\criticals\CriticalsC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\AutobanCommand.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\events\PacketListener.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\Color.java

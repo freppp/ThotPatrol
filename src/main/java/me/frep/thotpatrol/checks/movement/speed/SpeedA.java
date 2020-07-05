@@ -34,8 +34,6 @@ public class SpeedA extends Check {
 
     public static Map<UUID, Map.Entry<Integer, Long>> speedTicks;
     public static Map<UUID, Map.Entry<Integer, Long>> tooFastTicks;
-    public static Map<UUID, Long> lastHit;
-    public static Map<UUID, Double> velocity;
     public List<UUID> jumpingOnIce = new ArrayList<>();
 
     public SpeedA(ThotPatrol ThotPatrol) {
@@ -45,16 +43,6 @@ public class SpeedA extends Check {
         setMaxViolations(6);
         speedTicks = new HashMap<>();
         tooFastTicks = new HashMap<>();
-        lastHit = new HashMap<>();
-        velocity = new HashMap<>();
-    }
-
-    @EventHandler(ignoreCancelled = true)
-    public void onHit(EntityDamageByEntityEvent e) {
-        if (e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
-            lastHit.put(player.getUniqueId(), System.currentTimeMillis());
-        }
     }
 
     public boolean isOnIce(final Player player) {
@@ -71,8 +59,6 @@ public class SpeedA extends Check {
     public void onLog(PlayerQuitEvent e) {
         speedTicks.remove(e.getPlayer().getUniqueId());
         tooFastTicks.remove(e.getPlayer().getUniqueId());
-        lastHit.remove(e.getPlayer().getUniqueId());
-        velocity.remove(e.getPlayer().getUniqueId());
     }
 
     @SuppressWarnings("deprecation")
@@ -86,12 +72,10 @@ public class SpeedA extends Check {
                 || player.getVehicle() != null
                 || SpeedC.highKb.contains(player.getUniqueId())
                 || player.hasPermission("thotpatrol.bypass")
-                || player.getVelocity().length() + 0.1 < velocity.getOrDefault(uuid, -1.0D)
-                || (getThotPatrol().LastVelocity.containsKey(uuid)
+                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(player.getUniqueId(), 0L), 2000)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(uuid, 0L), 5000L)
                 && !player.hasPotionEffect(PotionEffectType.POISON)
-                && !player.hasPotionEffect(PotionEffectType.WITHER) && player.getFireTicks() == 0)) return;
-        long lastHitDiff = lastHit.containsKey(uuid) ? lastHit.get(uuid) - System.currentTimeMillis() : 2001L;
+                && !player.hasPotionEffect(PotionEffectType.WITHER) && player.getFireTicks() == 0) return;
         int Count = 0;
         long Time = UtilTime.nowlong();
         if (speedTicks.containsKey(uuid)) {
@@ -108,13 +92,6 @@ public class SpeedA extends Check {
                 LimitXZ = 0.34D;
             } else {
                 LimitXZ = 0.39D;
-            }
-            if (lastHitDiff < 800L) {
-                ++LimitXZ;
-            } else if (lastHitDiff < 1600L) {
-                LimitXZ += 0.4;
-            } else if (lastHitDiff < 2000L) {
-                LimitXZ += 0.1;
             }
             if (UtilCheat.slabsNear(player.getLocation())) {
                 LimitXZ += 0.05D;
@@ -168,9 +145,6 @@ public class SpeedA extends Check {
             Count++;
             dumplog(player, "New Count: " + Count);
         }
-        if (jumpingOnIce.contains(uuid)) {
-        	return;
-        }
         Material below = player.getLocation().subtract(0, 1.5, 0).getBlock().getType();
         Material below2 = player.getLocation().subtract(0, 1, 0).getBlock().getType();
         if (below.equals(Material.ICE) || below.equals(Material.PACKED_ICE) 
@@ -200,6 +174,7 @@ public class SpeedA extends Check {
         		&& tps > getThotPatrol().getConfig().getDouble("instantBans.SpeedA.minTPS")
         		&& ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedA.maxPing")
         		&& ping > 1) {
+            Count = 0;
             getThotPatrol().banPlayer(player, this);
         	String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedA.banAlertMessage");
         	getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", player.getName())
@@ -213,11 +188,6 @@ public class SpeedA extends Check {
             getThotPatrol().logCheat(this, player, Math.round(percent) + "% faster than normal | Ping: " + ping + " | TPS: " + tps);
         	getThotPatrol().logToFile(player, this, "Average", "Percent: " + Math.round(percent)
         	+ " | TPS: " + tps + " | Ping: " + ping);
-        }
-        if (!UtilPlayer.isOnGround(player)) {
-            velocity.put(uuid, player.getVelocity().length());
-        } else {
-            velocity.put(uuid, -1.0D);
         }
         tooFastTicks.put(uuid, new AbstractMap.SimpleEntry<>(TooFastCount, System.currentTimeMillis()));
         speedTicks.put(uuid, new AbstractMap.SimpleEntry<>(Count, Time));

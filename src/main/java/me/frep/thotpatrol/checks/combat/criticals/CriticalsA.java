@@ -52,7 +52,7 @@ public class CriticalsA extends Check {
         Player p = (Player)e.getDamager();
         UUID uuid = p.getUniqueId();
         if (p.getAllowFlight() 
-        		|| getThotPatrol().LastVelocity.containsKey(uuid) 
+        		|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
         		|| UtilCheat.slabsNear(p.getLocation()) 
         		|| p.hasPermission("thotpatrol.bypass")) {
         	return;

@@ -40,11 +40,11 @@ public class KillAuraH extends Check {
 			int count = verbose.getOrDefault(p.getUniqueId(), 0);
 			double tps = getThotPatrol().getLag().getTPS();
 			int ping = getThotPatrol().getLag().getPing(p);
-			if (elapsed < 3 && ping < 400) {
+			if (elapsed < 2 && ping < 350) {
 				count++;
 				getThotPatrol().verbose(this, p, ping, tps, elapsed + " < 3");
 			}
-			if (count > 3) {
+			if (count > 4) {
 				count = 0;
 				getThotPatrol().logCheat(this, p, "Packet | Ping: " + ping + " | TPS: " + tps);
 				getThotPatrol().logToFile(p, this, "Packet", "Time: " + elapsed
