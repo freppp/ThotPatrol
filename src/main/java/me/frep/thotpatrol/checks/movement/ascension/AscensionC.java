@@ -6,6 +6,7 @@ import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,6 +14,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.sql.Time;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +53,11 @@ public class AscensionC extends Check {
 		if (!UtilServer.isBukkitVerison("1_8")
 				&&!UtilServer.isBukkitVerison("1_7")) {
 			if (p.hasPotionEffect(PotionEffectType.JUMP)) {
+				return;
+			}
+		}
+		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
+			if (b.getType().toString().contains("SLIME")) {
 				return;
 			}
 		}

@@ -4,6 +4,7 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.*;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -116,5 +117,10 @@ public class SpeedH extends Check {
             count = 0;
         }
         verbose.put(p.getUniqueId(), count);
+    }
+
+    @EventHandler
+    public void slothTest(PlayerMoveEvent e) {
+
     }
 }

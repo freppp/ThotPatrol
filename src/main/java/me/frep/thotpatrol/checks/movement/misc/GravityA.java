@@ -67,7 +67,7 @@ public class GravityA extends Check {
 				}
 			}
 			for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 4)) {
-				if (b.getType().equals(Material.SLIME_BLOCK)) {
+				if (b.getType().toString().equals(Material.SLIME_BLOCK)) {
 					return;
 				}
 			}

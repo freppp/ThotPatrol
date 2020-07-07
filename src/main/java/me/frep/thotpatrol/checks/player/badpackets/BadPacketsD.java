@@ -99,7 +99,7 @@ public class BadPacketsD extends Check {
                     }
                 }
                 if (Count > 400) {
-                	getThotPatrol().logCheat(this, player, null);
+                	getThotPatrol().logCheat(this, player, "More Packets: " + Count + " | Ping:" + ping + " | TPS: " + tps);
 		        	getThotPatrol().logToFile(player, this, "Packet Count", "Packets: " + Count + " > " + maxPackets + 
 		        			" | TPS: " + tps + " | Ping: " + ping);
                 }

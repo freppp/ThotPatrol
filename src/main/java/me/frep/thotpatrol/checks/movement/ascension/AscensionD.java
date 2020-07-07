@@ -54,7 +54,7 @@ public class AscensionD extends Check {
             || !inAir(p)) {
             return;
         }
-        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
             if (b.getType().toString().contains("SLIME") || b.getType().toString().contains("PISTON") || b.getType().toString().contains("BED")
                 || b.getType().toString().contains("STAIR")) {
                 return;

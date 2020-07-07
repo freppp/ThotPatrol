@@ -53,7 +53,7 @@ public class AscensionA extends Check {
 				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(uuid, 0L), 4200L)) {
 			return;
 		}
-		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
 			if (b.getType().equals(Material.SLIME_BLOCK)) {
 				return;
 			}

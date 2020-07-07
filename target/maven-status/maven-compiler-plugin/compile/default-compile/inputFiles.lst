@@ -10,6 +10,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\m
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketPlayerEvent.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\noslowdown\NoSlowdownA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\killaura\KillAuraB.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketVelocityEvent.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\jesus\JesusA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\speed\SpeedG.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\speed\SpeedD.java
@@ -103,5 +104,6 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\m
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\nofall\NoFallB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\events\SharedEvents.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\UtilActionMessage.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\badpackets\BadPacketsE.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\badpackets\BadPacketsB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketUseEntityEvent.java

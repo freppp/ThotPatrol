@@ -61,6 +61,7 @@ me\frep\thotpatrol\checks\combat\reach\ReachC.class
 me\frep\thotpatrol\packets\PacketCore$12.class
 me\frep\thotpatrol\utils\UtilCheat$1.class
 me\frep\thotpatrol\packets\PacketCore.class
+me\frep\thotpatrol\checks\player\badpackets\BadPacketsE.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraG.class
 me\frep\thotpatrol\checks\movement\speed\SpeedB.class
 me\frep\thotpatrol\packets\PacketCore$19.class
@@ -80,7 +81,6 @@ me\frep\thotpatrol\checks\movement\sneak\SneakA.class
 me\frep\thotpatrol\events\SharedEvents$2.class
 me\frep\thotpatrol\utils\UtilActionMessage$ClickableType.class
 me\frep\thotpatrol\checks\movement\fly\FlyA$1.class
-me\frep\thotpatrol\checks\combat\velocity\VelocityA.class
 me\frep\thotpatrol\packets\PacketCore$1.class
 me\frep\thotpatrol\packets\PacketCore$4.class
 me\frep\thotpatrol\packets\events\PacketBlockPlaceEvent.class

@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class SpeedG extends Check {
 	private double gyp = .001599998474120845;
 	private double gypp = .0015999984741199569;
 	private double qqe = 0.0799999999999983;
+	private double aaewq = .4200000000000017;
 
 	public SpeedG(ThotPatrol ThotPatrol) {
 		super("SpeedG", "Speed (Type G)", ThotPatrol);
@@ -43,11 +45,10 @@ public class SpeedG extends Check {
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		if (p.isFlying()
-				|| p.getAllowFlight()
+		if (p.getAllowFlight()
+				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1000)
 				|| p.hasPermission("thotpatrol.bypass")
 				|| e.getFrom().getX() == e.getTo().getX()
-				&& e.getFrom().getY() == e.getTo().getY()
 				&& e.getFrom().getZ() == e.getTo().getZ()) {
 			return;
 		}
@@ -57,7 +58,7 @@ public class SpeedG extends Check {
 			}
 		}
 		double yDiff = Math.abs(e.getFrom().getY() - e.getTo().getY());
-		if (yDiff == 0 || yDiff > .42) return;
+		if (yDiff == 0) return;
 		int verbose = count.getOrDefault(uuid, 0);
 		double ping = getThotPatrol().getLag().getPing(p);
 		double tps = getThotPatrol().getLag().getTPS();
@@ -68,7 +69,8 @@ public class SpeedG extends Check {
 				|| yDiff == eqe
 				|| yDiff == gyp
 				|| yDiff == gypp
-				|| yDiff == qqe) {
+				|| yDiff == qqe
+				|| yDiff == aaewq) {
 			verbose++;
 		}
 		if (verbose >= 3) {
