@@ -14,6 +14,7 @@ import me.frep.thotpatrol.checks.combat.killaura.*;
 import me.frep.thotpatrol.checks.combat.misc.FastBowA;
 import me.frep.thotpatrol.checks.combat.misc.NoSwingA;
 import me.frep.thotpatrol.checks.combat.reach.*;
+import me.frep.thotpatrol.checks.combat.velocity.VelocityA;
 import me.frep.thotpatrol.checks.movement.ascension.*;
 import me.frep.thotpatrol.checks.movement.fastclimb.FastClimbA;
 import me.frep.thotpatrol.checks.movement.fly.*;
@@ -261,6 +262,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new KillAuraM(this));
         Checks.add(new AimPatternA(this));
         Checks.add(new AimPatternB(this));
+        Checks.add(new VelocityA(this));
         Checks.add(new NoSwingA(this));
         Checks.add(new ReachA(this));
         Checks.add(new ReachB(this));

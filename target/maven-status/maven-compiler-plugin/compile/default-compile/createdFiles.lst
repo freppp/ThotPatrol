@@ -26,6 +26,7 @@ me\frep\thotpatrol\checks\movement\speed\SpeedC.class
 me\frep\thotpatrol\packets\PacketCore$5.class
 me\frep\thotpatrol\checks\movement\fly\FlyC.class
 me\frep\thotpatrol\packets\events\PacketUseEntityEvent.class
+me\frep\thotpatrol\packets\events\PacketVelocityEvent.class
 me\frep\thotpatrol\checks\movement\noslowdown\NoSlowdownA.class
 me\frep\thotpatrol\packets\PacketCore$2.class
 me\frep\thotpatrol\packets\events\PacketEntityActionEvent.class
@@ -79,6 +80,7 @@ me\frep\thotpatrol\checks\movement\sneak\SneakA.class
 me\frep\thotpatrol\events\SharedEvents$2.class
 me\frep\thotpatrol\utils\UtilActionMessage$ClickableType.class
 me\frep\thotpatrol\checks\movement\fly\FlyA$1.class
+me\frep\thotpatrol\checks\combat\velocity\VelocityA.class
 me\frep\thotpatrol\packets\PacketCore$1.class
 me\frep\thotpatrol\packets\PacketCore$4.class
 me\frep\thotpatrol\packets\events\PacketBlockPlaceEvent.class
@@ -95,6 +97,7 @@ me\frep\thotpatrol\checks\combat\autoclicker\AutoClickerB.class
 me\frep\thotpatrol\packets\events\PacketBlockDigEvent.class
 me\frep\thotpatrol\checks\movement\fly\FlyD.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsB.class
+me\frep\thotpatrol\packets\PacketCore$20.class
 me\frep\thotpatrol\packets\PacketCore$10.class
 me\frep\thotpatrol\events\SharedEvents.class
 me\frep\thotpatrol\checks\combat\reach\ReachA.class
