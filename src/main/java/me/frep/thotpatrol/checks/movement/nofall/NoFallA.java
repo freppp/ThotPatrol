@@ -28,7 +28,7 @@ public class NoFallA extends Check {
         super("NoFallA", "No Fall (Type A)", ThotPatrol);
         setEnabled(true);
         setBannable(true);
-        setMaxViolations(4);
+        setMaxViolations(2);
         NoFallTicks = new HashMap<>();
         FallDistance = new HashMap<>();
         cancel = new ArrayList<>();

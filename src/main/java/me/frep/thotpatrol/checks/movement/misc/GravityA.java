@@ -56,7 +56,7 @@ public class GravityA extends Check {
 					|| getThotPatrol().getLag().getTPS() < getThotPatrol().getTPSCancel()
 					|| getThotPatrol().getLag().getPing(p) > getThotPatrol().getPingCancel()
 					|| p.getGameMode().equals(GameMode.CREATIVE)
-					|| UtilVelocityNew.didTakeVel(p)) {
+					|| UtilVelocity.didTakeVelocity(p)) {
 				data.setGravity_VL(0);
 				return;
 			}

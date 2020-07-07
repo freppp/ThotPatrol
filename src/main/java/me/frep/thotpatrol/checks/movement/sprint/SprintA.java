@@ -7,6 +7,7 @@ import me.frep.thotpatrol.utils.UtilCheat;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import me.frep.thotpatrol.utils.UtilVelocity;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -56,9 +57,8 @@ public class SprintA extends Check {
     	if (ping > 250) {
     		maxDelta += .04;
     	}
-    	//todo calc walkspeed values
-    	if (p.getWalkSpeed() > .22) {
-    		return;
+    	if (p.getWalkSpeed() > .21) {
+    		maxDelta += p.getWalkSpeed() * 1.5;
 		}
     	if (delta > maxDelta && p.isSprinting() && UtilPlayer.isOnGround(p)) {
 			count++;
@@ -67,9 +67,25 @@ public class SprintA extends Check {
     			count--;
 			}
 		}
+		if (count > 8
+				&& getThotPatrol().getConfig().getBoolean("instantBans.SprintA.enabled")
+				&& delta > getThotPatrol().getConfig().getInt("instantBans.SprintA.maxDelta")
+				&& isBannable() && !getThotPatrol().getNamesBanned().containsKey(p.getName())
+				&& !getThotPatrol().NamesBanned.containsKey(p.getName()) && ping > 1
+				&& tps > getThotPatrol().getConfig().getDouble("instantBans.SprintA.minTPS")
+				&& ping < getThotPatrol().getConfig().getDouble("instantBans.SprintA.maxPing")) {
+			count = 0;
+			String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SprintA.banAlertMessage");
+			getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
+					.replaceAll("%delta%", Double.toString(Math.round(delta)))));
+			dumplog(p, "[Instant Ban] Omnisprint: " + delta + " | TPS: " + tps + " | Ping: " + ping);
+			getThotPatrol().logToFile(p, this, "Omnisprint [Instant Ban]", "Delta: " + delta + " | TPS: " + tps + " | Ping: " + ping);
+			getThotPatrol().banPlayer(p, this);
+		}
     	if (count > 8) {
 			getThotPatrol().logCheat(this, p, "Omnisprint | Delta: " + delta + " | Ping: " + ping + " | TPS: " + tps);
 			getThotPatrol().logToFile(p, this, "Omnisprint", "Delta : " + delta + " | TPS: " + tps + " | Ping: " + ping);
+			dumplog(p, "Delta : " + delta + " | TPS: " + tps + " | Ping: " + ping);
 			count = 0;
     	}
     	verbose.put(uuid,  count);

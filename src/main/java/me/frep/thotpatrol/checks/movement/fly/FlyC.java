@@ -19,7 +19,6 @@ import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilServer;
 import me.frep.thotpatrol.utils.UtilVelocity;
-import me.frep.thotpatrol.utils.UtilVelocityNew;
 
 public class FlyC extends Check {
 	
@@ -89,7 +88,7 @@ public class FlyC extends Check {
 		double ping = getThotPatrol().getLag().getPing(p);
 		final Vector vec = new Vector(to.getX(), to.getY(), to.getZ());
 		final double Distance = vec.distance(new Vector(from.getX(), from.getY(), from.getZ()));
-		if (!UtilVelocityNew.didTakeVel(p) && !UtilPlayer.wasOnSlime(p)) {
+		if (!UtilVelocity.didTakeVelocity(p) && !UtilPlayer.wasOnSlime(p)) {
 			if (p.getFallDistance() == 0.0f && p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR && p.getLocation().getBlock().getRelative(BlockFace.UP).getType() == Material.AIR) {
 				if (UtilPlayer.isNearSlime(from)
 						|| UtilPlayer.isNearSlime(to)) {
@@ -128,7 +127,7 @@ public class FlyC extends Check {
 			}
 		}
 		if (!UtilServer.isBukkitVerison("1_13") && !UtilServer.isBukkitVerison("1_7")) {
-			if (!UtilVelocityNew.didTakeVel(p) && !UtilPlayer.wasOnSlime(p)) {
+			if (!UtilVelocity.didTakeVelocity(p) && !UtilPlayer.wasOnSlime(p)) {
 				if (e.getTo().getY() > e.getFrom().getY() && data.getAirTicks() > 2 && !UtilVelocity.didTakeVelocity(p)) {
 					if (!UtilPlayer.isOnGround4(p) && !UtilPlayer.onGround2(p) && !UtilPlayer.isOnGround(p)) {
 						if (UtilPlayer.getDistanceToGround(p) > 2) {
@@ -162,7 +161,7 @@ public class FlyC extends Check {
 			}
 		}
 		else {
-			if (!UtilVelocityNew.didTakeVel(p) && !UtilPlayer.wasOnSlime(p)) {
+			if (!UtilVelocity.didTakeVelocity(p) && !UtilPlayer.wasOnSlime(p)) {
 				if (e.getTo().getY() > e.getFrom().getY() && data.getAirTicks() > 2 && !UtilVelocity.didTakeVelocity(p)) {
 					if (!UtilPlayer.isOnGround4(p) && !UtilPlayer.onGround2(p) && !UtilPlayer.isOnGround(e, p)) {
 						if (UtilPlayer.getDistanceToGround(p) > 2) {

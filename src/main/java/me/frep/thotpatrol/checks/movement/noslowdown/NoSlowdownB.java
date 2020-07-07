@@ -74,6 +74,7 @@ public class NoSlowdownB extends Check {
         }
         if (count > 5 && isActuallySprinting(p)) {
             count = 0;
+            blocking.remove(p.getUniqueId());
             getThotPatrol().logCheat(this, p, "Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Blocking while Running", "Delta: " + lastDist.getOrDefault(p.getUniqueId(), 0D) + " |  TPS: " + tps + " | Ping: " + ping);
         }

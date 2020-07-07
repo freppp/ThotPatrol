@@ -175,12 +175,12 @@ public class SpeedA extends Check {
         		&& ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedA.maxPing")
         		&& ping > 1) {
             Count = 0;
-            getThotPatrol().banPlayer(player, this);
         	String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedA.banAlertMessage");
         	getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", player.getName())
         			.replaceAll("%speed%", Double.toString(Math.round(percent)))));
         	dumplog(player, "[Instant Ban] Average Speed: " + percent + "% | TPS: " + tps + " | Ping: " + ping);
         	getThotPatrol().logToFile(player, this, "Average [Instant Ban]", "Percent: " + percent + "% | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(player, this);
         }
         if (Count >= 3) {
             dumplog(player, "Logged for Speed. Count: " + Count);

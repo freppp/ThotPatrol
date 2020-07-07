@@ -39,8 +39,6 @@ public class SpeedG extends Check {
 		count.remove(e.getPlayer().getUniqueId());
 	}
 
-
-	//todo make an actual yport check lool
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
@@ -59,9 +57,7 @@ public class SpeedG extends Check {
 			}
 		}
 		double yDiff = Math.abs(e.getFrom().getY() - e.getTo().getY());
-		if (yDiff == 0 || yDiff > .42) {
-			return;
-		}
+		if (yDiff == 0 || yDiff > .42) return;
 		int verbose = count.getOrDefault(uuid, 0);
 		double ping = getThotPatrol().getLag().getPing(p);
 		double tps = getThotPatrol().getLag().getTPS();

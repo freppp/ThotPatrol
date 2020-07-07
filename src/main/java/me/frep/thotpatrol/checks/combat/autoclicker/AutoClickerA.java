@@ -69,12 +69,12 @@ public class AutoClickerA extends Check {
         		&& tps > getThotPatrol().getConfig().getDouble("instantBans.AutoClickerA.minTPS")
         		&& ping < getThotPatrol().getConfig().getInt("instantBans.AutoClickerA.maxPing")
         		&& ping > 1) {
-            getThotPatrol().banPlayer(p, this);
         	String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.AutoClickerA.banAlertMessage");
         	getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
         			.replaceAll("%CPS%", Integer.toString(CPS))));
         	dumplog(p, "[Instant Ban] CPS: " + CPS + " | TPS: " + tps + " | Ping: " + ping);
         	getThotPatrol().logToFile(p, this, "Click Speed [Instant Ban]", "CPS: " + CPS + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(p, this);
         }
         attackTicks.put(uuid, new AbstractMap.SimpleEntry<Integer, Long>(CPS, Time));
     }

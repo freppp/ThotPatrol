@@ -62,6 +62,7 @@ me\frep\thotpatrol\utils\UtilCheat$1.class
 me\frep\thotpatrol\packets\PacketCore.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraG.class
 me\frep\thotpatrol\checks\movement\speed\SpeedB.class
+me\frep\thotpatrol\packets\PacketCore$19.class
 me\frep\thotpatrol\checks\movement\speed\SpeedH.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraA.class
 me\frep\thotpatrol\utils\UtilPlayer.class
@@ -80,13 +81,12 @@ me\frep\thotpatrol\utils\UtilActionMessage$ClickableType.class
 me\frep\thotpatrol\checks\movement\fly\FlyA$1.class
 me\frep\thotpatrol\packets\PacketCore$1.class
 me\frep\thotpatrol\packets\PacketCore$4.class
+me\frep\thotpatrol\packets\events\PacketBlockPlaceEvent.class
 me\frep\thotpatrol\checks\movement\fly\FlyA.class
 me\frep\thotpatrol\utils\ChecksGUI$2.class
 me\frep\thotpatrol\utils\TxtFile.class
 me\frep\thotpatrol\ThotPatrol$3.class
-me\frep\thotpatrol\utils\Values.class
 me\frep\thotpatrol\packets\events\PacketSwingArmEvent.class
-me\frep\thotpatrol\utils\UtilTime$TimeUnit.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraH.class
 me\frep\thotpatrol\checks\movement\nofall\NoFallA.class
 me\frep\thotpatrol\packets\PacketCore$18.class
@@ -108,7 +108,6 @@ me\frep\thotpatrol\commands\JDayCommand.class
 me\frep\thotpatrol\checks\combat\reach\ReachD.class
 me\frep\thotpatrol\packets\PacketCore$9.class
 me\frep\thotpatrol\data\DataPlayer.class
-me\frep\thotpatrol\utils\UtilVelocityNew.class
 me\frep\thotpatrol\packets\events\PacketPlayerEvent.class
 me\frep\thotpatrol\checks\movement\fastclimb\FastClimbA.class
 me\frep\thotpatrol\ThotPatrol$1.class

@@ -53,13 +53,12 @@ public class CriticalsA extends Check {
         UUID uuid = p.getUniqueId();
         if (p.getAllowFlight() 
         		|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
+                || p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()
+                || p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
         		|| UtilCheat.slabsNear(p.getLocation()) 
         		|| p.hasPermission("thotpatrol.bypass")) {
         	return;
         }
-        Location pL = p.getLocation().clone();
-        pL.add(0.0, p.getEyeHeight() + 1.0, 0.0);
-        if (UtilCheat.blocksNear(pL)) return;
         int Count = 0;
         long Time = System.currentTimeMillis();
         if (CritTicks.containsKey(uuid)) {

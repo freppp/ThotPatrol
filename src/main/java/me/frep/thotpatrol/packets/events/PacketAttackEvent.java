@@ -24,7 +24,7 @@ public class PacketAttackEvent extends Event {
 		return this.player;
 	}
 
-	public Entity getEntity() {
+	public Entity  getEntity() {
 		return entity;
 	}
 

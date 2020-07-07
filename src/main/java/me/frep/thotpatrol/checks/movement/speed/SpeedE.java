@@ -5,6 +5,7 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,15 +18,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class SpeedE extends Check {
-	
-    public Map<UUID, Map.Entry<Integer, Long>> speedTicks = new HashMap<>();
-    public Map<UUID, Map.Entry<Integer, Long>> tooFastTicks = new HashMap<>();
-    public Map<UUID, Long> lastHit = new HashMap<>();
 
     public SpeedE(ThotPatrol ThotPatrol) {
         super("SpeedE", "Speed (Type E)", ThotPatrol);
@@ -86,14 +79,6 @@ public class SpeedE extends Check {
         Location from = e.getFrom().clone();
         Location to = e.getTo().clone();
         Player p = e.getPlayer();
-		if (p.hasPermission("thotpatrol.bypass")) {
-			return;
-		}
-		for (Block b: UtilBlock.getNearbyBlocks(p.getLocation() ,3)) {
-		    if (b.getType().toString().contains("PISTON")) {
-		        return;
-            }
-        }
         Location l = p.getLocation();
         int x = l.getBlockX();
         int y = l.getBlockY();
@@ -107,6 +92,7 @@ public class SpeedE extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || p.hasPermission("thotpatrol.bypass")
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
 		if (DataPlayer.lastNearSlime !=null) {
@@ -114,6 +100,11 @@ public class SpeedE extends Check {
 				return;
 			}
 		}
+        for (Block b: UtilBlock.getNearbyBlocks(p.getLocation() ,3)) {
+            if (b.getType().toString().contains("PISTON")) {
+                return;
+            }
+        }
         double ig = 0.28;
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         if (p.hasPotionEffect(PotionEffectType.SPEED)) {
@@ -128,21 +119,29 @@ public class SpeedE extends Check {
                 && !flaggyStuffNear(p.getLocation()) && blockLoc.getBlock().getType() != Material.ICE
                 && e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE
                 && loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
+                && above3.getBlock().getType() == Material.AIR
+                && getThotPatrol().getConfig().getBoolean("instantBans.SpeedE.enabled") && isBannable()
+                && speed > getThotPatrol().getConfig().getDouble("instantBans.SpeedE.maxSpeed")
+                && tps > getThotPatrol().getConfig().getDouble("instantBans.SpeedE.minTPS")
+                && ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedE.maxPing") && ping > 1
+                && !getThotPatrol().getNamesBanned().containsKey(p.getName())
+                && !getThotPatrol().NamesBanned.containsKey(p.getName())) {
+            String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedE.banAlertMessage");
+            getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
+                    .replaceAll("%speed%", Double.toString(Math.round(speed)))));
+            dumplog(p, "[Instant Ban] Vanilla: " + speed + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Vanilla [Instant Ban]", "Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(p, this);
+        }
+        if (speed > ig && !isAir(p) && onGroundDiff <= -0.4 && p.getFallDistance() <= 0.4
+                && !flaggyStuffNear(p.getLocation()) && blockLoc.getBlock().getType() != Material.ICE
+                && e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE
+                && loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
                 && above3.getBlock().getType() == Material.AIR) {
         	getThotPatrol().logCheat(this, p, "Type: Vanilla | " + speed + " > " + ig + " | Ping: " + ping + " | TPS: " + tps);
         	getThotPatrol().logToFile(p, this, "Vanilla", "Speed: " + speed + " > " + ig
         			+ " | TPS: " + tps + " | Ping: " + ping);
         }
-    }
-    
-    public boolean isOnIce(final Player player) {
-        final Location a = player.getLocation();
-        a.setY(a.getY() - 1.0);
-        if (a.getBlock().getType().equals(Material.ICE)) {
-            return true;
-        }
-        a.setY(a.getY() - 1.0);
-        return a.getBlock().getType().equals(Material.ICE);
     }
 
     private int getPotionEffectLevel(Player p, PotionEffectType pet) {

@@ -13,14 +13,8 @@ import me.frep.thotpatrol.checks.combat.improbable.ImprobableA;
 import me.frep.thotpatrol.checks.combat.killaura.*;
 import me.frep.thotpatrol.checks.combat.misc.FastBowA;
 import me.frep.thotpatrol.checks.combat.misc.NoSwingA;
-import me.frep.thotpatrol.checks.combat.reach.ReachA;
-import me.frep.thotpatrol.checks.combat.reach.ReachB;
-import me.frep.thotpatrol.checks.combat.reach.ReachC;
-import me.frep.thotpatrol.checks.combat.reach.ReachD;
-import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
-import me.frep.thotpatrol.checks.movement.ascension.AscensionB;
-import me.frep.thotpatrol.checks.movement.ascension.AscensionC;
-import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
+import me.frep.thotpatrol.checks.combat.reach.*;
+import me.frep.thotpatrol.checks.movement.ascension.*;
 import me.frep.thotpatrol.checks.movement.fastclimb.FastClimbA;
 import me.frep.thotpatrol.checks.movement.fly.*;
 import me.frep.thotpatrol.checks.movement.jesus.JesusA;
@@ -35,10 +29,7 @@ import me.frep.thotpatrol.checks.movement.speed.*;
 import me.frep.thotpatrol.checks.movement.sprint.SprintA;
 import me.frep.thotpatrol.checks.movement.step.StepA;
 import me.frep.thotpatrol.checks.movement.timer.TimerA;
-import me.frep.thotpatrol.checks.player.badpackets.BadPacketsA;
-import me.frep.thotpatrol.checks.player.badpackets.BadPacketsB;
-import me.frep.thotpatrol.checks.player.badpackets.BadPacketsC;
-import me.frep.thotpatrol.checks.player.badpackets.BadPacketsD;
+import me.frep.thotpatrol.checks.player.badpackets.*;
 import me.frep.thotpatrol.checks.player.client.HackedClientA;
 import me.frep.thotpatrol.checks.player.client.HackedClientB;
 import me.frep.thotpatrol.checks.player.client.HackedClientC;
@@ -77,7 +68,6 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public LagCore lag;
     private DataManager dataManager;
     public List<Check> Checks;
-    public static long MS_PluginLoad;
     public Map<UUID, Map<Check, Integer>> Violations;
     public Map<UUID, Map<Check, Long>> ViolationReset;
     public List<Player> AlertsOn;
@@ -109,11 +99,10 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         PacketCore.init();
         packet = new PacketCore(this);
         lag = new LagCore(this);
-        HackedClientA vapers = new HackedClientA(this);
         addChecks();
-        MS_PluginLoad = UtilTime.nowlong();
+        HackedClientA vapers = new HackedClientA(this);
         getServer().getMessenger().registerIncomingPluginChannel(this, "LOLIMAHCKER", vapers);
-        for (final Check check : Checks) {
+        for (Check check : Checks) {
             if (check.isEnabled()) {
                 RegisterListener(check);
             }
@@ -123,10 +112,10 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         getCommand("alerts").setExecutor(new AlertsCommand(this));
         getCommand("autoban").setExecutor(new AutobanCommand(this));
         getCommand("thotpatrol").setExecutor(new ThotPatrolCommand(this));
-        getCommand("getLog").setExecutor(new GetLogCommand(this));
+        getCommand("getlog").setExecutor(new GetLogCommand(this));
+        Bukkit.getServer().getPluginManager().registerEvents(new Latency(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new ChecksGUI(this), this);
         RegisterListener(this);
-        Bukkit.getServer().getPluginManager().registerEvents(new Latency(this), this);
         if (!file.exists()) {
             getConfig().addDefault("prefix", "&8[&d&l!&8] ");
             getConfig().addDefault("alerts.primary", "&7");
@@ -163,16 +152,51 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             getConfig().addDefault("instantBans.SpeedC.maxPing", 200);
             getConfig().addDefault("instantBans.SpeedC.minTPS", 19.75);
             getConfig().addDefault("instantBans.SpeedC.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type C) &7[&d%speed%&7]");
+            getConfig().addDefault("instantBans.SpeedD.enabled", true);
+            getConfig().addDefault("instantBans.SpeedD.maxSpeed", 1.4);
+            getConfig().addDefault("instantBans.SpeedD.maxPing", 200);
+            getConfig().addDefault("instantBans.SpeedD.minTPS", 19.75);
+            getConfig().addDefault("instantBans.SpeedD.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type D) &7[&d%speed%&7]");
+            getConfig().addDefault("instantBans.SpeedE.enabled", true);
+            getConfig().addDefault("instantBans.SpeedE.maxSpeed", .40);
+            getConfig().addDefault("instantBans.SpeedE.maxPing", 200);
+            getConfig().addDefault("instantBans.SpeedE.minTPS", 19.75);
+            getConfig().addDefault("instantBans.SpeedE.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type E) &7[&d%speed%&7]");
+            getConfig().addDefault("instantBans.SpeedH.enabled", true);
+            getConfig().addDefault("instantBans.SpeedH.maxSpeed", .75);
+            getConfig().addDefault("instantBans.SpeedH.maxPing", 200);
+            getConfig().addDefault("instantBans.SpeedH.minTPS", 19.75);
+            getConfig().addDefault("instantBans.SpeedH.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type H) &7[&d%speed%&7]");
+            getConfig().addDefault("instantBans.SpeedI.enabled", true);
+            getConfig().addDefault("instantBans.SpeedI.maxSpeed", .92);
+            getConfig().addDefault("instantBans.SpeedI.maxPing", 200);
+            getConfig().addDefault("instantBans.SpeedI.minTPS", 19.75);
+            getConfig().addDefault("instantBans.SpeedI.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type I) &7[&d%speed%&7]");
+            getConfig().addDefault("instantBans.SprintA.enabled", true);
+            getConfig().addDefault("instantBans.SprintA.maxDelta", 1.25);
+            getConfig().addDefault("instantBans.SprintA.maxPing", 200);
+            getConfig().addDefault("instantBans.SprintA.minTPS", 19.75);
+            getConfig().addDefault("instantBans.SprintA.banAlertMessage", "&d%player% &7was banned for &bSprint (Type A) &7[&d%delta%&7]");
             getConfig().addDefault("instantBans.TimerA.enabled", true);
             getConfig().addDefault("instantBans.TimerA.maxPackets", 28);
             getConfig().addDefault("instantBans.TimerA.maxPing", 200);
             getConfig().addDefault("instantBans.TimerA.minTPS", 19.75);
-            getConfig().addDefault("instantBans.AscensionD.banAlertMessage", "&d%player% &7was banned for &bTimer (Type A) &7[&d%packets%&7]");
+            getConfig().addDefault("instantBans.TimerA.banAlertMessage", "&d%player% &7was banned for &bTimer (Type A) &7[&d%packets%&7]");
+            getConfig().addDefault("instantBans.AscensionA.enabled", true);
+            getConfig().addDefault("instantBans.AscensionA.maxHeight", 3.50);
+            getConfig().addDefault("instantBans.AscensionA.maxPing", 200);
+            getConfig().addDefault("instantBans.AscensionA.minTPS", 19.75);
+            getConfig().addDefault("instantBans.AscensionA.banAlertMessage", "&d%player% &7was banned for &bAscension (Type A) &7[&d%height%&7]");
             getConfig().addDefault("instantBans.AscensionD.enabled", true);
             getConfig().addDefault("instantBans.AscensionD.maxHeight", .95);
             getConfig().addDefault("instantBans.AscensionD.maxPing", 200);
             getConfig().addDefault("instantBans.AscensionD.minTPS", 19.75);
             getConfig().addDefault("instantBans.AscensionD.banAlertMessage", "&d%player% &7was banned for &bAscension (Type D) &7[&d%height%&7]");
+            getConfig().addDefault("instantBans.FastClimbA.enabled", true);
+            getConfig().addDefault("instantBans.FastClimbA.maxSpeed", .23);
+            getConfig().addDefault("instantBans.FastClimbA.maxPing", 200);
+            getConfig().addDefault("instantBans.FastClimbA.minTPS", 19.75);
+            getConfig().addDefault("instantBans.FastClimbA.banAlertMessage", "&d%player% &7was banned for &bFast Climb (Type A) &7[&d%speed%&7]");
             for (Check check : Checks) {
                 getConfig().addDefault("checks." + check.getIdentifier() + ".enabled", check.isEnabled());
                 getConfig().addDefault("checks." + check.getIdentifier() + ".bannable", check.isBannable());
@@ -287,14 +311,6 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new ScaffoldB(this));
     }
 
-    public void resetDumps(Player player) {
-        for (Check check : Checks) {
-            if (check.hasDump(player)) {
-                check.clearDump(player);
-            }
-        }
-    }
-
     public void resetAllViolations() {
         Violations.clear();
         ViolationReset.clear();
@@ -367,7 +383,6 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new SharedEvents(), this);
         getServer().getPluginManager().registerEvents(new MoveEvent(), this);
         getServer().getPluginManager().registerEvents(new UtilVelocity(), this);
-        getServer().getPluginManager().registerEvents(new UtilVelocityNew(), this);
     }
 
     @EventHandler
@@ -422,10 +437,11 @@ public class ThotPatrol extends JavaPlugin implements Listener {
                 return;
             }
             File dataFolder = getInstance().getDataFolder();
-            Map<Check, Integer> Checks = getViolations(p);
+            Map<Check, Integer> checks = getViolations(p);
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("MM-dd|HH:mm:ss");
-            Integer vl = Checks.get(c);
+            if (!checks.containsKey(c)) return;
+            Integer vl = checks.getOrDefault(c, 0);
             if (!dataFolder.exists()) {
                 dataFolder.mkdir();
             }
@@ -649,7 +665,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         if (e.getReason().equals("Flying is not enabled on this server")) {
             alert(Color.Purple + e.getPlayer().getName() + Color.Gray + " was kicked for flying!");
         }
-        if (e.getReason().equals("Invalid move packet recieved")) {
+        if (e.getReason().equals("Invalid move packet received")) {
             alert(Color.Purple + e.getPlayer().getName() + Color.Gray + " was kicked for invalid move packets!");
         }
         if (e.getReason().contains("Too many packet")) {

@@ -37,6 +37,9 @@ public class FlyE extends Check {
             || UtilCheat.isInWeb(p)
             || e.isCancelled()
             || deltaY <= 0
+            || UtilPlayer.isOnClimbable(p)
+            || UtilPlayer.isOnClimbable(p, 1)
+            || UtilPlayer.isOnClimbable(p, 0)
             || SpeedC.highKb.contains(p.getUniqueId())
             || UtilCheat.isInWater(p)
             || UtilPlayer.isInWater(p)

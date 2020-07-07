@@ -179,12 +179,12 @@ public class SpeedB extends Check {
                     && blockLoc.getBlock().getType() != Material.PACKED_ICE
                     && loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
                     && above3.getBlock().getType() == Material.AIR) {
-                getThotPatrol().banPlayer(p, this);
             	String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedB.banAlertMessage");
             	getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
             			.replaceAll("%speed%", Double.toString(Math.round(speed)))));
             	dumplog(p, "[Instant Ban] Ground Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
             	getThotPatrol().logToFile(p, this, "Ground [Instant Ban]", "Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
+                getThotPatrol().banPlayer(p, this);
             }
         }
     }

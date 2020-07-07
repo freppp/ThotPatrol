@@ -11,34 +11,49 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.data.DataPlayer;
 
 public class UtilVelocity implements Listener {
-	
+
+	public static long VelTimeReset_1 = 999L;
+	public static long VelTimeReset_1_FORCE_RESET = 1000L;
+
+	@SuppressWarnings("deprecation")
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	public void onMove(PlayerMoveEvent e) {
 		final Player p = e.getPlayer();
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
-			if (data.isDidTakeVelocity()) {
-				if (UtilTime.elapsed(data.getLastVelMS(),2000L)) {
-					data.setDidTakeVelocity(false);
+			if (data.isLastVelUpdateBoolean()) {
+				if (UtilTime.elapsed(data.getLastVelUpdate(),VelTimeReset_1_FORCE_RESET)) {
+					data.setLastVelUpdateBoolean(false);
+				}
+				if (UtilTime.elapsed(data.getLastVelUpdate(),VelTimeReset_1)) {
+					if (!p.isOnGround()) {
+						data.setLastVelUpdate(UtilTime.nowlong());
+					} else {
+						data.setLastVelUpdateBoolean(false);
+					}
 				}
 			}
 		}
 	}
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
-	public void onVelEvent(PlayerVelocityEvent e) {
+	public void onVelChange(PlayerVelocityEvent e) {
 		final Player p = e.getPlayer();
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
-			data.setDidTakeVelocity(true);
-			data.setLastVelMS(UtilTime.nowlong());
+			if (p.getNoDamageTicks() <= 0) {
+				if (!data.isLastVelUpdateBoolean()) {
+					data.setLastVelUpdateBoolean(true);
+					data.setLastVelUpdate(UtilTime.nowlong());
+				}
+			}
 		}
 	}
 	public static boolean didTakeVelocity(Player p) {
-		boolean out = false;
 		final DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
-		if (data != null && data.isDidTakeVelocity()) {
-			out = true;
+		if (data != null) {
+			return data.isLastVelUpdateBoolean();
+		} else {
+			return false;
 		}
-		return out;
 	}
 }

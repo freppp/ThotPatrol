@@ -7,6 +7,7 @@ import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -62,12 +63,10 @@ public class KillAuraI extends Check {
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
 		Player p = e.getPlayer();
-		if (p == null) {
-			return;
-		}
 		double lastLastAccel = lastLastDist.getOrDefault(p.getUniqueId(), 0D);
 		double lastAccel = lastDist.getOrDefault(p.getUniqueId(), 0D);
-		if(e.getType() != PacketPlayerType.USE
+		if(p == null
+				|| e.getType() != PacketPlayerType.USE
 				|| p.hasPermission("thotpatrol.bypass")
 				|| e.getEntity().isDead()
 				|| lastAccel == lastLastAccel
@@ -76,7 +75,7 @@ public class KillAuraI extends Check {
 				|| p.getWalkSpeed() > .22) {
 			return;
 		}
-		//TODO calc walkSpeed values
+		//todo ^^^
 		double tps = getThotPatrol().getLag().getTPS();
 		int ping = getThotPatrol().getLag().getPing(p);
 		int count = verbose.getOrDefault(p.getUniqueId(), 0);

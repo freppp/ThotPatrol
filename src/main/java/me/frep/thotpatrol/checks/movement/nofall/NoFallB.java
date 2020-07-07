@@ -26,7 +26,7 @@ public class NoFallB extends Check {
         super("NoFallB", "No Fall (Type B)", ThotPatrol);
         setEnabled(true);
         setBannable(true);
-        setMaxViolations(5);
+        setMaxViolations(3);
     }
 	
 	@SuppressWarnings("deprecation")

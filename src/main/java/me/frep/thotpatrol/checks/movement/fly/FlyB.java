@@ -21,7 +21,6 @@ import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilServer;
 import me.frep.thotpatrol.utils.UtilVelocity;
-import me.frep.thotpatrol.utils.UtilVelocityNew;
 
 public class FlyB extends Check {
 	
@@ -81,7 +80,7 @@ public class FlyB extends Check {
 		}
 		double tps = getThotPatrol().getLag().getTPS();
 		double ping = getThotPatrol().getLag().getPing(p);
-		if (!UtilVelocityNew.didTakeVel(p)) {
+		if (!UtilVelocity.didTakeVelocity(p)) {
 			final Vector vec = new Vector(to.getX(), to.getY(), to.getZ());
 			final double Distance = vec.distance(new Vector(from.getX(), from.getY(), from.getZ()));
 			if (p.getFallDistance() == 0.0f && p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR && p.getLocation().getBlock().getRelative(BlockFace.UP).getType() == Material.AIR) {
@@ -102,7 +101,7 @@ public class FlyB extends Check {
 			}
 		}
 		if (!UtilServer.isBukkitVerison("1_13") && !UtilServer.isBukkitVerison("1_7")) {
-			if (!UtilVelocityNew.didTakeVel(p)) {
+			if (!UtilVelocity.didTakeVelocity(p)) {
 				if (e.getTo().getY() > e.getFrom().getY() && data.getAirTicks() > 2 && !UtilVelocity.didTakeVelocity(p)) {
 					if (!UtilPlayer.isOnGround4(p) && !UtilPlayer.onGround2(p) && !UtilPlayer.isOnGround(p)) {
 						if (UtilPlayer.getDistanceToGround(p) > 2) {
@@ -126,7 +125,7 @@ public class FlyB extends Check {
 			}
 		}
 		else {
-			if (!UtilVelocityNew.didTakeVel(p)) {
+			if (!UtilVelocity.didTakeVelocity(p)) {
 				if (e.getTo().getY() > e.getFrom().getY() && data.getAirTicks() > 2 && !UtilVelocity.didTakeVelocity(p)) {
 					if (!UtilPlayer.isOnGround4(p) && !UtilPlayer.onGround2(p) && !UtilPlayer.isOnGround(e, p)) {
 						if (UtilPlayer.getDistanceToGround(p) > 2) {
@@ -247,7 +246,7 @@ public class FlyB extends Check {
 			if(finalDifference < 0.08
 					&& e.getFrom().getY() < e.getTo().getY()
 					&& !UtilPlayer.isOnGround(p) && !p.getLocation().getBlock().isLiquid() && !UtilBlock.isNearLiquid(p)
-					&& !UtilVelocityNew.didTakeVel(p) && !UtilVelocity.didTakeVelocity(p)) {
+					&& !UtilVelocity.didTakeVelocity(p) && !UtilVelocity.didTakeVelocity(p)) {
 				if(++verboseC > 8) {
 					if (!UtilPlayer.wasOnSlime(p)) {
 						verboseC = 0;
@@ -268,7 +267,7 @@ public class FlyB extends Check {
 			if(finalDifference < 0.08
 					&& e.getFrom().getY() < e.getTo().getY()
 					&& !UtilPlayer.isOnGround(e, p) && !p.getLocation().getBlock().isLiquid() && !UtilBlock.isNearLiquid(p)
-					&& !UtilVelocityNew.didTakeVel(p) && !UtilVelocity.didTakeVelocity(p)) {
+					&& !UtilVelocity.didTakeVelocity(p) && !UtilVelocity.didTakeVelocity(p)) {
 				if(++verboseC > 8) {
 					if (!UtilPlayer.wasOnSlime(p)) {
 						verboseC = 0;

@@ -7,6 +7,7 @@ import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilCheat;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -86,8 +87,23 @@ public class AscensionA extends Check {
 		double ping = getThotPatrol().getLag().getPing(p);
 		if (TotalBlocks > Limit) {
 			if (MS > 250L) {
+				if (!velocity.containsKey(p.getUniqueId())
+						&& TotalBlocks > getThotPatrol().getConfig().getDouble("instantBans.AscensionA.maxHeight")
+						&& getThotPatrol().getConfig().getBoolean("instantBans.AscensionA.enabled")
+						&& isBannable()
+						&& !getThotPatrol().NamesBanned.containsKey(p.getName())
+						&& !getThotPatrol().getNamesBanned().containsKey(p.getName())
+						&& tps > getThotPatrol().getConfig().getDouble("instantBans.AscensionA.minTPS")
+						&& ping < getThotPatrol().getConfig().getInt("instantBans.AscensionA.maxPing")) {
+					String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.AscensionA.banAlertMessage");
+					getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
+							.replaceAll("%height%", Double.toString(Math.round(TotalBlocks)))));
+					dumplog(p, "[Instant Ban] Height: " + TotalBlocks + " | TPS: " + tps + " | Ping: " + ping);
+					getThotPatrol().logToFile(p, this, "Flew Upwards [Instant Ban]", "Y-Diff: " + TotalBlocks + " | TPS: " + tps + " | Ping: " + ping);
+					getThotPatrol().banPlayer(p, this);
+				}
 				if (!velocity.containsKey(p.getUniqueId())) {
-					getThotPatrol().logCheat(this, p, "Flew up " + UtilMath.trim(1, TotalBlocks) + " blocks | Ping: " + ping + " | TPS: " + tps);
+					getThotPatrol().logCheat(this, p, "Flew Upwards " + UtilMath.trim(1, TotalBlocks) + " blocks | Ping: " + ping + " | TPS: " + tps);
 		        	getThotPatrol().logToFile(p, this, "Flew Upwards", "Blocks: " + TotalBlocks 
 		        			+ " | TPS: " + tps + " | Ping: " + ping);
 				}

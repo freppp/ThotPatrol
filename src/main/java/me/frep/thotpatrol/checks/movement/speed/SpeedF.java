@@ -18,7 +18,6 @@ import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import me.frep.thotpatrol.utils.UtilVelocity;
-import me.frep.thotpatrol.utils.UtilVelocityNew;
 
 public class SpeedF extends Check {
 	
@@ -26,7 +25,7 @@ public class SpeedF extends Check {
         super("SpeedF", "Speed (Type F)", ThotPatrol);
         setEnabled(true);
         setBannable(true);
-        setMaxViolations(6);
+        setMaxViolations(3);
     }
 	
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
@@ -140,9 +139,9 @@ public class SpeedF extends Check {
 					&& blockLoc.getBlock().getType() != Material.ICE && !blockLoc.getBlock().isLiquid()
 					&& !loc.getBlock().isLiquid() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 					&& above.getBlock().getType() == Material.AIR && above3.getBlock().getType() == Material.AIR
-					&& blockLoc.getBlock().getType() != Material.AIR && !UtilVelocityNew.didTakeVel(p) && !UtilBlock.isNearStair(p)) {
-				if (!UtilVelocityNew.didTakeVel(p) && UtilPlayer.getDistanceToGround(p) <= 4) {
-					if (data.getSpeed2Verbose() >= 8 || p.getNoDamageTicks() == 0 == false && !UtilVelocity.didTakeVelocity(p) && !UtilVelocityNew.didTakeVel(p)
+					&& blockLoc.getBlock().getType() != Material.AIR && !UtilVelocity.didTakeVelocity(p) && !UtilBlock.isNearStair(p)) {
+				if (!UtilVelocity.didTakeVelocity(p) && UtilPlayer.getDistanceToGround(p) <= 4) {
+					if (data.getSpeed2Verbose() >= 8 || p.getNoDamageTicks() == 0 == false && !UtilVelocity.didTakeVelocity(p) && !UtilVelocity.didTakeVelocity(p)
 							&& p.getLocation().add(0, 1.94, 0).getBlock().getType() != Material.AIR) {
 						getThotPatrol().logCheat(this, p, "Check [1] | Ping: " + ping + " TPS: " + tps);
 			        	getThotPatrol().logToFile(p, this, "Overall [1]", "Speed: " + speed + " > " + MaxAirSpeed
@@ -167,7 +166,7 @@ public class SpeedF extends Check {
 			if (speed > 0.7 && !UtilPlayer.isAir(p) && onGroundDiff <= -0.4 && p.getFallDistance() <= 0.4 && blockLoc.getBlock().getType() != Material.ICE
 					&& e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 					&& loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
-					&& above3.getBlock().getType() == Material.AIR && !UtilVelocityNew.didTakeVel(p) && !UtilVelocity.didTakeVelocity(p) &&
+					&& above3.getBlock().getType() == Material.AIR && !UtilVelocity.didTakeVelocity(p) && !UtilVelocity.didTakeVelocity(p) &&
 					p.getLocation().getBlock().getType() != Material.PISTON_MOVING_PIECE && p.getLocation().getBlock().getType() != Material.PISTON_BASE
 					&& p.getLocation().getBlock().getType() != Material.PISTON_STICKY_BASE && !UtilBlock.isNearPiston(p) && !data.isSpeed_PistonExpand_Set()) {
 				if (!data.isSpeed_PistonExpand_Set()) {
@@ -195,9 +194,9 @@ public class SpeedF extends Check {
 						&& blockLoc.getBlock().getType() != Material.ICE && !blockLoc.getBlock().isLiquid()
 						&& !loc.getBlock().isLiquid() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 						&& above.getBlock().getType() == Material.AIR && above3.getBlock().getType() == Material.AIR
-						&& blockLoc.getBlock().getType() != Material.AIR && !UtilVelocityNew.didTakeVel(p) && !UtilBlock.isNearStair(p)) {
-					if (!UtilVelocityNew.didTakeVel(p) && UtilPlayer.getDistanceToGround(p) <= 4) {
-						if (data.getSpeed2Verbose() >= 8 || p.getNoDamageTicks() == 0 == false && !UtilVelocity.didTakeVelocity(p) && !UtilVelocityNew.didTakeVel(p)
+						&& blockLoc.getBlock().getType() != Material.AIR && !UtilVelocity.didTakeVelocity(p) && !UtilBlock.isNearStair(p)) {
+					if (!UtilVelocity.didTakeVelocity(p) && UtilPlayer.getDistanceToGround(p) <= 4) {
+						if (data.getSpeed2Verbose() >= 8 || p.getNoDamageTicks() == 0 == false && !UtilVelocity.didTakeVelocity(p) && !UtilVelocity.didTakeVelocity(p)
 								&& p.getLocation().add(0, 1.94, 0).getBlock().getType() != Material.AIR) {
 							getThotPatrol().logCheat(this, p, "Check [4] | Ping: " + ping + " TPS: " + tps);
 				        	getThotPatrol().logToFile(p, this, "Overall [4]", "Speed: " + speed + " > " + MaxAirSpeed
@@ -214,7 +213,7 @@ public class SpeedF extends Check {
 							speedPot = true;
 						}
 					}
-					if (speed > 0.29 && UtilPlayer.isOnGround(p) && !data.isNearIce() && !UtilBlock.isNearStair(p) && !UtilVelocityNew.didTakeVel(p) && !speedPot) {
+					if (speed > 0.29 && UtilPlayer.isOnGround(p) && !data.isNearIce() && !UtilBlock.isNearStair(p) && !UtilVelocity.didTakeVelocity(p) && !speedPot) {
 						if (speed > Max && !UtilPlayer.isAir(p) && onGroundDiff <= -0.4 && p.getFallDistance() <= 0.4 && blockLoc.getBlock().getType() != Material.ICE
 								&& e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 								&& loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
@@ -226,13 +225,12 @@ public class SpeedF extends Check {
 						if (speed > 0.7 && !UtilPlayer.isAir(p) && onGroundDiff <= -0.4 && p.getFallDistance() <= 0.4 && blockLoc.getBlock().getType() != Material.ICE
 								&& e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE
 								&& loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
-								&& above3.getBlock().getType() == Material.AIR && !UtilVelocityNew.didTakeVel(p) && !UtilVelocity.didTakeVelocity(p) &&
+								&& above3.getBlock().getType() == Material.AIR && !UtilVelocity.didTakeVelocity(p) && !UtilVelocity.didTakeVelocity(p) &&
 								p.getLocation().getBlock().getType() != Material.PISTON_MOVING_PIECE && p.getLocation().getBlock().getType() != Material.PISTON_BASE
 								&& p.getLocation().getBlock().getType() != Material.PISTON_STICKY_BASE && !UtilBlock.isNearPiston(p)) {
 							getThotPatrol().logCheat(this, p, "Check [6] | Ping: " + ping + " TPS: " + tps);
 				        	getThotPatrol().logToFile(p, this, "Overall [6]", "Speed: " + speed + " > .7" 
 				        			+ " | TPS: " + tps + " | Ping: " + ping);
-
 						}
 					}
 				}

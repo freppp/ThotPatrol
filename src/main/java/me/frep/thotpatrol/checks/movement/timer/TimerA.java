@@ -61,14 +61,10 @@ public class TimerA extends Check {
             this.lastPacket.put(uuid, System.currentTimeMillis());
             return;
         }
-        if (SharedEvents.worldChange.contains(uuid)) {
-        	return;        
-        }
+        if (SharedEvents.worldChange.contains(uuid)) return;
         double tps = getThotPatrol().getLag().getTPS();
         double ping = getThotPatrol().getLag().getPing(p);
-        if (ping > 10000) {
-        	return;
-        }
+        if (ping > 10000) return;
         double threshold = 21;
         if (UtilTime.elapsed(Time, 1000L)) {
             if (toCancel.remove(p) && packets <= 13) {
@@ -92,7 +88,7 @@ public class TimerA extends Check {
                     && !getThotPatrol().getNamesBanned().containsKey(p.getName())
             		&& getThotPatrol().getLag().getTPS() > getThotPatrol().getConfig().getDouble("instantBans.TimerA.minTPS")
             		&& ping > 1
-            		&& ping < getThotPatrol().getConfig().getDouble("instantBans.TimerA.maxPing")
+            		&& ping < getThotPatrol().getConfig().getInt("instantBans.TimerA.maxPing")
             		&& verbose > 2) {
             	String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.TimerA.banAlertMessage");
             	getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())

@@ -4,6 +4,7 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.*;
+import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -73,7 +74,6 @@ public class SpeedH extends Check {
             || p.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")) {
             maxSpeed += .08;
         }
-        //todo :(
         if (p.getWalkSpeed() > .21) {
             maxSpeed += p.getWalkSpeed() * 1.5;
         }
@@ -94,6 +94,20 @@ public class SpeedH extends Check {
                     count -= 1.5;
                 }
             }
+        }
+        if (count > 11
+                && getThotPatrol().getConfig().getBoolean("instantBans.SpeedH.enabled")
+                && speed > getThotPatrol().getConfig().getInt("instantBans.SpeedH.maxSpeed")
+                && isBannable() && ping > 1 && !getThotPatrol().getNamesBanned().containsKey(p.getName())
+                && tps > getThotPatrol().getConfig().getDouble("instantBans.SpeedH.minTPS")
+                && ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedH.maxPing")) {
+            count = 0;
+            String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedH.banAlertMessage");
+            getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
+                    .replaceAll("%speed%", Double.toString(Math.round(speed)))));
+            dumplog(p, "[Instant Ban] Ground Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Average [Instant Ban]", "Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(p, this);
         }
         if (count > 11) {
             getThotPatrol().logCheat(this, p, speed + " > " + maxSpeed + " | Ping: " + ping + " | TPS: " + tps);

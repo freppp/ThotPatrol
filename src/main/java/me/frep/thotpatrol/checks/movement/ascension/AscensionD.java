@@ -69,22 +69,22 @@ public class AscensionD extends Check {
             }
         }
         if (yDiff > maxDist) {
+            dumplog(p, "Y-Diff: " + yDiff + " | TPS: " + tps + " | Ping: " + ping);
             getThotPatrol().logCheat(this, p, "Invalid Y | Y-Diff: " + yDiff+ " | Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Multi", "Y-Dist: " + yDiff + " | TPS: " + tps + " | Ping: " + ping);
         }
         if (yDiff > getThotPatrol().getConfig().getDouble("instantBans.AscensionD.maxHeight")
                 && getThotPatrol().getConfig().getBoolean("instantBans.AscensionD.enabled")
-                && isBannable()
-                && !getThotPatrol().NamesBanned.containsKey(p.getName())
+                && isBannable() && !getThotPatrol().NamesBanned.containsKey(p.getName())
                 && !getThotPatrol().getNamesBanned().containsKey(p.getName())
                 && tps > getThotPatrol().getConfig().getDouble("instantBans.AscensionD.minTPS")
                 && ping < getThotPatrol().getConfig().getInt("instantBans.AscensionD.maxPing")) {
-            getThotPatrol().banPlayer(p, this);
             String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.AscensionD.banAlertMessage");
             getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
                     .replaceAll("%height%", Double.toString(yDiff))));
             dumplog(p, "[Instant Ban] Y-Diff: " + yDiff + " | TPS: " + tps + " | Ping: " + ping);
             getThotPatrol().logToFile(p, this, "Invalid deltaY [Instant Ban]", "Y-Diff: " + yDiff + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(p, this);
         }
     }
 

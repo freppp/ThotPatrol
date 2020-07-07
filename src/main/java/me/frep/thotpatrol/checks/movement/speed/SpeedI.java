@@ -6,6 +6,7 @@ import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -83,7 +84,6 @@ public class SpeedI extends Check {
         if (p.getMaximumNoDamageTicks() < 15) {
             maxDelta += .04;
         }
-        //todo
         if (p.getWalkSpeed() > .21) {
             maxDelta += p.getWalkSpeed() * 1;
         }
@@ -93,7 +93,7 @@ public class SpeedI extends Check {
             }
         }
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
-        if (delta > maxDelta + .6) {
+        if (delta > maxDelta + .4) {
             count += 4;
         } else {
             if (delta > maxDelta) {
@@ -104,9 +104,27 @@ public class SpeedI extends Check {
                 }
             }
         }
+        if (count > 4
+                && getThotPatrol().getConfig().getBoolean("instantBans.SpeedI.enabled")
+                && delta > getThotPatrol().getConfig().getInt("instantBans.SpeedI.maxSpeed")
+                && isBannable() && ping > 1
+                && !getThotPatrol().getNamesBanned().containsKey(p.getName())
+                && !getThotPatrol().NamesBanned.containsKey(p.getName())
+                && tps > getThotPatrol().getConfig().getDouble("instantBans.SpeedI.minTPS")
+                && ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedI.maxPing")) {
+            count = 0;
+            String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedI.banAlertMessage");
+            getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
+                    .replaceAll("%speed%", Double.toString(Math.round(delta)))));
+            dumplog(p, "[Instant Ban] Air Speed: " + delta + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Air [Instant Ban]", "Speed: " + delta + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(p, this);
+        }
         if (count > 4) {
             count = 0;
             getThotPatrol().logCheat(this, p, delta + " > .35 | Ping: " + ping + " | TPS: " + tps);
+            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + delta + " > " +  maxDelta + " | TPS: " + tps + " | Ping: " + ping);
+            dumplog(p, "[Flag] Speed: " + delta + " > " + maxDelta + " | Ping: " + ping + " | TPS: " + tps);
         }
         verbose.put(p.getUniqueId(), count);
     }

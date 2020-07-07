@@ -114,7 +114,7 @@ public class SpeedC extends Check {
             }
         }
         if (getThotPatrol().getConfig().getBoolean("instantBans.SpeedC.enabled")
-        		&& isBannable()
+        		&& isBannable() && ping > 1
         		&& speed > getThotPatrol().getConfig().getDouble("instantBans.SpeedC.maxSpeed") 
         		&& tps > getThotPatrol().getConfig().getDouble("instantBans.SpeedC.minTPS")
         		&& ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedC.maxPing")
@@ -125,12 +125,12 @@ public class SpeedC extends Check {
         		&& blockLoc.getBlock().getType() != Material.PACKED_ICE
                 && above.getBlock().getType() == Material.AIR && above3.getBlock().getType() == Material.AIR
                 && blockLoc.getBlock().getType() != Material.AIR) {
-            getThotPatrol().banPlayer(p, this);
         	String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedC.banAlertMessage");
         	getThotPatrol().alert(ChatColor.translateAlternateColorCodes('&', banAlertMessage.replaceAll("%player%", p.getName())
         			.replaceAll("%speed%", Double.toString(Math.round(speed)))));
         	dumplog(p, "[Instant Ban] Air Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
         	getThotPatrol().logToFile(p, this, "Air [Instant Ban]", "Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().banPlayer(p, this);
         }
         if (!isReallyOnGround(p) && speed >= Airmaxspeed && !isOnIce(p) && !below.equals(Material.ICE) 
         		&& !below.equals(Material.PACKED_ICE) && blockLoc.getBlock().getType() != Material.ICE 

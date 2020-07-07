@@ -25,6 +25,7 @@ import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilServer;
+import org.bukkit.util.Vector;
 
 public class PacketCore {
 	
@@ -195,6 +196,17 @@ public class PacketCore {
 			}
 		});
 		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(PacketCore.ThotPatrol,
+				new PacketType[] { PacketType.Play.Client.BLOCK_PLACE }) {
+			@Override
+			public void onPacketReceiving(final PacketEvent event) {
+				final Player player = event.getPlayer();
+				if (player == null) {
+					return;
+				}
+				Bukkit.getServer().getPluginManager().callEvent(new PacketBlockPlaceEvent(event, player));
+			}
+		});
+		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(PacketCore.ThotPatrol,
 				new PacketType[] { PacketType.Play.Server.POSITION}) {
 			@Override
 			public void onPacketSending(final PacketEvent event) {
@@ -219,6 +231,21 @@ public class PacketCore {
 				}
 				Bukkit.getServer().getPluginManager()
 				.callEvent(new PacketEntityActionEvent(player, packet.getIntegers().read(1)));
+			}
+		});
+		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(PacketCore.ThotPatrol,
+				new PacketType[] { PacketType.Play.Server.ENTITY_VELOCITY }) {
+			public void onPacketSending(PacketEvent event) {
+				Player player = event.getPlayer();
+				PacketContainer packet = event.getPacket();
+				if (player == null) {
+					return;
+				}
+				double x = packet.getIntegers().read(1).doubleValue() / 8000.0;
+				double y = packet.getIntegers().read(2).doubleValue() / 8000.0;
+				double z = packet.getIntegers().read(3).doubleValue() / 8000.0;
+				Vector vec = new Vector(x, y, z);
+				Bukkit.getServer().getPluginManager().callEvent(new PacketVelocityEvent(player, vec));
 			}
 		});
 		ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(PacketCore.ThotPatrol,
