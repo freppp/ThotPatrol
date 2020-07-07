@@ -5,6 +5,7 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -14,11 +15,18 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class SpeedE extends Check {
+
+    public static Map<UUID, Long> teleported = new HashMap<>();
 
     public SpeedE(ThotPatrol ThotPatrol) {
         super("SpeedE", "Speed (Type E)", ThotPatrol);
@@ -74,6 +82,11 @@ public class SpeedE extends Check {
                 && b.getRelative(BlockFace.SOUTH).getType().equals(Material.AIR);
     }
 
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent e) {
+        teleported.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
+    }
+
 	@EventHandler(ignoreCancelled = true)
     public void onMove(PlayerMoveEvent e) {
         Location from = e.getFrom().clone();
@@ -92,18 +105,12 @@ public class SpeedE extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || !UtilTime.elapsed(teleported.getOrDefault(p.getUniqueId(), 0L), 2500)
                 || p.hasPermission("thotpatrol.bypass")
-                || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
-		if (DataPlayer.lastNearSlime !=null) {
-			if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
-				return;
-			}
-		}
         for (Block b: UtilBlock.getNearbyBlocks(p.getLocation() ,3)) {
-            if (b.getType().toString().contains("PISTON")) {
-                return;
-            }
+            if (b.getType().toString().contains("PISTON")) return;
+            if (b.getType().toString().contains("SLIME")) return;
         }
         double ig = 0.28;
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));

@@ -43,22 +43,19 @@ public class SpeedH extends Check {
             airTicks.put(p.getUniqueId(), System.currentTimeMillis());
         }
         if (e.getTo().getX() == e.getFrom().getX() && e.getFrom().getZ() == e.getTo().getZ()
-            || e.getFrom().getY() != e.getTo().getY()
-            || !(p.getLocation().getY() % 1 == 0)
-            || !(e.getTo().getY() % 1 == 0)
-            || !(e.getFrom().getY() % 1 == 0)
-            || !UtilPlayer.isOnGround(p)
-            || p.getVehicle() != null
-            || p.getAllowFlight()
-            || e.isCancelled()
-            || SpeedC.jumpingOnIce.contains(p.getUniqueId())
-            || !UtilTime.elapsed(airTicks.getOrDefault(p.getUniqueId(), 0L), 500)
-            || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
-            || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
-            || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
-            || p.hasPermission("thotpatrol.bypass")
-            || SpeedC.highKb.contains(p.getUniqueId())
-            || !UtilPlayer.isOnGround(p.getLocation())) {
+                || e.getFrom().getY() != e.getTo().getY()
+                || !UtilPlayer.isOnGround(p)
+                || p.getVehicle() != null
+                || p.getAllowFlight()
+                || e.isCancelled()
+                || SpeedC.jumpingOnIce.contains(p.getUniqueId())
+                || !UtilTime.elapsed(airTicks.getOrDefault(p.getUniqueId(), 0L), 500)
+                || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
+                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
+                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
+                || p.hasPermission("thotpatrol.bypass")
+                || SpeedC.highKb.contains(p.getUniqueId())
+                || !UtilPlayer.isOnGround(p.getLocation())) {
             return;
         }
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
@@ -72,8 +69,10 @@ public class SpeedH extends Check {
         double speed = UtilMath.getHorizontalDistance(e.getFrom(), e.getTo());
         int ping = getThotPatrol().getLag().getPing(p);
         if (p.getLocation().clone().add(0, .5, 0).getBlock().getType().toString().contains("DOOR")
-            || p.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")) {
-            maxSpeed += .08;
+                || p.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")
+                || p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
+                || p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()) {
+            maxSpeed += .15;
         }
         if (p.getWalkSpeed() > .21) {
             maxSpeed += p.getWalkSpeed() * 1.5;
@@ -112,15 +111,10 @@ public class SpeedH extends Check {
         }
         if (count > 11) {
             getThotPatrol().logCheat(this, p, speed + " > " + maxSpeed + " | Ping: " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + speed + " > " +  maxSpeed + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + speed + " > " + maxSpeed + " | TPS: " + tps + " | Ping: " + ping);
             dumplog(p, "[Flag] Speed: " + speed + " > " + maxSpeed + " | Ping: " + ping + " | TPS: " + tps);
             count = 0;
         }
         verbose.put(p.getUniqueId(), count);
-    }
-
-    @EventHandler
-    public void slothTest(PlayerMoveEvent e) {
-
     }
 }

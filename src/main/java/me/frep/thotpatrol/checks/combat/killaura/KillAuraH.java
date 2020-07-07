@@ -44,7 +44,7 @@ public class KillAuraH extends Check {
 				count++;
 				getThotPatrol().verbose(this, p, ping, tps, elapsed + " < 3");
 			}
-			if (count > 4) {
+			if (count > 8) {
 				count = 0;
 				getThotPatrol().logCheat(this, p, "Packet | Ping: " + ping + " | TPS: " + tps);
 				getThotPatrol().logToFile(p, this, "Packet", "Time: " + elapsed

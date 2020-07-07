@@ -2,6 +2,7 @@ package me.frep.thotpatrol.checks.combat.misc;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.checks.movement.speed.SpeedE;
 import me.frep.thotpatrol.packets.events.PacketSwingArmEvent;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
@@ -27,20 +28,16 @@ public class NoSwingA extends Check {
         setBannable(true);
     }
 
-
     //todo recode this
     @EventHandler(ignoreCancelled=true, priority=EventPriority.MONITOR)
     public void onDamage(EntityDamageByEntityEvent e) {
-        if (!(e.getDamager() instanceof Player)) {
-            return;
-        }
-        if (!e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
-            return;
-        }
-        if (getThotPatrol().getLag().getTPS() < 17.0) {
+        if (!(e.getDamager() instanceof Player)
+            || !e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)
+            || getThotPatrol().getLag().getTPS() < 17) {
             return;
         }
         Player p = (Player)e.getDamager();
+        if (!UtilTime.elapsed(SpeedE.teleported.getOrDefault(p.getUniqueId(), 0L), 2500)) return;
 		double tps = getThotPatrol().getLag().getTPS();
 		double ping = getThotPatrol().getLag().getPing(p);
 		for (Plugin plugin : Bukkit.getServer().getPluginManager().getPlugins()) {
@@ -54,7 +51,7 @@ public class NoSwingA extends Check {
             Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin)getThotPatrol(), new Runnable(){
                 @Override
                 public void run() {
-                    if (!hasSwung(p, 1500L)) {
+                    if (!hasSwung(p, 1200L)) {
                         getThotPatrol().logCheat(NoSwingA.this, p, null);
             			getThotPatrol().logToFile(p, NoSwingA.this, "Packet", "Ping: " 
             					+ ping + " | TPS: " + tps);

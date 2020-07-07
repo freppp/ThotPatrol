@@ -2,17 +2,9 @@ package me.frep.thotpatrol.checks.player.badpackets;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
-import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
-import me.frep.thotpatrol.packets.events.PacketSwingArmEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class BadPacketsE extends Check {
 

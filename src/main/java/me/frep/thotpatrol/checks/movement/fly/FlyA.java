@@ -3,6 +3,7 @@ package me.frep.thotpatrol.checks.movement.fly;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
@@ -42,6 +43,7 @@ public class FlyA extends Check {
                 || (event.getTo().getX() == event.getFrom().getX()) && (event.getTo().getZ() == event.getFrom().getZ())
                 || player.getAllowFlight()
                 || player.getVehicle() != null
+                || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(player.getUniqueId(), 0L), 3000L)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(uuid, 0L), 5000L)
                 || player.hasPermission("thotpatrol.bypass")
                 || getThotPatrol().getLag().getTPS() < getThotPatrol().getTPSCancel()
@@ -53,13 +55,13 @@ public class FlyA extends Check {
             return;
         }
         if (SharedEvents.placedBlock.containsKey(player)) {
-            if (System.currentTimeMillis() - SharedEvents.placedBlock.get(player) < 2000) {
+            if (System.currentTimeMillis() - SharedEvents.placedBlock.get(player) < 3000) {
                 return;
             }
         }
 		double tps = getThotPatrol().getLag().getTPS();
 		double ping = getThotPatrol().getLag().getPing(player);
-        if (blockPlaced.contains(uuid) && ping > 300) {
+        if (blockPlaced.contains(uuid) && ping > 500) {
         	return;
         }
         if (Math.abs(event.getTo().getY() - event.getFrom().getY()) > 0.06) {

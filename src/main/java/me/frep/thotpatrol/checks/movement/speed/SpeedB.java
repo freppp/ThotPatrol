@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -22,7 +23,6 @@ public class SpeedB extends Check {
 
     public Map<UUID, Map.Entry<Integer, Long>> speedTicks;
     public Map<UUID, Map.Entry<Integer, Long>> tooFastTicks;
-    public Map<UUID, Long> lastHit;
     public List<UUID> jumpingOnIce = new ArrayList<>();
 
     public SpeedB(ThotPatrol ThotPatrol) {
@@ -30,7 +30,6 @@ public class SpeedB extends Check {
         setEnabled(true);
         setMaxViolations(8);
         setBannable(true);
-        lastHit = new HashMap<>();
         tooFastTicks = new HashMap<>();
         speedTicks = new HashMap<>();
     }
@@ -110,12 +109,12 @@ public class SpeedB extends Check {
         Location loc2 = new Location(p.getWorld(), x, y + 1, z);
         Location above = new Location(p.getWorld(), x, y + 2, z);
         Location above3 = new Location(p.getWorld(), x - 1, y + 2, z - 1);
-        long lastHitDiff = Math.abs(System.currentTimeMillis() - lastHit.getOrDefault(p.getUniqueId(), 0L));
         if ((e.getTo().getX() == e.getFrom().getX()) && (e.getTo().getZ() == e.getFrom().getZ())
                 && (e.getTo().getY() == e.getFrom().getY())
-                || lastHitDiff < 1500L
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || !UtilTime.elapsed(SpeedI.invalidBlock.getOrDefault(p.getUniqueId(), 0L), 2000L)
+                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double maxSpeed = 0.42;
@@ -193,7 +192,6 @@ public class SpeedB extends Check {
     public void onPlayerQuit(PlayerQuitEvent e) {
         speedTicks.remove(e.getPlayer().getUniqueId());
         tooFastTicks.remove(e.getPlayer().getUniqueId());
-        lastHit.remove(e.getPlayer().getUniqueId());
     }
 
     private int getPotionEffectLevel(Player p) {

@@ -26,7 +26,7 @@ import java.util.UUID;
 public class SpeedI extends Check {
 
     private Map<UUID, Integer> verbose = new HashMap<>();
-    private Map<UUID, Long> invalidBlock = new HashMap<>();
+    public static Map<UUID, Long> invalidBlock = new HashMap<>();
     private Map<UUID, Long> belowBlock = new HashMap<>();
 
     public SpeedI(me.frep.thotpatrol.ThotPatrol ThotPatrol) {

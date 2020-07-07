@@ -6,6 +6,7 @@ import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
@@ -21,10 +22,7 @@ import org.bukkit.util.Vector;
 import java.util.*;
 
 public class SpeedC extends Check {
-	
-    public Map<UUID, Map.Entry<Integer, Long>> speedTicks = new HashMap<>();
-    public Map<UUID, Map.Entry<Integer, Long>> tooFastTicks = new HashMap<>();
-    public static Map<UUID, Long> lastHit = new HashMap<>();
+
     public static List<UUID> jumpingOnIce = new ArrayList<>();
     public static List<UUID>  highKb = new ArrayList<>();
 
@@ -63,15 +61,14 @@ public class SpeedC extends Check {
         Location loc = new Location(p.getWorld(), x, y, z);
         Location above = new Location(p.getWorld(), x, y + 2, z);
         Location above3 = new Location(p.getWorld(), x - 1, y + 2, z - 1);
-        long lastHitDiff = Math.abs(System.currentTimeMillis() - lastHit.getOrDefault(p.getUniqueId(), 0L));
         if (SharedEvents.worldChange.contains(p.getUniqueId())) {
         	return;        
         }
         if ((e.getTo().getX() == e.getFrom().getX()) && (e.getTo().getZ() == e.getFrom().getZ())
                 && (e.getTo().getY() == e.getFrom().getY())
-                || lastHitDiff < 1500L
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1800)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double Airmaxspeed = 0.40;
@@ -83,7 +80,7 @@ public class SpeedC extends Check {
                 return;
             }
             if (b.getType().equals(Material.TRAP_DOOR) || b.getType().equals(Material.IRON_TRAPDOOR)) {
-                Airmaxspeed += .02;
+                Airmaxspeed += .03;
             }
         }
         double tps = getThotPatrol().getLag().getTPS();
@@ -172,13 +169,9 @@ public class SpeedC extends Check {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
-        if (!(e.getDamager() instanceof Player)) {
-            return;
-        }
-        if (!(e.getEntity() instanceof Player)) {
-            return;
-        }
-        if (!e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
+        if (!(e.getDamager() instanceof Player)
+                || !(e.getEntity() instanceof Player
+                || !e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))) {
             return;
         }
         Player p = (Player)e.getDamager();

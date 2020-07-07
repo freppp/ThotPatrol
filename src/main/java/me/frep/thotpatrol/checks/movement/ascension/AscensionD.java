@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilBlock;
+import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -47,9 +48,10 @@ public class AscensionD extends Check {
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         double yDiff = e.getTo().getY() - e.getFrom().getY();
-        if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
+        if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME") && UtilPlayer.getDistanceToGround(p) > 10
             || p.hasPermission("thotpatrol.bypass")
-            || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 2500)
+            || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
+            || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 4000)
             || p.getAllowFlight()
             || !inAir(p)) {
             return;

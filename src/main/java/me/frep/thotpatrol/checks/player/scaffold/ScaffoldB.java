@@ -2,12 +2,15 @@ package me.frep.thotpatrol.checks.player.scaffold;
 
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.HashMap;
@@ -20,12 +23,22 @@ public class ScaffoldB extends Check {
     private Map<UUID, Integer> lastBlockX = new HashMap<>();
     private Map<UUID, Integer> lastBlockZ = new HashMap<>();
     private Map<UUID, Integer> verbose = new HashMap<>();
+    private Map<UUID, Long> blockFaceUp = new HashMap<>();
 
     public ScaffoldB(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("ScaffoldB", "Scaffold (Type B) [#]", ThotPatrol);
         setEnabled(true);
         setBannable(false);
         setMaxViolations(3);
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            if (e.getBlockFace().equals(BlockFace.UP)) {
+                blockFaceUp.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
+            }
+        }
     }
 
     @EventHandler
@@ -42,7 +55,7 @@ public class ScaffoldB extends Check {
         int lastZ = lastBlockZ.getOrDefault(p.getUniqueId(), 0);
         //todo check to make sure black face is up
         if (p.getLocation().clone().subtract(0, 1, 0).getBlock().getType().equals(Material.AIR)
-            || p.getLocation().getY() % 1 == 0) {
+                || p.getLocation().getY() % 1 == 0 || !UtilTime.elapsed(blockFaceUp.getOrDefault(p.getUniqueId(), 0L), 2000)) {
             return;
         }
         if (p.getLocation().getBlockX() == lastX && p.getLocation().getBlockZ() == lastZ && delta > 0) {
