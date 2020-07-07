@@ -3,8 +3,10 @@ package me.frep.thotpatrol.checks.movement.fly;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.movement.speed.SpeedC;
+import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilCheat;
 import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -40,6 +42,7 @@ public class FlyE extends Check {
             || UtilPlayer.isOnClimbable(p)
             || UtilPlayer.isOnClimbable(p, 1)
             || UtilPlayer.isOnClimbable(p, 0)
+            ||!UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 750L)
             || SpeedC.highKb.contains(p.getUniqueId())
             || UtilCheat.isInWater(p)
             || UtilPlayer.isInWater(p)

@@ -1,10 +1,13 @@
 package me.frep.thotpatrol.utils;
 
+import me.frep.thotpatrol.ThotPatrol;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TxtFile {
 	
@@ -67,17 +70,80 @@ public class TxtFile {
         return Name;
     }
 
-    public String getText() {
-        String text = "";
-        for (int i = 0; i < Lines.size(); i++) {
-            String line = Lines.get(i);
-
-            text = text + line + (Lines.size() - 1 == i ? "" : "\n");
+    public static int getLogged(String playerName) {
+        int logged = 0;
+        try {
+            Scanner scanner = new Scanner(new File(ThotPatrol.Instance.getDataFolder() + "/violations.txt"));
+            while (scanner.hasNextLine()) {
+                if(scanner.nextLine().contains(playerName)){
+                    logged++;
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 0;
         }
-        return text;
+        return logged;
     }
 
-    public List<String> getLines() {
-        return Lines;
+    public static int getViolations(String playerName, String checkType) {
+        int logged = 0;
+        try {
+            Scanner scanner = new Scanner(new File(ThotPatrol.Instance.getDataFolder() + "/violations.txt"));
+            while (scanner.hasNextLine()) {
+                if(scanner.nextLine().contains(playerName) && scanner.nextLine().contains(checkType)) {
+                    logged++;
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return logged;
+    }
+
+    public static double averagePing(String playerName) {
+        List<Double> pings = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(new File(ThotPatrol.Instance.getDataFolder() + "/violations.txt"));
+            while (scanner.hasNextLine()) {
+                if(scanner.nextLine().contains(playerName)) {
+                    String[] spl = scanner.nextLine().split("Ping: ");
+                    pings.add(Double.parseDouble(spl[1]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        int averagePing = 0;
+        for (double ping : pings) {
+            averagePing += ping;
+        }
+        return averagePing / pings.size();
+    }
+
+    public static double averageTps(String playerName) {
+        List<Double> tpss = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(new File(ThotPatrol.Instance.getDataFolder() + "/violations.txt"));
+            while (scanner.hasNextLine()) {
+                if(scanner.nextLine().contains(playerName)) {
+                    String[] spl = scanner.nextLine().split("TPS: ");
+                    String[] spl1 = spl[1].split(" | ");
+                    tpss.add(Double.parseDouble(spl1[0]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        double averageTps = 0;
+        for (double tps : tpss) {
+            averageTps += tps;
+        }
+        return (UtilMath.trim(2, averageTps / tpss.size()));
     }
 }

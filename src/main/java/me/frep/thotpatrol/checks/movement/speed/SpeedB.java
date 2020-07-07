@@ -98,9 +98,6 @@ public class SpeedB extends Check {
         Location to = e.getTo().clone();
         Player p = e.getPlayer();
         UUID uuid = p.getUniqueId();
-		if (p.hasPermission("thotpatrol.bypass")) {
-			return;
-		}
         Location l = p.getLocation();
         int x = l.getBlockX();
         int y = l.getBlockY();
@@ -113,11 +110,20 @@ public class SpeedB extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
-                || !UtilTime.elapsed(SpeedI.invalidBlock.getOrDefault(p.getUniqueId(), 0L), 2000L)
+                || p.hasPermission("thotpatrol.bypass")
                 || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double maxSpeed = 0.42;
+        if (!UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 2000L)) {
+            maxSpeed += .1;
+        }
+        if (p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
+                || p.getEyeLocation().clone().add(0, 2, 0).getBlock().getType().isSolid()
+                || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.TRAP_DOOR)
+                || p.getLocation().add(0 , 1, 0).getBlock().getType().equals(Material.IRON_TRAPDOOR)) {
+            maxSpeed += .15;
+        }
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         if (p.hasPotionEffect(PotionEffectType.SPEED)) {
             int level = getPotionEffectLevel(p);
@@ -153,7 +159,7 @@ public class SpeedB extends Check {
             }
         }
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
         maxSpeed += p.getWalkSpeed() > 0.2 ? p.getWalkSpeed() * 1.5 : 0;
         if (isReallyOnGround(p) && to.getY() == from.getY()) {
             if (speed >= maxSpeed && p.isOnGround() && p.getFallDistance() < 0.15

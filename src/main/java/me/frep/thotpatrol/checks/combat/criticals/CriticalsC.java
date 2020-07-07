@@ -56,7 +56,7 @@ public class CriticalsC extends Check {
         if (count > 6) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Packet | Ping: " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Packet", "DeltaY: " + deltaY + " | Ping: " + ping + " | TPS: " + tps);
+            getThotPatrol().logToFile(p, this, "Packet", "DeltaY: " + deltaY + " | TPS: " + tps + " | Ping: " + ping);
         }
         verbose.put(p.getUniqueId(), count);
     }

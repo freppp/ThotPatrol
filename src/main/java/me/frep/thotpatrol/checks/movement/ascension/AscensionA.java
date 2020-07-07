@@ -3,10 +3,7 @@ package me.frep.thotpatrol.checks.movement.ascension;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
-import me.frep.thotpatrol.utils.UtilBlock;
-import me.frep.thotpatrol.utils.UtilCheat;
-import me.frep.thotpatrol.utils.UtilMath;
-import me.frep.thotpatrol.utils.UtilTime;
+import me.frep.thotpatrol.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,6 +24,7 @@ public class AscensionA extends Check {
     public static Map<UUID, Map.Entry<Long, Double>> AscensionTicks = new HashMap<>();
     public static Map<UUID, Double> velocity = new HashMap<>();
     public static Map<UUID, Long> toggleFlight = new HashMap<>();
+    public static Map<UUID, Long> lastNearSlime = new HashMap<>();
 
     public AscensionA(ThotPatrol ThotPatrol) {
         super("AscensionA", "Ascension (Type A)", ThotPatrol);
@@ -44,19 +42,20 @@ public class AscensionA extends Check {
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
+		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
+			if (b.getType().equals(Material.SLIME_BLOCK)) {
+				lastNearSlime.put(p.getUniqueId(), System.currentTimeMillis());
+			}
+		}
 		if (e.getFrom().getY() >= e.getTo().getY()
 				|| p.getAllowFlight()
 				|| p.getVehicle() != null
+				|| p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME") && UtilPlayer.getDistanceToGround(p) < 10
+				|| !UtilTime.elapsed(lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
 				|| p.hasPermission("thotpatrol.bypass")
-				|| p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
 				|| !UtilTime.elapsed(toggleFlight.getOrDefault(uuid, 0L), 5000L)
 				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(uuid, 0L), 4200L)) {
 			return;
-		}
-		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
-			if (b.getType().equals(Material.SLIME_BLOCK)) {
-				return;
-			}
 		}
 		long Time = System.currentTimeMillis();
 		double TotalBlocks = 0.0D;

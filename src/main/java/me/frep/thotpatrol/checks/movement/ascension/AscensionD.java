@@ -48,8 +48,9 @@ public class AscensionD extends Check {
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         double yDiff = e.getTo().getY() - e.getFrom().getY();
-        if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME") && UtilPlayer.getDistanceToGround(p) > 10
+        if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME") && UtilPlayer.getDistanceToGround(p) < 10
             || p.hasPermission("thotpatrol.bypass")
+            || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
             || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
             || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 4000)
             || p.getAllowFlight()

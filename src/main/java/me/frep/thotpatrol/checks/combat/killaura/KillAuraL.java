@@ -41,7 +41,7 @@ public class KillAuraL extends Check {
         if (count >= 4) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Wall | Ping: " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Wall", "Ping: " + ping + " | TPS: " + tps);
+            getThotPatrol().logToFile(p, this, "Wall", "TPS: " + tps + " | Ping: " + ping);
         }
         verbose.put(p.getUniqueId(), count);
     }

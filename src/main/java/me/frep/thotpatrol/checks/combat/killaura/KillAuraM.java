@@ -60,7 +60,7 @@ public class KillAuraM extends Check {
         if (count >= 6) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Packet | Ping " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Packet", "Delta: " + delta + " | Ping: " + ping + " | TPS: " + tps);
+            getThotPatrol().logToFile(p, this, "Packet", "Delta: " + delta + " | TPS: " + tps + " | Ping: " + ping);
         }
         verbose.put(p.getUniqueId(), count);
     }

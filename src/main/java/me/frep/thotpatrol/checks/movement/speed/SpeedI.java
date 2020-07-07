@@ -27,7 +27,7 @@ public class SpeedI extends Check {
 
     private Map<UUID, Integer> verbose = new HashMap<>();
     public static Map<UUID, Long> invalidBlock = new HashMap<>();
-    private Map<UUID, Long> belowBlock = new HashMap<>();
+    public static Map<UUID, Long> belowBlock = new HashMap<>();
 
     public SpeedI(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("SpeedI", "Speed (Type I) [#]", ThotPatrol);
@@ -51,8 +51,8 @@ public class SpeedI extends Check {
                 || p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().toString().contains("SLIME"))) {
             invalidBlock.put(p.getUniqueId(), System.currentTimeMillis());
         }
-        if (UtilBlock.isSolid(p.getEyeLocation().clone().add(0, 1, 0).getBlock())
-                || UtilBlock.isSolid(p.getEyeLocation().clone().add(0, 2, 0).getBlock())
+        if (p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
+                || p.getEyeLocation().clone().add(0, 2, 0).getBlock().getType().isSolid()
                 || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.TRAP_DOOR)
                 || p.getLocation().add(0 , 1, 0).getBlock().getType().equals(Material.IRON_TRAPDOOR)) {
             belowBlock.put(p.getUniqueId(), System.currentTimeMillis());

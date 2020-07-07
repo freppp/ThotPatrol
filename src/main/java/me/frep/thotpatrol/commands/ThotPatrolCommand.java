@@ -1,5 +1,6 @@
 package me.frep.thotpatrol.commands;
 
+import me.frep.thotpatrol.utils.TxtFile;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -51,10 +52,92 @@ public class ThotPatrolCommand implements CommandExecutor {
                 }
                 return true;
             }
+            if (args[0].equalsIgnoreCase("search")) {
+                if (args.length == 1) {
+                    sender.sendMessage(ThotPatrol.PREFIX + Color.Red + "Please specify a player name!");
+                    return true;
+                }
+                String playerName2 = args[1];
+                int totalLogs = TxtFile.getLogged(playerName2);
+                double averagePing = TxtFile.averagePing(playerName2);
+                double averageTps = TxtFile.averageTps(playerName2);
+                if (args.length == 3) {
+                    if (args[2].equalsIgnoreCase("KillAura")) {
+                        int auraViolations = TxtFile.getViolations(playerName2, "Kill Aura");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Kill Aura results for &d" + playerName2 + "&7."));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Kill Aura Violations: &d" + auraViolations));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        return true;
+                    }
+                    if (args[2].equalsIgnoreCase("Speed")) {
+                        int speedViolations = TxtFile.getViolations(playerName2, "Speed");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Speed results for &d" + playerName2 + "&7."));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Speed Violations: &d" + speedViolations));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        return true;
+                    }
+                    if (args[2].equalsIgnoreCase("Reach")) {
+                        int reachViolations = TxtFile.getViolations(playerName2, "Reach");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Reach results for &d" + playerName2 + "&7."));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Reach Violations: &d" + reachViolations));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        return true;
+                    }
+                    if (args[2].equalsIgnoreCase("Ascension")) {
+                        int ascensionViolations = TxtFile.getViolations(playerName2, "Ascension");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Ascension results for &d" + playerName2 + "&7."));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Ascension Violations: &d" + ascensionViolations));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        return true;
+                    }
+                    if (args[2].equalsIgnoreCase("AutoClicker")) {
+                        int autoClickerViolations = TxtFile.getViolations(playerName2, "Auto Clicker");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Auto Clicker results for &d" + playerName2 + "&7."));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Auto Clicker Violations: &d" + autoClickerViolations));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        return true;
+                    }
+                }
+                if (totalLogs == 0) {
+                    sender.sendMessage(ThotPatrol.PREFIX + Color.Red + "That player has no logs!");
+                    return true;
+                }
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Search results for &d" + playerName2 + "&7."));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Total Violations: &d" + totalLogs));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                return true;
+            }
             if (args[0].equalsIgnoreCase("ban")) {
                 if (sender instanceof Player) {
                     String playerName2 = args[1];
-                    sender.sendMessage(Color.Red + "Usage: /thotpatrol ban (player)");
+                    if (args.length == 0) {
+                        sender.sendMessage(Color.Red + "Usage: /thotpatrol ban (player)");
+                        return true;
+                    }
                     if (playerName2 == null) {
                         sender.sendMessage(Color.Red + "Invalid player!");
                     	return true;

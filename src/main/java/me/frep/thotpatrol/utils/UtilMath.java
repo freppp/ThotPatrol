@@ -32,34 +32,10 @@ public class UtilMath {
         return Math.sqrt(x * x + z * z);
     }
 
-    public static double getStandardDeviation(long[] numberArray) {
-        double sum = 0.0, deviation = 0.0;
-        int length = numberArray.length;
-        for (double num : numberArray)
-            sum += num;
-        double mean = sum / length;
-        for (double num : numberArray)
-            deviation += Math.pow(num - mean, 2);
-
-        return Math.sqrt(deviation / length);
-    }
-
-    public static double getStandardDeviation(double[] numberArray) {
-        double sum = 0.0, deviation = 0.0;
-        int length = numberArray.length;
-        for (double num : numberArray)
-            sum += num;
-        double mean = sum / length;
-        for (double num : numberArray)
-            deviation += Math.pow(num - mean, 2);
-
-        return Math.sqrt(deviation / length);
-    }
-
     public static double trim(int degree, double d) {
         String format = "#.#";
         for (int i = 1; i < degree; ++i) {
-            format = String.valueOf(format) + "#";
+            format = format + "#";
         }
         DecimalFormat twoDForm = new DecimalFormat(format);
         return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
