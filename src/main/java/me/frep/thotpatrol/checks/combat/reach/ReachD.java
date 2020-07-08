@@ -6,6 +6,7 @@ import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -48,7 +49,8 @@ public class ReachD extends Check {
 		if(e.getType() != PacketPlayerType.USE
 			|| d.hasPermission("thotpatrol.bypass")
 			|| d.getAllowFlight()
-			|| p.getAllowFlight()) {
+			|| p.getAllowFlight()
+			|| d.getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
 		int count = verbose.getOrDefault(d.getUniqueId(), 0);
@@ -57,6 +59,7 @@ public class ReachD extends Check {
 				? Math.abs(UtilPlayer.getEyeLocation(d).getY() - UtilPlayer.getEyeLocation(p).getY()) : 0;
 		double yawDiff = Math.abs(180 - Math.abs(d.getLocation().getYaw() - p.getLocation().getYaw()));
         double reach = (UtilPlayer.getEyeLocation(d).distance(p.getEyeLocation()) - yDist) - 0.32;
+        if (reach > 6.5) return;
 		double maxReach = 3.1;
 		double speed = lastDist.getOrDefault(d.getUniqueId(), 0D);
 		double tps = getThotPatrol().getLag().getTPS();
@@ -67,7 +70,7 @@ public class ReachD extends Check {
 		}
 		maxReach += yawDiff > 100 && yDist < 0.1 ? yawDiff * 0.01 : yawDiff * 0.001;
 		maxReach += speed * .5;
-		maxReach += yDist * .62;
+		maxReach += yDist * .75;
 		maxReach += ((ping + ping2) / 2) * 0.0034;
 		for (PotionEffect effect : d.getActivePotionEffects()) {
 			if (effect.getType().equals(PotionEffectType.SPEED)) {

@@ -54,7 +54,7 @@ public class AscensionA extends Check {
 				|| !UtilTime.elapsed(lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
 				|| p.hasPermission("thotpatrol.bypass")
 				|| !UtilTime.elapsed(toggleFlight.getOrDefault(uuid, 0L), 5000L)
-				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(uuid, 0L), 4200L)) {
+				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(uuid, 0L), 2500L)) {
 			return;
 		}
 		long Time = System.currentTimeMillis();

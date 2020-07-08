@@ -47,7 +47,7 @@ public class SpeedD extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1500)
+                || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()
                 || p.hasPermission("thotpatrol.bypass")) return;
@@ -70,7 +70,7 @@ public class SpeedD extends Check {
                 && tps > getThotPatrol().getConfig().getDouble("instantBans.SpeedD.minTPS")
                 && ping < getThotPatrol().getConfig().getDouble("instantBans.SpeedD.maxPing")
                 && !getThotPatrol().getNamesBanned().containsKey(p.getName())
-                && speed >= newmaxspeed && isOnIce(p) && p.getFallDistance() < 0.6
+                && speed >= newmaxspeed && p.getFallDistance() < 0.6
                 && loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
                 && loc2.getBlock().getType() == Material.AIR) {
             String banAlertMessage = getThotPatrol().getConfig().getString("instantBans.SpeedD.banAlertMessage");
@@ -80,7 +80,7 @@ public class SpeedD extends Check {
             getThotPatrol().logToFile(p, this, "Limit [Instant Ban]", "Speed: " + speed + " | TPS: " + tps + " | Ping: " + ping);
             getThotPatrol().banPlayer(p, this);
         }
-        if (speed >= newmaxspeed && isOnIce(p) && p.getFallDistance() < 0.6
+        if (speed >= newmaxspeed && p.getFallDistance() < 0.6
                 && loc2.getBlock().getType() != Material.TRAP_DOOR && above.getBlock().getType() == Material.AIR
                 && loc2.getBlock().getType() == Material.AIR) {
         	getThotPatrol().logCheat(this, p, "Type: Limit | " + speed + " > " + newmaxspeed + " | Ping: " + ping + " TPS: " + tps);

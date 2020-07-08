@@ -74,9 +74,6 @@ public class BadPacketsD extends Check {
             Count = packetTicks.get(player.getUniqueId()).getKey();
             Time = packetTicks.get(player.getUniqueId()).getValue();
         }
-        if (blacklist.contains(player.getUniqueId())) {
-        	return;
-        }
         if (lastPacket.containsKey(player.getUniqueId())) {
             long MS = System.currentTimeMillis() - lastPacket.get(player.getUniqueId());
             if (MS >= 100L) {

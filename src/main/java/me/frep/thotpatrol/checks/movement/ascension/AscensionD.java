@@ -51,7 +51,7 @@ public class AscensionD extends Check {
         if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME") && UtilPlayer.getDistanceToGround(p) < 10
             || p.hasPermission("thotpatrol.bypass")
             || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
-            || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
+            || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
             || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 4000)
             || p.getAllowFlight()
             || !inAir(p)) {

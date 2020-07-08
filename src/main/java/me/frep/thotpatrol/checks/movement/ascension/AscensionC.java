@@ -23,7 +23,6 @@ import java.util.UUID;
 public class AscensionC extends Check {
 	
 	public static Map<UUID, Map.Entry<Integer, Long>> flyTicks = new HashMap<>();
-	public static Map<UUID, Double> velocity = new HashMap<>();
 	
     public AscensionC(ThotPatrol ThotPatrol) {
         super("AscensionC", "Ascension (Type C)", ThotPatrol);
@@ -47,7 +46,7 @@ public class AscensionC extends Check {
 				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(uuid, 0L), 4200L)
 				|| Latency.getLag(p) > 75
 				|| p.hasPermission("thotpatrol.bypass")
-				|| getThotPatrol().getLastVelocity().containsKey(uuid)) {
+				|| !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)) {
 			return;
 		}
 		if (!UtilServer.isBukkitVerison("1_8")

@@ -18,6 +18,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\badpackets\BadPacketsC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\events\MoveEvent.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketBlockPlaceEvent.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\badpackets\BadPacketsF.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\killaura\KillAuraD.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\killaura\KillAuraA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\fly\FlyE.java
@@ -28,6 +29,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\m
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\UtilJDay.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\ascension\AscensionC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\UtilPlayer.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\TxtFile.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\criticals\CriticalsB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\badpackets\BadPacketsA.java
@@ -50,6 +52,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\p
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\GetLogCommand.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\aimpattern\AimPatternB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\UtilTime.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveD.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\data\DataPlayer.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\UtilMath.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\fly\FlyA.java
@@ -63,6 +66,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\sneak\SneakA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\step\StepA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketEntityActionEvent.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\client\HackedClientB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\timer\TimerA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\reach\ReachA.java
@@ -75,6 +79,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\m
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\ConfigFile.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\reach\ReachD.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\Latency.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\client\HackedClientC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\criticals\CriticalsC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\AutobanCommand.java
@@ -94,6 +99,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\c
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\aimpattern\AimPatternA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\ascension\AscensionD.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\sprint\SprintA.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\reach\ReachE.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketAttackEvent.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\client\HackedClientA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\JDayCommand.java

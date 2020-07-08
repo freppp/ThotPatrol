@@ -10,12 +10,12 @@ me\frep\thotpatrol\checks\movement\sprint\SprintA.class
 me\frep\thotpatrol\data\DataManager.class
 me\frep\thotpatrol\checks\combat\improbable\ImprobableA.class
 me\frep\thotpatrol\checks\combat\criticals\CriticalsA.class
-me\frep\thotpatrol\checks\movement\speed\SpeedA$1.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsC.class
 me\frep\thotpatrol\utils\ChecksGUI$1.class
 me\frep\thotpatrol\checks\combat\autoclicker\AutoClickerB$ClickProfile.class
 me\frep\thotpatrol\checks\player\client\HackedClientC.class
 me\frep\thotpatrol\utils\UtilVelocity.class
+me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveB.class
 me\frep\thotpatrol\packets\PacketCore$17.class
 me\frep\thotpatrol\ThotPatrol$2.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraL.class
@@ -30,6 +30,7 @@ me\frep\thotpatrol\packets\events\PacketVelocityEvent.class
 me\frep\thotpatrol\checks\movement\noslowdown\NoSlowdownA.class
 me\frep\thotpatrol\packets\PacketCore$2.class
 me\frep\thotpatrol\packets\events\PacketEntityActionEvent.class
+me\frep\thotpatrol\checks\player\badpackets\BadPacketsF.class
 me\frep\thotpatrol\checks\movement\nofall\NoFallB.class
 me\frep\thotpatrol\commands\LogsCommand.class
 me\frep\thotpatrol\packets\PacketCore$14.class
@@ -39,6 +40,7 @@ me\frep\thotpatrol\checks\combat\autoclicker\AutoClickerC.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraI.class
 me\frep\thotpatrol\checks\movement\misc\GravityA.class
 me\frep\thotpatrol\checks\combat\misc\NoSwingA$1.class
+me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveA.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsD.class
 me\frep\thotpatrol\utils\UtilCheat.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraF.class
@@ -100,6 +102,7 @@ me\frep\thotpatrol\checks\movement\fly\FlyD.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsB.class
 me\frep\thotpatrol\packets\PacketCore$20.class
 me\frep\thotpatrol\packets\PacketCore$10.class
+me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveC.class
 me\frep\thotpatrol\events\SharedEvents.class
 me\frep\thotpatrol\checks\combat\reach\ReachA.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraE.class
@@ -122,6 +125,7 @@ me\frep\thotpatrol\ThotPatrol.class
 me\frep\thotpatrol\checks\movement\ascension\AscensionA.class
 me\frep\thotpatrol\packets\events\PacketHeldItemChangeEvent.class
 me\frep\thotpatrol\checks\Check.class
+me\frep\thotpatrol\checks\combat\reach\ReachE.class
 me\frep\thotpatrol\checks\combat\aimpattern\AimPatternB.class
 me\frep\thotpatrol\commands\ThotPatrolCommand.class
 me\frep\thotpatrol\utils\UtilActionMessage$AMText.class
@@ -146,6 +150,7 @@ me\frep\thotpatrol\checks\player\badpackets\BadPacketsA.class
 me\frep\thotpatrol\checks\movement\timer\TimerA.class
 me\frep\thotpatrol\commands\AlertsCommand.class
 me\frep\thotpatrol\checks\combat\criticals\CriticalsC.class
+me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveD.class
 me\frep\thotpatrol\utils\UtilMath.class
 me\frep\thotpatrol\checks\combat\aimpattern\AimPatternA.class
 me\frep\thotpatrol\packets\PacketCore$7.class

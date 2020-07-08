@@ -7,6 +7,7 @@ import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -20,7 +21,7 @@ import java.util.UUID;
 
 public class SpeedH extends Check {
 
-    private Map<UUID, Long> airTicks = new HashMap<>();
+    public static Map <UUID, Long> airTicks = new HashMap<>();
     private Map<UUID, Integer> verbose = new HashMap<>();
 
     public SpeedH(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
@@ -48,11 +49,9 @@ public class SpeedH extends Check {
                 || p.getVehicle() != null
                 || p.getAllowFlight()
                 || e.isCancelled()
-                || SpeedC.jumpingOnIce.contains(p.getUniqueId())
                 || !UtilTime.elapsed(airTicks.getOrDefault(p.getUniqueId(), 0L), 500)
                 || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || p.hasPermission("thotpatrol.bypass")
                 || SpeedC.highKb.contains(p.getUniqueId())
                 || !UtilPlayer.isOnGround(p.getLocation())) {
@@ -64,6 +63,9 @@ public class SpeedH extends Check {
             }
         }
         double maxSpeed = .29;
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)) {
+            maxSpeed += .15;
+        }
         double tps = getThotPatrol().getLag().getTPS();
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         double speed = UtilMath.getHorizontalDistance(e.getFrom(), e.getTo());
@@ -71,7 +73,8 @@ public class SpeedH extends Check {
         if (p.getLocation().clone().add(0, .5, 0).getBlock().getType().toString().contains("DOOR")
                 || p.getLocation().clone().add(0, 1, 0).getBlock().getType().toString().contains("DOOR")
                 || p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
-                || p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()) {
+                || p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()
+                || UtilBlock.isStair(p.getLocation().getBlock().getRelative(BlockFace.DOWN))) {
             maxSpeed += .15;
         }
         if (p.getWalkSpeed() > .21) {
@@ -81,6 +84,10 @@ public class SpeedH extends Check {
             if (effect.getType().equals(PotionEffectType.SPEED)) {
                 maxSpeed += (effect.getAmplifier() + 1) * .06;
             }
+        }
+        if (speed > maxSpeed + .5) {
+            count += 6;
+            dumplog(p, "[Count Increase (High)] Speed: " + speed + " > " + maxSpeed + " | Ping: " + ping + " | TPS: " + tps);
         }
         if (speed > maxSpeed + .2) {
             count += 3;

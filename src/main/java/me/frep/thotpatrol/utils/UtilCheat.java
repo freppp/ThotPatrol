@@ -59,7 +59,6 @@ public final class UtilCheat {
                 || (otherBlock.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_WATER);
         boolean sw = (otherBlock.getRelative(BlockFace.SOUTH_WEST).getType() == Material.WATER)
                 || (otherBlock.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_WATER);
-
         return (n) && (s) && (e) && (w) && (ne) && (nw) && (se) && (sw) && (isHover);
     }
 

@@ -65,7 +65,6 @@ public class SpeedI extends Check {
                 || e.isCancelled()
                 || p.getLocation().getBlock().isLiquid()
                 || p.hasPermission("thotpatrol.bypass")
-                || SpeedC.jumpingOnIce.contains(p.getUniqueId())
                 || UtilPlayer.isOnClimbable(p, 0)
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p)
@@ -73,12 +72,19 @@ public class SpeedI extends Check {
                 || !UtilTime.elapsed(belowBlock.getOrDefault(p.getUniqueId(), 0L), 750L)
                 || !UtilTime.elapsed(invalidBlock.getOrDefault(p.getUniqueId(), 0L), 1000L)
                 || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
-                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1200)) {
+                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)) {
             return;
         }
         double delta = UtilMath.offset(getHV(e.getTo().toVector()), getHV(e.getFrom().toVector()));
         double maxDelta = .35;
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1200)) {
+            maxDelta += .4;
+        }
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 3)) {
+            if (b.getType().toString().contains("ICE")) {
+                maxDelta += .2;
+            }
+        }
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);
         if (p.getMaximumNoDamageTicks() < 15) {

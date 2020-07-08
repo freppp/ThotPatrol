@@ -111,7 +111,7 @@ public class SpeedB extends Check {
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
                 || p.hasPermission("thotpatrol.bypass")
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 2000)
+                || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double maxSpeed = 0.42;

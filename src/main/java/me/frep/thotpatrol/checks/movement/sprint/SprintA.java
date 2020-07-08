@@ -3,11 +3,9 @@ package me.frep.thotpatrol.checks.movement.sprint;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedC;
-import me.frep.thotpatrol.utils.UtilCheat;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilTime;
-import me.frep.thotpatrol.utils.UtilVelocity;
+import me.frep.thotpatrol.utils.*;
 import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -39,7 +37,6 @@ public class SprintA extends Check {
     	if (UtilCheat.isInWeb(p)
     			|| UtilVelocity.didTakeVelocity(p)
     			|| !UtilPlayer.isOnGround(p)
-				|| SpeedC.jumpingOnIce.contains(p.getUniqueId())
 				|| p.getLocation().getBlock().isLiquid()
     			|| p.hasPermission("thotpatrol.bypass")
     			|| p.getAllowFlight()
@@ -57,6 +54,11 @@ public class SprintA extends Check {
     	if (ping > 250) {
     		maxDelta += .04;
     	}
+		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+			if (b.getType().toString().contains("ICE")) {
+				maxDelta += .03;
+			}
+		}
     	if (p.getWalkSpeed() > .21) {
     		maxDelta += p.getWalkSpeed() * 1.5;
 		}

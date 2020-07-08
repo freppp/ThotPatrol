@@ -8,10 +8,12 @@ import java.util.Map;
 import java.util.UUID;
 
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,16 +27,11 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.events.SharedEvents;
-import me.frep.thotpatrol.utils.UtilCheat;
-import me.frep.thotpatrol.utils.UtilMath;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilTime;
 
 public class SpeedA extends Check {
 
     public static Map<UUID, Map.Entry<Integer, Long>> speedTicks;
     public static Map<UUID, Map.Entry<Integer, Long>> tooFastTicks;
-    public List<UUID> jumpingOnIce = new ArrayList<>();
 
     public SpeedA(ThotPatrol ThotPatrol) {
         super("SpeedA", "Speed (Type A)", ThotPatrol);
@@ -72,7 +69,7 @@ public class SpeedA extends Check {
                 || player.getVehicle() != null
                 || SpeedC.highKb.contains(player.getUniqueId())
                 || player.hasPermission("thotpatrol.bypass")
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(player.getUniqueId(), 0L), 2000)
+                || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(player.getUniqueId(), 0L), 2000)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(uuid, 0L), 5000L)
                 && !player.hasPotionEffect(PotionEffectType.POISON)
                 && !player.hasPotionEffect(PotionEffectType.WITHER) && player.getFireTicks() == 0) return;
@@ -92,6 +89,11 @@ public class SpeedA extends Check {
                 LimitXZ = 0.34D;
             } else {
                 LimitXZ = 0.39D;
+            }
+            for (Block b : UtilBlock.getNearbyBlocks(player.getLocation(), 2)) {
+                if (b.getType().toString().contains("ICE")) {
+                    LimitXZ += .35;
+                }
             }
             if (UtilCheat.slabsNear(player.getLocation())) {
                 LimitXZ += 0.05D;
@@ -147,19 +149,6 @@ public class SpeedA extends Check {
         }
         Material below = player.getLocation().subtract(0, 1.5, 0).getBlock().getType();
         Material below2 = player.getLocation().subtract(0, 1, 0).getBlock().getType();
-        if (below.equals(Material.ICE) || below.equals(Material.PACKED_ICE) 
-        		|| below2.equals(Material.ICE) || below2.equals(Material.PACKED_ICE)) {
-        	jumpingOnIce.add(uuid);
-        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, new Runnable() {
-        		@Override
-        		public void run() {
-        			jumpingOnIce.remove(uuid);
-        		}
-        	}, 40);
-        }
-        if (jumpingOnIce.contains(uuid)) {
-        	return;
-        }
         if (speedTicks.containsKey(uuid) && UtilTime.elapsed(Time, 30000L)) {
             Count = 0;
             Time = UtilTime.nowlong();

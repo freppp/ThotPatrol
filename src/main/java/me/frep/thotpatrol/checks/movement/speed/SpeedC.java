@@ -23,7 +23,6 @@ import java.util.*;
 
 public class SpeedC extends Check {
 
-    public static List<UUID> jumpingOnIce = new ArrayList<>();
     public static List<UUID>  highKb = new ArrayList<>();
 
     public SpeedC(ThotPatrol ThotPatrol) {
@@ -68,10 +67,12 @@ public class SpeedC extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1200)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double Airmaxspeed = 0.40;
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)) {
+            Airmaxspeed += .3;
+        }
         if (p.getMaximumNoDamageTicks() < 15) {
         	Airmaxspeed += .05;
         }
@@ -87,20 +88,16 @@ public class SpeedC extends Check {
         int ping = getThotPatrol().getLag().getPing(p);
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         Material below = p.getLocation().subtract(0, 1.5, 0).getBlock().getType();
-        Material below2 = p.getLocation().subtract(0, 1, 0).getBlock().getType();
-        if (below.equals(Material.ICE) || below.equals(Material.PACKED_ICE) 
-        		|| below2.equals(Material.ICE) || below2.equals(Material.PACKED_ICE)) {
-        	jumpingOnIce.add(p.getUniqueId());
-        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> jumpingOnIce.remove(p.getUniqueId()), 40);
-        }
-        if (jumpingOnIce.contains(p.getUniqueId())) {
-        	return;
-        }
 		if (DataPlayer.lastNearSlime !=null) {
 			if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
 				return;
 			}
 		}
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+            if (b.getType().toString().contains("ICE")) {
+                Airmaxspeed += .35;
+            }
+        }
 		if (p.getWalkSpeed() > 0.25) {
 			Airmaxspeed += p.getWalkSpeed() * 1;
 		}

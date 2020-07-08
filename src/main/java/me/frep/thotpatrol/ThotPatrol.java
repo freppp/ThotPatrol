@@ -17,6 +17,7 @@ import me.frep.thotpatrol.checks.combat.reach.*;
 import me.frep.thotpatrol.checks.movement.ascension.*;
 import me.frep.thotpatrol.checks.movement.fastclimb.FastClimbA;
 import me.frep.thotpatrol.checks.movement.fly.*;
+import me.frep.thotpatrol.checks.movement.invalidmove.*;
 import me.frep.thotpatrol.checks.movement.jesus.JesusA;
 import me.frep.thotpatrol.checks.movement.misc.GravityA;
 import me.frep.thotpatrol.checks.movement.misc.VClipA;
@@ -47,6 +48,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
@@ -75,6 +78,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public Map<Player, Map.Entry<Check, Long>> AutoBan;
     public Map<String, Check> NamesBanned;
     public Map<UUID, Long> LastVelocity;
+    public Map<UUID, Long> lastDamage;
     public Integer pingToCancel = getConfig().getInt("settings.latency.ping");
     public Integer tpsToCancel = getConfig().getInt("settings.latency.tps");
 
@@ -88,6 +92,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         AutoBan = new HashMap<>();
         NamesBanned = new HashMap<>();
         LastVelocity = new HashMap<>();
+        lastDamage = new HashMap<>();
     }
 
     public void onEnable() {
@@ -139,7 +144,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             getConfig().addDefault("instantBans.AutoClickerA.minTPS", 19.75);
             getConfig().addDefault("instantBans.AutoClickerA.banAlertMessage", "&d%player% &7was banned for &bAuto Clicker (Type A) &7[&d%CPS% CPS&7]");
             getConfig().addDefault("instantBans.SpeedA.enabled", true);
-            getConfig().addDefault("instantBans.SpeedA.maxSpeedPercentage", 60);
+            getConfig().addDefault("instantBans.SpeedA.maxSpeedPercentage", 50);
             getConfig().addDefault("instantBans.SpeedA.maxPing", 200);
             getConfig().addDefault("instantBans.SpeedA.minTPS", 19.75);
             getConfig().addDefault("instantBans.SpeedA.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type A) &7[&d%speed%%&7]");
@@ -169,7 +174,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             getConfig().addDefault("instantBans.SpeedH.minTPS", 19.75);
             getConfig().addDefault("instantBans.SpeedH.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type H) &7[&d%speed%&7]");
             getConfig().addDefault("instantBans.SpeedI.enabled", true);
-            getConfig().addDefault("instantBans.SpeedI.maxSpeed", .92);
+            getConfig().addDefault("instantBans.SpeedI.maxSpeed", .65);
             getConfig().addDefault("instantBans.SpeedI.maxPing", 200);
             getConfig().addDefault("instantBans.SpeedI.minTPS", 19.75);
             getConfig().addDefault("instantBans.SpeedI.banAlertMessage", "&d%player% &7was banned for &bSpeed (Type I) &7[&d%speed%&7]");
@@ -267,11 +272,13 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new ReachB(this));
         Checks.add(new ReachC(this));
         Checks.add(new ReachD(this));
+        Checks.add(new ReachE(this));
         Checks.add(new BadPacketsA(this));
         Checks.add(new BadPacketsB(this));
         Checks.add(new BadPacketsC(this));
         Checks.add(new BadPacketsD(this));
         Checks.add(new BadPacketsE(this));
+        Checks.add(new BadPacketsF(this));
         Checks.add(new FastClimbA(this));
         Checks.add(new AscensionA(this));
         Checks.add(new AscensionB(this));
@@ -291,6 +298,10 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new FlyC(this));
         Checks.add(new FlyD(this));
         Checks.add(new FlyE(this));
+        Checks.add(new InvalidMoveA(this));
+        Checks.add(new InvalidMoveB(this));
+        Checks.add(new InvalidMoveC(this));
+        Checks.add(new InvalidMoveD(this));
         Checks.add(new StepA(this));
         Checks.add(new JesusA(this));
         Checks.add(new NoFallA(this));
@@ -621,6 +632,15 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void Velocity(PlayerVelocityEvent e) {
         LastVelocity.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e) {
+        if (!(e.getEntity() instanceof Player)
+            || !(e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))) {
+            return;
+        }
+        lastDamage.put(e.getEntity().getUniqueId(), System.currentTimeMillis());
     }
 
     public void banPlayer(Player p, Check check) {

@@ -18,9 +18,12 @@ public class BadPacketsE extends Check {
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
         Player p = e.getPlayer();
+        int ping = getThotPatrol().getLag().getPing(p);
+        double tps = getThotPatrol().getLag().getTPS();
         if (!(e.getEntity() instanceof Player)) return;
         if (e.getPlayer() == e.getEntity()) {
             getThotPatrol().logCheat(this, p, null);
+            getThotPatrol().logToFile(p, this, "Self Damage", "TPS: " + tps + " | Ping: " + ping);
         }
     }
 }

@@ -189,17 +189,17 @@ public class ChecksGUI implements Listener {
         return thing;
     }
 
-    public void openChecks(Player player, int pageSelect){
+    public void openChecks(Player player, int pageSelect) {
         int get = 0;
         List<Check> checks = ThotPatrol.getChecks();
         int totalChecks = checks.size();
         int maxP = (int) Math.ceil((double) totalChecks / (double) 45);
 
-        for(int page = 1; page < maxP + 1; page++){
+        for (int page = 1; page < maxP + 1; page++) {
             Inventory inv = Bukkit.createInventory(null, 54, Color.Gold + "Checks: Toggle [" + page + "]");
             int slot = 0;
-            for(int items = 0; items < 45; items++){
-                if(get >= totalChecks){
+            for (int items = 0; items < 45; items++) {
+                if (get >= totalChecks) {
                     break;
                 }
                 Check check = checks.get(get);
@@ -217,10 +217,9 @@ public class ChecksGUI implements Listener {
                 ItemStack c = createGlass(Material.STAINED_GLASS_PANE, 15, 1, Color.Gray + "N/A");
                 inv.setItem(i, c);
             }
-            ItemStack previous = createItem(Material.ARROW, 1, ChatColor.GREEN  + "Previous Page");
+            ItemStack previous = createItem(Material.ARROW, 1, ChatColor.GREEN + "Previous Page");
             inv.setItem(46, previous);
-
-            ItemStack next = createItem(Material.ARROW, 1, ChatColor.GREEN  + "Next Page");
+            ItemStack next = createItem(Material.ARROW, 1, ChatColor.GREEN + "Next Page");
             inv.setItem(51, next);
 
             inv.setItem(53, back);
@@ -234,11 +233,11 @@ public class ChecksGUI implements Listener {
         List<Check> checks = ThotPatrol.getChecks();
         int totalChecks = checks.size();
         int maxP = (int) Math.ceil((double) totalChecks / (double) 45);
-        for(int page = 1; page < maxP + 1; page++){
+        for (int page = 1; page < maxP + 1; page++) {
             Inventory inv = Bukkit.createInventory(null, 54, Color.Gold + "Checks: Bannable [" + page + "]");
             int slot = 0;
-            for(int items = 0; items < 45; items++){
-                if(get >= totalChecks){
+            for (int items = 0; items < 45; items++) {
+                if (get >= totalChecks) {
                     break;
                 }
                 Check check = checks.get(get);
@@ -256,10 +255,10 @@ public class ChecksGUI implements Listener {
                 ItemStack c = createGlass(Material.STAINED_GLASS_PANE, 15, 1, Color.Gray + "N/A");
                 inv.setItem(i, c);
             }
-            ItemStack previous = createItem(Material.ARROW, 1, ChatColor.GREEN  + "Previous Page");
+            ItemStack previous = createItem(Material.ARROW, 1, ChatColor.GREEN + "Previous Page");
             inv.setItem(46, previous);
 
-            ItemStack next = createItem(Material.ARROW, 1, ChatColor.GREEN  + "Next Page");
+            ItemStack next = createItem(Material.ARROW, 1, ChatColor.GREEN + "Next Page");
             inv.setItem(51, next);
 
             inv.setItem(53, back);
@@ -273,11 +272,11 @@ public class ChecksGUI implements Listener {
         List<Check> checks = ThotPatrol.getChecks();
         int totalChecks = checks.size();
         int maxP = (int) Math.ceil((double) totalChecks / (double) 45);
-        for(int page = 1; page < maxP + 1; page++){
+        for (int page = 1; page < maxP + 1; page++) {
             Inventory inv = Bukkit.createInventory(null, 54, Color.Gold + "Checks: BanTimer [" + page + "]");
             int slot = 0;
-            for(int items = 0; items < 45; items++){
-                if(get >= totalChecks){
+            for (int items = 0; items < 45; items++) {
+                if (get >= totalChecks) {
                     break;
                 }
                 Check check = checks.get(get);
@@ -295,10 +294,10 @@ public class ChecksGUI implements Listener {
                 ItemStack c = createGlass(Material.STAINED_GLASS_PANE, 15, 1, Color.Gray + "N/A");
                 inv.setItem(i, c);
             }
-            ItemStack previous = createItem(Material.ARROW, 1, ChatColor.GREEN  + "Previous Page");
+            ItemStack previous = createItem(Material.ARROW, 1, ChatColor.GREEN + "Previous Page");
             inv.setItem(46, previous);
 
-            ItemStack next = createItem(Material.ARROW, 1, ChatColor.GREEN  + "Next Page");
+            ItemStack next = createItem(Material.ARROW, 1, ChatColor.GREEN + "Next Page");
             inv.setItem(51, next);
 
             inv.setItem(53, back);
@@ -461,7 +460,7 @@ public class ChecksGUI implements Listener {
                         ThotPatrol.saveConfig();
                         ThotPatrol.reloadConfig();
                         check.setEnabled(true);
-                        openChecks(player,page);
+                        openChecks(player, page);
                         return;
                     }
                 }
@@ -469,14 +468,14 @@ public class ChecksGUI implements Listener {
                     openThotPatrolMain(player);
                 }
                 if (ChatColor.stripColor(check_name).equals("Previous Page")) {
-                    if(!ThotPatrolChecks.containsKey(page-1)){
+                    if (!ThotPatrolChecks.containsKey(page - 1)) {
                         player.sendMessage(Color.Red + "No previous page!");
                         return;
                     }
-                    openChecks(player, page-1);
+                    openChecks(player, page - 1);
                 }
                 if (ChatColor.stripColor(check_name).equals("Next Page")) {
-                    if(!ThotPatrolChecks.containsKey(page + 1)){
+                    if (!ThotPatrolChecks.containsKey(page + 1)) {
                         player.sendMessage(Color.Red + "No next page!");
                         return;
                     }
@@ -517,14 +516,14 @@ public class ChecksGUI implements Listener {
                     openThotPatrolMain(player);
                 }
                 if (ChatColor.stripColor(check_name).equals("Previous Page")) {
-                    if(!ThotPatrolBannable.containsKey(page-1)){
+                    if (!ThotPatrolBannable.containsKey(page - 1)) {
                         player.sendMessage(Color.Red + "No previous page!");
                         return;
                     }
-                    openAutoBans(player, page-1);
+                    openAutoBans(player, page - 1);
                 }
                 if (ChatColor.stripColor(check_name).equals("Next Page")) {
-                    if(!ThotPatrolBannable.containsKey(page + 1)){
+                    if (!ThotPatrolBannable.containsKey(page + 1)) {
                         player.sendMessage(Color.Red + "No next page!");
                         return;
                     }
@@ -568,14 +567,14 @@ public class ChecksGUI implements Listener {
                     openThotPatrolMain(player);
                 }
                 if (ChatColor.stripColor(check_name).equals("Previous Page")) {
-                    if(!ThotPatrolTimer.containsKey(page-1)){
+                    if (!ThotPatrolTimer.containsKey(page - 1)) {
                         player.sendMessage(Color.Red + "No previous page!");
                         return;
                     }
-                    openTimer(player, page-1);
+                    openTimer(player, page - 1);
                 }
                 if (ChatColor.stripColor(check_name).equals("Next Page")) {
-                    if(!ThotPatrolTimer.containsKey(page + 1)){
+                    if (!ThotPatrolTimer.containsKey(page + 1)) {
                         player.sendMessage(Color.Red + "No next page!");
                         return;
                     }
@@ -594,4 +593,5 @@ public class ChecksGUI implements Listener {
     public String c(String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
+
 }
