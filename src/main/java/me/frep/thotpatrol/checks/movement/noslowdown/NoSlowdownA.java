@@ -48,7 +48,7 @@ public class NoSlowdownA extends Check {
                 || !player.getLocation().getBlock().getType().equals(Material.WEB)
                 || OffsetXZ < 0.2) return;
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(player);
+		int ping = getThotPatrol().getLag().getPing(player);
         getThotPatrol().logCheat(this, player, "[0] Offset: " + OffsetXZ);
     	getThotPatrol().logToFile(player, this, "Ticks [B]", "Offset: " + 
     			OffsetXZ + " | TPS: " + tps + " | Ping: " + ping);
@@ -79,7 +79,7 @@ public class NoSlowdownA extends Check {
     		Time = speedTicks.get(uuid).getValue();
     	}
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(player);
+		int ping = getThotPatrol().getLag().getPing(player);
     	double diff = System.currentTimeMillis() - Time;
     	level = diff >= 2.0 ? (diff <= 51.0 ? (level += 2) : (diff <= 100.0 ? (level += 0) : (diff <= 500.0 ? (level -= 6) : (level -= 12)))) : ++level;
     	int max = 50;

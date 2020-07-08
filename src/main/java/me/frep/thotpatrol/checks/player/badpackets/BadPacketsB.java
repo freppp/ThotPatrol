@@ -22,7 +22,7 @@ public class BadPacketsB extends Check {
         if (e.getPlayer().hasPermission("thotpatrol.bypass")) {
         	return;
         }
-        double ping = getThotPatrol().getLag().getPing(e.getPlayer());
+        int ping = getThotPatrol().getLag().getPing(e.getPlayer());
         double tps = getThotPatrol().getLag().getTPS();
         if ((e.getPitch() > 90.1F) || (e.getPitch() < -90.1F)) {
         	getThotPatrol().logCheat(this, e.getPlayer(), "Invalid Look Packets | Ping:" + ping + " | TPS: " + tps);

@@ -49,7 +49,7 @@ public class SprintA extends Check {
     		return;
     	}
     	double tps = getThotPatrol().getLag().getTPS();
-    	double ping = getThotPatrol().getLag().getPing(p);
+    	int ping = getThotPatrol().getLag().getPing(p);
     	Vector movement = new Vector(e.getTo().getX() - e.getFrom().getX(), 0, e.getTo().getZ() - e.getFrom().getZ()),
     			direction = new Vector(-Math.sin(e.getPlayer().getEyeLocation().getYaw() * 3.141592653589F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(e.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F);
     	double delta = movement.distanceSquared(direction);

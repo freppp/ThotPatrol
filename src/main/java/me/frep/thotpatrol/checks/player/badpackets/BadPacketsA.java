@@ -66,7 +66,7 @@ public class BadPacketsA extends Check {
             Count = Count > 0 ? Count - 1 : Count;
         }
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(player);
+        int ping = getThotPatrol().getLag().getPing(player);
         if (Count > 2) {
         	getThotPatrol().logCheat(this, player, "Regen | Ping" + ping + " | TPS: " + tps);
         	getThotPatrol().logToFile(player, this, "Regeneration", "Packets: " + Count + 

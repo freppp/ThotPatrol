@@ -44,7 +44,7 @@ public class AutoClickerC extends Check {
         Player damager = e.getAttacker();
         UUID uuid = damager.getUniqueId();
         int Count = 0;
-        double ping = getThotPatrol().getLag().getPing(damager);
+        int ping = getThotPatrol().getLag().getPing(damager);
         double tps = getThotPatrol().getLag().getTPS();
         long Time = System.currentTimeMillis();
         if (ClickTicks.containsKey(uuid)) {

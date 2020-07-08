@@ -68,7 +68,7 @@ public class SpeedC extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
-                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1800)
+                || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1200)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double Airmaxspeed = 0.40;
@@ -84,7 +84,7 @@ public class SpeedC extends Check {
             }
         }
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         Material below = p.getLocation().subtract(0, 1.5, 0).getBlock().getType();
         Material below2 = p.getLocation().subtract(0, 1, 0).getBlock().getType();
@@ -136,8 +136,8 @@ public class SpeedC extends Check {
                 && above.getBlock().getType() == Material.AIR && above3.getBlock().getType() == Material.AIR
                 && blockLoc.getBlock().getType() != Material.AIR && !highKb.contains(p.getUniqueId())) {
         	getThotPatrol().logCheat(this, p, "Type: Air | " + speed + " > " + Airmaxspeed + " | Ping: " + ping + " | TPS: " + tps);
-        	getThotPatrol().logToFile(p, this, "Air", "Speed: " + speed + " > " + Airmaxspeed 
-        			+ " | TPS: " + tps + " | Ping: " + ping);
+        	getThotPatrol().logToFile(p, this, "Air", "Speed: " + UtilMath.trim(5, speed) + " > " + Airmaxspeed
+        			+ " | TPS: " + UtilMath.trim(5, tps) + " | Ping: " + ping);
         }
     }
     

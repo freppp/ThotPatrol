@@ -35,7 +35,7 @@ public class SpeedF extends Check {
 		final Location to = e.getTo();
 		final Location from = e.getFrom();
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
 		if (((to.getX() == from.getX() && to.getY() == from.getY() && to.getZ() == from.getZ()))
 				|| p.getGameMode().equals(GameMode.CREATIVE)
 				|| e.getPlayer().getVehicle() != null

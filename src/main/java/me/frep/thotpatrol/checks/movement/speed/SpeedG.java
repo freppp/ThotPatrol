@@ -60,7 +60,7 @@ public class SpeedG extends Check {
 		double yDiff = Math.abs(e.getFrom().getY() - e.getTo().getY());
 		if (yDiff == 0) return;
 		int verbose = count.getOrDefault(uuid, 0);
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
 		double tps = getThotPatrol().getLag().getTPS();
 		if (yDiff == a
 				|| yDiff == b

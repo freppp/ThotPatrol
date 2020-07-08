@@ -31,6 +31,7 @@ me\frep\thotpatrol\checks\movement\noslowdown\NoSlowdownA.class
 me\frep\thotpatrol\packets\PacketCore$2.class
 me\frep\thotpatrol\packets\events\PacketEntityActionEvent.class
 me\frep\thotpatrol\checks\movement\nofall\NoFallB.class
+me\frep\thotpatrol\commands\LogsCommand.class
 me\frep\thotpatrol\packets\PacketCore$14.class
 me\frep\thotpatrol\utils\LagCore$1.class
 me\frep\thotpatrol\utils\UtilJDay.class

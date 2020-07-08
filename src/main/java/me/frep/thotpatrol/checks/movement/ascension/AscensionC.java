@@ -102,7 +102,7 @@ public class AscensionC extends Check {
 			Time = UtilTime.nowlong();
 		}
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
 		if (Count >= 4) {
 			Count = 0;
 			dumplog(p, "Logged for Ascension Type C");

@@ -59,7 +59,11 @@ public class ThotPatrolCommand implements CommandExecutor {
                 }
                 String playerName2 = args[1];
                 int totalLogs = TxtFile.getLogged(playerName2);
-                double averagePing = TxtFile.averagePing(playerName2);
+                if (totalLogs == 0) {
+                    sender.sendMessage(ThotPatrol.PREFIX + Color.Red + "That player has no logs!");
+                    return true;
+                }
+                int averagePing = TxtFile.averagePing(playerName2);
                 double averageTps = TxtFile.averageTps(playerName2);
                 if (args.length == 3) {
                     if (args[2].equalsIgnoreCase("KillAura")) {
@@ -117,10 +121,17 @@ public class ThotPatrolCommand implements CommandExecutor {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
                         return true;
                     }
-                }
-                if (totalLogs == 0) {
-                    sender.sendMessage(ThotPatrol.PREFIX + Color.Red + "That player has no logs!");
-                    return true;
+                    if (args[2].equalsIgnoreCase("Fly")) {
+                        int autoClickerViolations = TxtFile.getViolations(playerName2, "Fly");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Fly results for &d" + playerName2 + "&7."));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&r"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Fly Violations: &d" + autoClickerViolations));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average Ping: &d" + averagePing));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Average TPS: &d" + averageTps));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
+                        return true;
+                    }
                 }
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8&m------------------------"));
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Search results for &d" + playerName2 + "&7."));

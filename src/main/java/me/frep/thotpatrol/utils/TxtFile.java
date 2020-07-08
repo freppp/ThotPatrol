@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class TxtFile {
 	
     private File File;
-    private String Name;
-    private List<String> Lines = new ArrayList<String>();
+    private final String Name;
+    private final List<String> Lines = new ArrayList<String>();
 
     public TxtFile(JavaPlugin Plugin, String Path, String Name) {
         File = new File(Plugin.getDataFolder() + Path);
@@ -104,14 +104,14 @@ public class TxtFile {
         return logged;
     }
 
-    public static double averagePing(String playerName) {
-        List<Double> pings = new ArrayList<>();
+    public static int averagePing(String playerName) {
+        List<Integer> pings = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(new File(ThotPatrol.Instance.getDataFolder() + "/violations.txt"));
-            while (scanner.hasNextLine()) {
+            while (scanner.hasNext()) {
                 if(scanner.nextLine().contains(playerName)) {
                     String[] spl = scanner.nextLine().split("Ping: ");
-                    pings.add(Double.parseDouble(spl[1]));
+                    pings.add(Integer.parseInt(spl[1]));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -119,10 +119,10 @@ public class TxtFile {
             return 0;
         }
         int averagePing = 0;
-        for (double ping : pings) {
+        for (int ping : pings) {
             averagePing += ping;
         }
-        return averagePing / pings.size();
+        return averagePing / getLogged(playerName);
     }
 
     public static double averageTps(String playerName) {
@@ -144,6 +144,6 @@ public class TxtFile {
         for (double tps : tpss) {
             averageTps += tps;
         }
-        return (UtilMath.trim(2, averageTps / tpss.size()));
+        return (UtilMath.trim(2, averageTps / getLogged(playerName)));
     }
 }

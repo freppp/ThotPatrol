@@ -62,7 +62,7 @@ public class StepA extends Check {
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(player);
+        int ping = getThotPatrol().getLag().getPing(player);
         if (player.getWorld().getHighestBlockAt(player.getLocation()).getType().toString().contains("SLIME")) {
             return;
         }

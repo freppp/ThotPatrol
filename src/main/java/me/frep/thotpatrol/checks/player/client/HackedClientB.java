@@ -47,7 +47,7 @@ public class HackedClientB extends Check implements PluginMessageListener, Liste
 					Map map = (Map)this.parser.parse(string2);
 					forgeMods.put(p.getUniqueId(), map);
 					final String string3 = getClientType(p);
-			        double ping = getThotPatrol().getLag().getPing(p);
+			        int ping = getThotPatrol().getLag().getPing(p);
 			        double tps = getThotPatrol().getLag().getTPS();
 					if (string3 != null) {
 						type = string3;
@@ -63,7 +63,7 @@ public class HackedClientB extends Check implements PluginMessageListener, Liste
 
 		public String getClientType(Player p) {
 			final Map<String, String> map = forgeMods.get(p.getUniqueId());
-	        double ping = getThotPatrol().getLag().getPing(p);
+	        int ping = getThotPatrol().getLag().getPing(p);
 	        double tps = getThotPatrol().getLag().getTPS();
 			if (map != null) {
 				if (map.containsKey("gc")) {

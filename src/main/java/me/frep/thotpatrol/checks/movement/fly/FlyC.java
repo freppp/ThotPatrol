@@ -85,7 +85,7 @@ public class FlyC extends Check {
 			}
 		}
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
 		final Vector vec = new Vector(to.getX(), to.getY(), to.getZ());
 		final double Distance = vec.distance(new Vector(from.getX(), from.getY(), from.getZ()));
 		if (!UtilVelocity.didTakeVelocity(p) && !UtilPlayer.wasOnSlime(p)) {

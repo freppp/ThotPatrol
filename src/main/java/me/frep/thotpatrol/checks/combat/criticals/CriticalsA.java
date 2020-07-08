@@ -72,7 +72,7 @@ public class CriticalsA extends Check {
             Count = 0;
             Time = UtilTime.nowlong();
         }
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         if (Count >= 2) {
             dumplog(p, "[Flag] Count: " + Count + " | TPS: " + tps + " | Ping: " + ping);

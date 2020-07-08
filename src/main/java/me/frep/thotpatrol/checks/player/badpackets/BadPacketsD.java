@@ -85,7 +85,7 @@ public class BadPacketsD extends Check {
                 blacklist.remove(player.getUniqueId());
             }
         }
-        double ping = getThotPatrol().getLag().getPing(player);
+        int ping = getThotPatrol().getLag().getPing(player);
         double tps = getThotPatrol().getLag().getTPS();
         if (!blacklist.contains(player.getUniqueId())) {
             Count++;

@@ -64,7 +64,7 @@ public class NoFallB extends Check {
 				}
 			}
     		double tps = getThotPatrol().getLag().getTPS();
-    		double ping = getThotPatrol().getLag().getPing(p);
+    		int ping = getThotPatrol().getLag().getPing(p);
 			final Location to = e.getTo();
 			final Location from = e.getFrom();
 			final double diff = to.toVector().distance(from.toVector());

@@ -35,7 +35,7 @@ public class AscensionB extends Check {
 		}
 		verbose++;
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
 		if (verbose > 3) {
 			verbose = 0;
 			getThotPatrol().logCheat(this, p, Math.abs(yDelta - lastYMovement.get(p)) + "<-" + 0.002 + " | Ping: " + ping + " | TPS: " + tps);

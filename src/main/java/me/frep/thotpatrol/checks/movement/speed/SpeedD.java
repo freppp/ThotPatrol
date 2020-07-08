@@ -63,7 +63,7 @@ public class SpeedD extends Check {
             }
         }
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         if (getThotPatrol().getConfig().getBoolean("instantBans.SpeedD.enabled")
                 && isBannable()
                 && speed > getThotPatrol().getConfig().getDouble("instantBans.SpeedD.maxSpeed")

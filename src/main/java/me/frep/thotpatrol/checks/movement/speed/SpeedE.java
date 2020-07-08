@@ -121,7 +121,7 @@ public class SpeedE extends Check {
             }
         }
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         if (speed > ig && !isAir(p) && onGroundDiff <= -0.4 && p.getFallDistance() <= 0.4
                 && !flaggyStuffNear(p.getLocation()) && blockLoc.getBlock().getType() != Material.ICE
                 && e.getTo().getY() != e.getFrom().getY() && blockLoc.getBlock().getType() != Material.PACKED_ICE

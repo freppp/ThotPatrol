@@ -37,7 +37,7 @@ public class KillAuraD extends Check {
 		if (player.hasPermission("thotpatrol.bypass")) {
 			return;
 		}
-        double ping = getThotPatrol().getLag().getPing(player);
+        int ping = getThotPatrol().getLag().getPing(player);
         double tps = getThotPatrol().getLag().getTPS();
         if (lastAttack.containsKey(player)) {
             Integer entityid = lastAttack.get(player).getKey();

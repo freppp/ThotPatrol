@@ -39,7 +39,7 @@ public class NoSwingA extends Check {
         Player p = (Player)e.getDamager();
         if (!UtilTime.elapsed(SpeedE.teleported.getOrDefault(p.getUniqueId(), 0L), 2500)) return;
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
 		for (Plugin plugin : Bukkit.getServer().getPluginManager().getPlugins()) {
             if (plugin.getName().equals("StrikePractice")) {
                 if (p.getName().startsWith("BOT_") && p.getName().endsWith("Bot")) {

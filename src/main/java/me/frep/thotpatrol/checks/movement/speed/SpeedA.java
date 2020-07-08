@@ -165,7 +165,7 @@ public class SpeedA extends Check {
             Time = UtilTime.nowlong();
         }
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(player);
+		int ping = getThotPatrol().getLag().getPing(player);
         if (Count > 2
         		&& getThotPatrol().getConfig().getBoolean("instantBans.SpeedA.enabled")
         		&& percent > getThotPatrol().getConfig().getInt("instantBans.SpeedA.maxSpeedPercentage")

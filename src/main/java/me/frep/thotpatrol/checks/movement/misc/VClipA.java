@@ -79,7 +79,7 @@ public class VClipA extends Check {
                 || (p.getLocation().getY() < 0.0D)
                 || (p.getLocation().getY() > p.getWorld().getMaxHeight())) return;
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
         double yDist = from.getBlockY() - to.getBlockY();
         if (SharedEvents.worldChange.contains(p.getUniqueId())) {
         	return;        

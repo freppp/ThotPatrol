@@ -63,7 +63,7 @@ public class TimerA extends Check {
         }
         if (SharedEvents.worldChange.contains(uuid)) return;
         double tps = getThotPatrol().getLag().getTPS();
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         if (ping > 10000) return;
         double threshold = 21;
         if (UtilTime.elapsed(Time, 1000L)) {

@@ -99,7 +99,7 @@ public class NoFallA extends Check {
             Time = System.currentTimeMillis();
         }
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(player);
+		int ping = getThotPatrol().getLag().getPing(player);
         if (Count >= 4) {
             dumplog(player, "Logged. Count: " + Count);
             Count = 0;

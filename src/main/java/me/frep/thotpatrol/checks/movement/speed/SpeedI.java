@@ -123,7 +123,7 @@ public class SpeedI extends Check {
         if (count > 4) {
             count = 0;
             getThotPatrol().logCheat(this, p, delta + " > .35 | Ping: " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + delta + " > " +  maxDelta + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + UtilMath.trim(5, delta) + " > " +  maxDelta + " | TPS: " + tps + " | Ping: " + ping);
             dumplog(p, "[Flag] Speed: " + delta + " > " + maxDelta + " | Ping: " + ping + " | TPS: " + tps);
         }
         verbose.put(p.getUniqueId(), count);

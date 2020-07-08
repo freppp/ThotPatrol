@@ -42,7 +42,7 @@ public class FlyE extends Check {
             || UtilPlayer.isOnClimbable(p)
             || UtilPlayer.isOnClimbable(p, 1)
             || UtilPlayer.isOnClimbable(p, 0)
-            ||!UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 750L)
+            ||!UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 2000L)
             || SpeedC.highKb.contains(p.getUniqueId())
             || UtilCheat.isInWater(p)
             || UtilPlayer.isInWater(p)

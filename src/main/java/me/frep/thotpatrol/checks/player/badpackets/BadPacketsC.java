@@ -48,7 +48,7 @@ public class BadPacketsC extends Check {
             Count = 0;
             Time = UtilTime.nowlong();
         }
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         if (Count > 2000) {
             this.getThotPatrol().logCheat(this, p, "[1] Crash Packets | Ping:" + ping + " | TPS: " + tps);
@@ -78,7 +78,7 @@ public class BadPacketsC extends Check {
             Count = 0;
             Time = UtilTime.nowlong();
         }
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         if (Count > 2000) {
             getThotPatrol().logCheat(this, p, "[2] Crash Packets | Ping:" + ping + " | TPS: " + tps);

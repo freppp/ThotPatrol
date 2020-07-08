@@ -50,7 +50,7 @@ public class AutoClickerA extends Check {
 		if (p.hasPermission("thotpatrol.bypass")) {
 			return;
 		}
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         CPS++;
         if ((attackTicks.containsKey(uuid)) && (UtilTime.elapsed(Time, 1000L))) {

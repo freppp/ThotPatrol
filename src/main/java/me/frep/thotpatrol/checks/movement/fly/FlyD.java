@@ -57,7 +57,7 @@ public class FlyD extends Check {
         }
         long MS = System.currentTimeMillis() - Time;
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(player);
+		int ping = getThotPatrol().getLag().getPing(player);
         if (MS > 1000) {
             dumplog(player, "Logged. MS: " + MS);
             flyTicks.remove(uuid);

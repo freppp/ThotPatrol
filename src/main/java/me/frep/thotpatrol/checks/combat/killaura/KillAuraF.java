@@ -53,7 +53,7 @@ public class KillAuraF extends Check {
 		if (p.hasPermission("thotpatrol.bypass")) {
 			return false;
 		}
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
 		if (pitch > 1.0f && Math.round(pitch * 10.0f) * 0.1f == pitch && Math.round(pitch) != pitch) {
 			if (pitch == this.lastBad) {
@@ -75,7 +75,7 @@ public class KillAuraF extends Check {
 		} else {
 			return 0;
 		}
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
 		this.lastYaw2 = yaw;
 		this.lastPitch = pitch;
@@ -91,7 +91,7 @@ public class KillAuraF extends Check {
 	public float onAim3(Player p, float yaw) {
 		final float pitch = Math.abs(yaw - this.lastYaw) % 180.0f;
 		this.lastYaw = yaw;
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
 		if (pitch > 0.1f && Math.round(pitch) == pitch) {
 			if (pitch == this.lastBad) {

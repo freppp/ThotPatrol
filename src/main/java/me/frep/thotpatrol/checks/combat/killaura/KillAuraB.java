@@ -94,7 +94,7 @@ public class KillAuraB extends Check {
             Count = 0;
             Time = UtilTime.nowlong();
         }
-        double ping = getThotPatrol().getLag().getPing(damager);
+        int ping = getThotPatrol().getLag().getPing(damager);
         double tps = getThotPatrol().getLag().getTPS();
         if (Count >= 16) {
         	getThotPatrol().logCheat(this, damager, "Hitbox" + " | Ping: " + ping + " | TPS: " + tps);

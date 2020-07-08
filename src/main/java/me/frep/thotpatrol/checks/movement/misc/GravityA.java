@@ -79,7 +79,7 @@ public class GravityA extends Check {
 				}
 			}
 			double tps = getThotPatrol().getLag().getTPS();
-			double ping = getThotPatrol().getLag().getPing(p);
+			int ping = getThotPatrol().getLag().getPing(p);
 			if (p.getLocation().getBlock().getType() != Material.CHEST &&
 					p.getLocation().getBlock().getType() != Material.TRAPPED_CHEST && p.getLocation().getBlock().getType() != Material.ENDER_CHEST && data.getAboveBlockTicks() == 0) {
 				if (!UtilPlayer.onGround2(p) && !UtilPlayer.isOnGround(e, p) && UtilPlayer.isFlying(e,p)) {

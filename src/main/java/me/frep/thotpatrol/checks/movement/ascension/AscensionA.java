@@ -83,7 +83,7 @@ public class AscensionA extends Check {
 			}
 		}
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
 		if (TotalBlocks > Limit) {
 			if (MS > 250L) {
 				if (!velocity.containsKey(p.getUniqueId())

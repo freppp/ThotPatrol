@@ -35,7 +35,7 @@ public class ImprobableA extends Check {
 		if(e.getType() != PacketPlayerType.USE) {
 			return;
 		}
-		double ping = getThotPatrol().getLag().getPing(p);
+		int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
 		int totalVL = getTotalBlatantViolations(p);
 		if (totalVL > 2 

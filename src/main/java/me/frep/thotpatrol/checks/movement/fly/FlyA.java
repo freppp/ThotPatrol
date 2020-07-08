@@ -60,7 +60,7 @@ public class FlyA extends Check {
             }
         }
 		double tps = getThotPatrol().getLag().getTPS();
-		double ping = getThotPatrol().getLag().getPing(player);
+		int ping = getThotPatrol().getLag().getPing(player);
         if (blockPlaced.contains(uuid) && ping > 500) {
         	return;
         }
@@ -76,7 +76,7 @@ public class FlyA extends Check {
         if (MS > 200L) {
             dumplog(player, "Logged Fly. MS: " + MS);
             getThotPatrol().logCheat(this, player,
-                    "Hovering for " + UtilMath.trim(1, (double) (MS / 1000)) + " second(s)" + " | Ping: " + ping + " | TPS: " + tps);
+                    "Hovering for " + UtilMath.trim(1, (double) (MS / 1000)) + " second(s) | Ping: " + ping + " | TPS: " + tps);
         	getThotPatrol().logToFile(player, this, "Hover", "Time: + " + (MS/1000) + " Seconds"
         			+ " | TPS: " + tps + " | Ping: " + ping);
             flyTicksA.remove(uuid);

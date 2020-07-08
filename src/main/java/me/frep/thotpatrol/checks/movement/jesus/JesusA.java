@@ -104,7 +104,7 @@ public class JesusA extends Check {
                 return;
             }
         }
-        double ping = getThotPatrol().getLag().getPing(p);
+        int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         if (Count > 9) {
             Count = 0;

@@ -30,7 +30,7 @@ public class HackedClientA extends Check implements PluginMessageListener {
         } catch (Exception ex) {
             str = "";
         }
-        double ping = getThotPatrol().getLag().getPing(player);
+        int ping = getThotPatrol().getLag().getPing(player);
         double tps = getThotPatrol().getLag().getTPS();
         getThotPatrol().logCheat(this, player, "Vape [Cracked] | Ping:" + ping + " | TPS: " + tps);
     	getThotPatrol().logToFile(player, this, "Vape [Cracked]", "| TPS: " + tps + " | Ping: " + ping);
