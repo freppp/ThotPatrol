@@ -117,7 +117,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         getCommand("alerts").setExecutor(new AlertsCommand(this));
         getCommand("autoban").setExecutor(new AutobanCommand(this));
         getCommand("thotpatrol").setExecutor(new ThotPatrolCommand(this));
-        getCommand("getlog").setExecutor(new GetLogCommand(this));
+        getCommand("banlog").setExecutor(new BanLogCommand(this));
         getCommand("logs").setExecutor(new LogsCommand(this));
         Bukkit.getServer().getPluginManager().registerEvents(new Latency(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new ChecksGUI(this), this);

@@ -13,7 +13,7 @@ commands:
   thotpatrol:
     description: Thot Patrol root command
     aliases: [anticheat]
-  getlog:
+  banlog:
     description: Get a player's ban log!
   JDay:
     description: Judgement Day

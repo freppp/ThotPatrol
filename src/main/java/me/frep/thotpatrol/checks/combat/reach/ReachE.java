@@ -5,14 +5,12 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class ReachE extends Check {
@@ -45,21 +43,20 @@ public class ReachE extends Check {
                 ? Math.abs(UtilPlayer.getEyeLocation(d).getY() - UtilPlayer.getEyeLocation(p).getY()) : 0;
         double yawDiff = Math.abs(180 - Math.abs(d.getLocation().getYaw() - p.getLocation().getYaw()));
         double reach = (UtilPlayer.getEyeLocation(d).distance(p.getEyeLocation()) - yDist) - 0.32;
+        double actualReach = reach;
         if (reach > 6.5) return;
-        double maxReach = 3.0;
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(d);
         int ping2 = getThotPatrol().getLag().getPing(p);
         if (!UtilPlayer.isOnGround(d)) {
-            maxReach += .23;
+            reach -= .1;
         }
-        maxReach += yawDiff > 100 && yDist < 0.1 ? yawDiff * 0.01 : yawDiff * 0.001;
-        maxReach += yDist * .62;
-        maxReach += ((ping + ping2) / 2) * 0.0034;
+        reach -= yawDiff > 100 && yDist < 0.1 ? yawDiff * 0.005 : yawDiff * 0.0025;
+        reach -= yDist * .25;
         for (PotionEffect effect : d.getActivePotionEffects()) {
             if (effect.getType().equals(PotionEffectType.SPEED)) {
                 int level = effect.getAmplifier() + 1;
-                maxReach += level * .06;
+                reach -= level * .06;
             }
         }
         if (lastReaches.get(d.getUniqueId()) == null) {
@@ -71,9 +68,11 @@ public class ReachE extends Check {
             sum += reaches;
         }
         double average = sum / lastReaches.get(d.getUniqueId()).size();
-        if (lastReaches.get(d.getUniqueId()).size() % 50 == 0) {
+        if (lastReaches.get(d.getUniqueId()).size() % 45 == 0) {
             if (average > 3.001) {
-                getThotPatrol().logCheat(this, d, "Average=" + average);
+                getThotPatrol().logCheat(this, d, "Average: " + average + " | Ping: " + ping + " | TPS: " + tps);
+                getThotPatrol().logToFile(d, this, "Reach (Average)", "Average: " + average
+                        + " > " + 3.001 + " | TPS: " + tps + " | Ping: " + ping);
             }
             lastReaches.get(d.getUniqueId()).clear();
         }

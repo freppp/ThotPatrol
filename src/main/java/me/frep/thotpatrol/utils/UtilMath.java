@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Random;
 
 public class UtilMath {
@@ -69,6 +70,30 @@ public class UtilMath {
     public static Vector getHorizontalVector(final Vector v) {
         v.setY(0);
         return v;
+    }
+
+    public static double getStandardDeviation(double[] numberArray) {
+        double sum = 0.0, deviation = 0.0;
+        int length = numberArray.length;
+        for (double num : numberArray)
+            sum += num;
+        double mean = sum / length;
+        for (double num : numberArray)
+            deviation += Math.pow(num - mean, 2);
+
+        return Math.sqrt(deviation / length);
+    }
+
+    public static double getStandardDeviation(List<Double> numberArray) {
+        double sum = 0.0, deviation = 0.0;
+        int length = numberArray.size();
+        for (double num : numberArray)
+            sum += num;
+        double mean = sum / length;
+        for (double num : numberArray)
+            deviation += Math.pow(num - mean, 2);
+
+        return Math.sqrt(deviation / length);
     }
 
     public static Vector getVerticalVector(final Vector v) {

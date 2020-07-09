@@ -11,11 +11,11 @@ import me.frep.thotpatrol.utils.Color;
 import java.io.File;
 import java.util.List;
 
-public class GetLogCommand implements CommandExecutor {
+public class BanLogCommand implements CommandExecutor {
 	
     private ThotPatrol ThotPatrol;
 
-    public GetLogCommand(ThotPatrol ThotPatrol) {
+    public BanLogCommand(ThotPatrol ThotPatrol) {
         this.ThotPatrol = ThotPatrol;
     }
 
@@ -26,7 +26,7 @@ public class GetLogCommand implements CommandExecutor {
             return true;
         }
         if (args.length != 2) {
-            sender.sendMessage(ThotPatrol.PREFIX + Color.Red + "Usage: /getlog <name> <page>");
+            sender.sendMessage(ThotPatrol.PREFIX + Color.Red + "Usage: /banlog <name> <page>");
             return true;
         }
         String player = args[0];

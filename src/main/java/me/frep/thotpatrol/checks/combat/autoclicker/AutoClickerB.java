@@ -2,6 +2,7 @@ package me.frep.thotpatrol.checks.combat.autoclicker;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,16 +21,14 @@ public class AutoClickerB extends Check {
         setBannable(true);
         setMaxViolations(8);
     }
-    
-	@EventHandler(ignoreCancelled=true, priority=EventPriority.HIGH)
+
+    @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_AIR) {
             return;
         }
         Player p = e.getPlayer();
-		if (p.hasPermission("thotpatrol.bypass")) {
-			return;
-		}
+        if (p.hasPermission("thotpatrol.bypass")) return;
         ClickProfile clickProfile = null;
         if (!profiles.containsKey(p)) {
             clickProfile = new ClickProfile();
@@ -59,12 +58,9 @@ public class AutoClickerB extends Check {
 
         public void analyzeClicks(Player p) {
             long l = System.currentTimeMillis();
-            if (p.hasPermission("thotpatrol.bypass")) {
-            	return;
-            }
             int ping = getThotPatrol().getLag().getPing(p);
             double tps = getThotPatrol().getLag().getTPS();
-            if (l - clickSprint >= 1000) {
+            if (l - this.clickSprint >= 1000) {
                 shuffleDown();
                 clickSprint = l;
                 clicks = 0.0;
@@ -93,8 +89,11 @@ public class AutoClickerB extends Check {
         }
 
         private boolean isConstant() {
-            if (threeSecondsAgoCPS >= 8.0) {
-                return lastCPS == twoSecondsAgoCPS && twoSecondsAgoCPS == threeSecondsAgoCPS;
+            if (threeSecondsAgoCPS >= 9.0) {
+                if (lastCPS == twoSecondsAgoCPS && twoSecondsAgoCPS == threeSecondsAgoCPS) {
+                    return true;
+                }
+                return false;
             }
             return false;
         }
