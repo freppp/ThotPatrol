@@ -1,6 +1,7 @@
 package me.frep.thotpatrol.checks.player.scaffold;
 
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
@@ -20,10 +21,9 @@ import java.util.UUID;
 public class ScaffoldB extends Check {
 
     private Map<UUID, Long> lastPlaced = new HashMap<>();
-    private Map<UUID, Integer> lastBlockX = new HashMap<>();
-    private Map<UUID, Integer> lastBlockZ = new HashMap<>();
+    private Map<UUID, Double> lastSpeed = new HashMap<>();
+    private Map<UUID, Double> lastDeltaY = new HashMap<>();
     private Map<UUID, Integer> verbose = new HashMap<>();
-    private Map<UUID, Long> blockFaceUp = new HashMap<>();
 
     public ScaffoldB(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("ScaffoldB", "Scaffold (Type B) [#]", ThotPatrol);
@@ -33,57 +33,40 @@ public class ScaffoldB extends Check {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            if (e.getBlockFace().equals(BlockFace.UP)) {
-                blockFaceUp.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
-            }
-        }
+    public void onMove(PlayerMoveEvent e) {
+        double speed = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
+        double deltaY = UtilMath.getVerticalDistance(e.getTo(), e.getFrom());
+        lastDeltaY.put(e.getPlayer().getUniqueId(), deltaY);
+        lastSpeed.put(e.getPlayer().getUniqueId(), speed);
     }
 
     @EventHandler
     public void onPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();
-        if (p.getAllowFlight()) {
+        if (p.getAllowFlight()
+            || p.hasPermission("thotpatrol.bypass")) {
             return;
         }
+        int ping = getThotPatrol().getLag().getPing(p);
+        double tps = getThotPatrol().getLag().getTPS();
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         long time = System.currentTimeMillis();
         long lastPlace = lastPlaced.getOrDefault(p.getUniqueId(), time);
+        double speed = lastSpeed.getOrDefault(p.getUniqueId(), 0D);
         long delta = time - lastPlace;
-        int lastX = lastBlockX.getOrDefault(p.getUniqueId(), 0);
-        int lastZ = lastBlockZ.getOrDefault(p.getUniqueId(), 0);
-        //todo check to make sure black face is up
-        if (p.getLocation().clone().subtract(0, 1, 0).getBlock().getType().equals(Material.AIR)
-                || p.getLocation().getY() % 1 == 0 || !UtilTime.elapsed(blockFaceUp.getOrDefault(p.getUniqueId(), 0L), 2000)) {
-            return;
-        }
-        if (p.getLocation().getBlockX() == lastX && p.getLocation().getBlockZ() == lastZ && delta > 0) {
-            if (delta < 400) {
-                count++;
-            } else {
-                if (count > 0) {
-                    count -= .5;
-                }
-            }
-        }
-        if (count >= 3) {
+        if (delta < 400 && delta > 0 && speed == 0 && e.getBlockAgainst().getFace(e.getBlockPlaced()).equals(BlockFace.UP)
+            && lastDeltaY.getOrDefault(p.getUniqueId(), 0D) > 0) {
+            count++;
+        } else {
             count = 0;
-            getThotPatrol().logCheat(this, p, null);
+        }
+        if (count > 2) {
+            count = 0;
+            getThotPatrol().logCheat(this, p, "delta=" + delta + " " + speed);
+            getThotPatrol().logToFile(p, this, "Tower", "Delta: " + delta
+                    + " < " + 400 + " | TPS: " + tps + " | Ping: " + ping);
         }
         verbose.put(p.getUniqueId(), count);
         lastPlaced.put(p.getUniqueId(), time);
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        int lastX = p.getLocation().getBlockX();
-        int lastZ = p.getLocation().getBlockZ();
-        if (!UtilPlayer.isOnGround(p)) {
-            return;
-        }
-        lastBlockX.put(p.getUniqueId(), lastX);
-        lastBlockZ.put(p.getUniqueId(), lastZ);
     }
 }

@@ -13,6 +13,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
@@ -28,6 +30,7 @@ public class SpeedI extends Check {
     private Map<UUID, Integer> verbose = new HashMap<>();
     public static Map<UUID, Long> invalidBlock = new HashMap<>();
     public static Map<UUID, Long> belowBlock = new HashMap<>();
+    public static Map<UUID, Long> bowBoost = new HashMap<>();
 
     public SpeedI(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("SpeedI", "Speed (Type I) [#]", ThotPatrol);
@@ -43,6 +46,13 @@ public class SpeedI extends Check {
         belowBlock.remove(e.getPlayer().getUniqueId());
     }
 
+
+    @EventHandler
+    public void onDmg(EntityDamageByEntityEvent e) {
+        if (!(e.getEntity() instanceof Player) || e.getCause() != EntityDamageEvent.DamageCause.PROJECTILE) return;
+        bowBoost.put(e.getEntity().getUniqueId(), System.currentTimeMillis());
+    }
+
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
@@ -54,7 +64,7 @@ public class SpeedI extends Check {
         if (p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
                 || p.getEyeLocation().clone().add(0, 2, 0).getBlock().getType().isSolid()
                 || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.TRAP_DOOR)
-                || p.getLocation().add(0 , 1, 0).getBlock().getType().equals(Material.IRON_TRAPDOOR)) {
+                || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.IRON_TRAPDOOR)) {
             belowBlock.put(p.getUniqueId(), System.currentTimeMillis());
         }
         if (e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getFrom().getZ()
@@ -80,6 +90,9 @@ public class SpeedI extends Check {
         if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1200)) {
             maxDelta += .4;
         }
+        if (!UtilTime.elapsed(bowBoost.getOrDefault(p.getUniqueId(), 0L), 2500)) {
+            maxDelta += 1;
+        }
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 3)) {
             if (b.getType().toString().contains("ICE")) {
                 maxDelta += .2;
@@ -89,6 +102,12 @@ public class SpeedI extends Check {
         int ping = getThotPatrol().getLag().getPing(p);
         if (p.getMaximumNoDamageTicks() < 15) {
             maxDelta += .04;
+        }
+        if (SpeedB.hadSpeed.contains(p.getUniqueId())) {
+            maxDelta += .5;
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(me.frep.thotpatrol.ThotPatrol.Instance, () -> {
+                SpeedB.hadSpeed.remove(p.getUniqueId());
+            }, 40);
         }
         if (p.getWalkSpeed() > .21) {
             maxDelta += p.getWalkSpeed() * 1;
@@ -129,7 +148,7 @@ public class SpeedI extends Check {
         if (count > 4) {
             count = 0;
             getThotPatrol().logCheat(this, p, delta + " > .35 | Ping: " + ping + " | TPS: " + tps);
-            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + UtilMath.trim(5, delta) + " > " +  maxDelta + " | TPS: " + tps + " | Ping: " + ping);
+            getThotPatrol().logToFile(p, this, "Ground", "Speed: " + UtilMath.trim(5, delta) + " > " + maxDelta + " | TPS: " + tps + " | Ping: " + ping);
             dumplog(p, "[Flag] Speed: " + delta + " > " + maxDelta + " | Ping: " + ping + " | TPS: " + tps);
         }
         verbose.put(p.getUniqueId(), count);

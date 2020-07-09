@@ -96,17 +96,25 @@ public class SpeedA extends Check {
                 }
             }
             if (UtilCheat.slabsNear(player.getLocation())) {
-                LimitXZ += 0.05D;
+                LimitXZ += 0.15D;
             }
             Location b = UtilPlayer.getEyeLocation(player);
             b.add(0.0D, 1.0D, 0.0D);
             if ((b.getBlock().getType() != Material.AIR) && (!UtilCheat.canStandWithin(b.getBlock()))) {
                 LimitXZ = 0.69D;
             }
+            if (SpeedB.hadSpeed.contains(player.getUniqueId())) {
+                LimitXZ += .5;
+                Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> {
+                    SpeedB.hadSpeed.remove(uuid);
+                }, 40);
+            }
+            if (!UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(player.getUniqueId(), 0L), 2500)) {
+                LimitXZ += 1;
+            }
             Location below = event.getPlayer().getLocation().clone().add(0.0D, -1.0D, 0.0D);
-
             if (UtilCheat.isStair(below.getBlock())) {
-                LimitXZ += 0.6;
+                LimitXZ += 0.15;
             }
             if (isOnIce(player)) {
                 if ((b.getBlock().getType() != Material.AIR) && (!UtilCheat.canStandWithin(b.getBlock()))) {

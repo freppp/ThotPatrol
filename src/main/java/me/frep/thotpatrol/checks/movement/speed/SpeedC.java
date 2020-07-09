@@ -84,6 +84,12 @@ public class SpeedC extends Check {
                 Airmaxspeed += .03;
             }
         }
+        if (SpeedB.hadSpeed.contains(p.getUniqueId())) {
+            Airmaxspeed += .5;
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> {
+                SpeedB.hadSpeed.remove(p.getUniqueId());
+            }, 40);
+        }
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));

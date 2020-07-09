@@ -8,6 +8,7 @@ import me.frep.thotpatrol.utils.UtilPlayer;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -26,6 +27,11 @@ public class ReachE extends Check {
     }
 
     @EventHandler
+    public void onLeave(PlayerQuitEvent e) {
+        lastReaches.remove(e.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
     public void onAttack(PacketAttackEvent e) {
         if (!(e.getEntity() instanceof Player)) {
             return;
@@ -35,7 +41,6 @@ public class ReachE extends Check {
         if (e.getType() != PacketPlayerType.USE
                 || d.hasPermission("thotpatrol.bypass")
                 || d.getAllowFlight()
-                || p.getAllowFlight()
                 || d.getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }
@@ -43,11 +48,9 @@ public class ReachE extends Check {
                 ? Math.abs(UtilPlayer.getEyeLocation(d).getY() - UtilPlayer.getEyeLocation(p).getY()) : 0;
         double yawDiff = Math.abs(180 - Math.abs(d.getLocation().getYaw() - p.getLocation().getYaw()));
         double reach = (UtilPlayer.getEyeLocation(d).distance(p.getEyeLocation()) - yDist) - 0.32;
-        double actualReach = reach;
         if (reach > 6.5) return;
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(d);
-        int ping2 = getThotPatrol().getLag().getPing(p);
         if (!UtilPlayer.isOnGround(d)) {
             reach -= .1;
         }

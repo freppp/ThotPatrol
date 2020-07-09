@@ -2,6 +2,7 @@ package me.frep.thotpatrol.checks.movement.speed;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
@@ -24,6 +25,8 @@ public class SpeedB extends Check {
     public Map<UUID, Map.Entry<Integer, Long>> speedTicks;
     public Map<UUID, Map.Entry<Integer, Long>> tooFastTicks;
     public List<UUID> jumpingOnIce = new ArrayList<>();
+    public static Map<UUID, Long> activeSpeed = new HashMap<>();
+    public static List<UUID> hadSpeed = new ArrayList<>();
 
     public SpeedB(ThotPatrol ThotPatrol) {
         super("SpeedB", "Speed (Type B)", ThotPatrol);
@@ -118,6 +121,25 @@ public class SpeedB extends Check {
         if (!UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 2000L)) {
             maxSpeed += .1;
         }
+        if (SharedEvents.placedBlock.containsKey(p)) {
+            if (System.currentTimeMillis() - SharedEvents.placedBlock.get(p) < 3000) {
+                maxSpeed += .1;
+            }
+        }
+        if (p.hasPotionEffect(PotionEffectType.SPEED) && !activeSpeed.containsKey(p.getUniqueId())) {
+            activeSpeed.put(p.getUniqueId(), System.currentTimeMillis());
+        }
+        if (activeSpeed.containsKey(p.getUniqueId()) && !p.hasPotionEffect(PotionEffectType.SPEED)) {
+            hadSpeed.add(p.getUniqueId());
+            activeSpeed.remove(uuid);
+        }
+        if (hadSpeed.contains(p.getUniqueId())) {
+            maxSpeed += .5;
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> {
+                hadSpeed.remove(uuid);
+                activeSpeed.remove(uuid);
+            }, 40);
+        }
         if (p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
                 || p.getEyeLocation().clone().add(0, 2, 0).getBlock().getType().isSolid()
                 || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.TRAP_DOOR)
@@ -129,6 +151,9 @@ public class SpeedB extends Check {
             int level = getPotionEffectLevel(p);
             if (level > 0) {
                 maxSpeed = (maxSpeed * (((level * 20) * 0.015) + 1));
+            }
+            if (hadSpeed.contains(uuid)) {
+                maxSpeed += (level * 20) + 2;
             }
         }
         Material below = p.getLocation().subtract(0, 1.5, 0).getBlock().getType();

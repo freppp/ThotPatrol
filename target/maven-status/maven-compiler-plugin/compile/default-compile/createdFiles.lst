@@ -51,7 +51,6 @@ me\frep\thotpatrol\ThotPatrol$4.class
 me\frep\thotpatrol\packets\PacketCore$13.class
 me\frep\thotpatrol\utils\UtilServer.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraB.class
-me\frep\thotpatrol\checks\combat\autoclicker\AutoClickerD.class
 me\frep\thotpatrol\checks\movement\ascension\AscensionD.class
 me\frep\thotpatrol\checks\player\scaffold\ScaffoldA.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraM.class

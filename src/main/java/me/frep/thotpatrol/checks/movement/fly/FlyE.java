@@ -4,9 +4,11 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.movement.speed.SpeedC;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
+import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilCheat;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -49,6 +51,11 @@ public class FlyE extends Check {
             || UtilCheat.isFullyInWater(p.getLocation())
             || p.hasPermission("thotpatrol.bypass")) {
             return;
+        }
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+            if (b.isLiquid()) {
+                return;
+            }
         }
         if (deltaY < .25 && distanceToGround > 5) {
             count++;

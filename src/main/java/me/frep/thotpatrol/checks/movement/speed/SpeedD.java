@@ -5,10 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import me.frep.thotpatrol.utils.UtilTime;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -61,6 +58,15 @@ public class SpeedD extends Check {
             if (level > 0) {
                 newmaxspeed = (newmaxspeed * (((level * 20) * 0.011) + 1));
             }
+        }
+        if (SpeedB.hadSpeed.contains(p.getUniqueId())) {
+            newmaxspeed += .5;
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(me.frep.thotpatrol.ThotPatrol.Instance, () -> {
+                SpeedB.hadSpeed.remove(p.getUniqueId());
+            }, 40);
+        }
+        if (p.getWalkSpeed() > .21) {
+            newmaxspeed += p.getWalkSpeed() * 1.5;
         }
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);

@@ -90,7 +90,7 @@ public class JesusA extends Check {
             }
         }
         int Count = count.getOrDefault(p, 0);
-        if ((UtilCheat.cantStandAtWater(p.getWorld().getBlockAt(p.getLocation())))
+        if ((UtilCheat.cantStandAtWater(p.getWorld().getBlockAt(p.getLocation()))) && !p.isSneaking() //todo <-------
                 && (UtilCheat.isHoveringOverWater(p.getLocation())) && (!UtilCheat.isFullyInWater(p.getLocation()))) {
             Count += 2;
         }

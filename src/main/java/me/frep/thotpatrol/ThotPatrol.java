@@ -644,9 +644,6 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     }
 
     public void banPlayer(Player p, Check check) {
-        if (!getConfig().getBoolean("testmode")) {
-            createLog(p, check);
-        }
         NamesBanned.put(p.getName(), check);
         removeViolations(p, check);
         new BukkitRunnable() {

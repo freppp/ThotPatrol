@@ -49,7 +49,6 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\c
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\reach\ReachC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\ThotPatrol.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\scaffold\ScaffoldA.java
-C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\GetLogCommand.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\aimpattern\AimPatternB.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\UtilTime.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveD.java
@@ -83,6 +82,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\m
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\player\client\HackedClientC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\criticals\CriticalsC.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\AutobanCommand.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands\BanLogCommand.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\events\PacketListener.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\utils\Color.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\fly\FlyB.java

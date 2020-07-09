@@ -1,5 +1,6 @@
 package me.frep.thotpatrol.checks.movement.speed;
 
+import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.events.SharedEvents;
@@ -65,6 +66,12 @@ public class SpeedH extends Check {
         double maxSpeed = .29;
         if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)) {
             maxSpeed += .15;
+        }
+        if (SpeedB.hadSpeed.contains(p.getUniqueId())) {
+            maxSpeed += .5;
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(me.frep.thotpatrol.ThotPatrol.Instance, () -> {
+                SpeedB.hadSpeed.remove(p.getUniqueId());
+            }, 40);
         }
         double tps = getThotPatrol().getLag().getTPS();
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
