@@ -2,7 +2,6 @@ package me.frep.thotpatrol.checks.movement.ascension;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -14,7 +13,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.sql.Time;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;

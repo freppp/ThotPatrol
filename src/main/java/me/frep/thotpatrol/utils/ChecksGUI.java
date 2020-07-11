@@ -1,5 +1,7 @@
 package me.frep.thotpatrol.utils;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,9 +14,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
 
 import java.util.*;
 

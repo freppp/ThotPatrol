@@ -1,18 +1,10 @@
 package me.frep.thotpatrol.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
-
+import me.frep.thotpatrol.checks.Check;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import me.frep.thotpatrol.checks.Check;
+import java.util.*;
 
 public class DataManager {
 	

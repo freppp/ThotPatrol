@@ -7,12 +7,8 @@ import me.frep.thotpatrol.utils.UtilCheat;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
 
@@ -23,7 +19,6 @@ import java.util.UUID;
 public class CriticalsC extends Check {
 
     private Map<UUID, Long> lastAttack = new HashMap<>();
-    private Map<UUID, Double> lastDeltaY = new HashMap<>();
     private Map<UUID, Integer> verbose = new HashMap<>();
 
     public CriticalsC(ThotPatrol ThotPatrol) {

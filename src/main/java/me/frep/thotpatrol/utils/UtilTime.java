@@ -1,8 +1,5 @@
 package me.frep.thotpatrol.utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 public class UtilTime {
     public static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT_DAY = "yyyy-MM-dd";

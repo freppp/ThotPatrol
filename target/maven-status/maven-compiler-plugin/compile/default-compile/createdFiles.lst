@@ -67,6 +67,7 @@ me\frep\thotpatrol\utils\UtilCheat$1.class
 me\frep\thotpatrol\packets\PacketCore.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsE.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraG.class
+me\frep\thotpatrol\checks\combat\killaura\KillAuraN.class
 me\frep\thotpatrol\checks\movement\speed\SpeedB.class
 me\frep\thotpatrol\packets\PacketCore$19.class
 me\frep\thotpatrol\checks\movement\speed\SpeedH.class

@@ -69,7 +69,7 @@ public class MoveEvent implements Listener {
 		}
 		DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data.isNearIce()) {
-			if (UtilTime.elapsed(data.getIsNearIceTicks(), 500L)) {
+			if (UtilTime.elapsed(data.getIsNearIceTicks(), 1500L)) {
 				if (!UtilPlayer.isNearIce(p)) {
 					data.setNearIce(false);
 				} else {

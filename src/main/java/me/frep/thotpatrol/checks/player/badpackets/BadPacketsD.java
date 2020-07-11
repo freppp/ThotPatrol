@@ -1,12 +1,10 @@
 package me.frep.thotpatrol.checks.player.badpackets;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
+import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,11 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilTime;
+import java.util.*;
 
 public class BadPacketsD extends Check {
 	

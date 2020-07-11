@@ -1,13 +1,12 @@
 package me.frep.thotpatrol.events;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.data.DataPlayer;
+import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.data.DataPlayer;
-import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
 
 public class PacketListener implements Listener {
 	

@@ -2,9 +2,7 @@ package me.frep.thotpatrol.checks.combat.aimpattern;
 
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;

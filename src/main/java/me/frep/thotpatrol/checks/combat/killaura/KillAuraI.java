@@ -7,7 +7,6 @@ import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

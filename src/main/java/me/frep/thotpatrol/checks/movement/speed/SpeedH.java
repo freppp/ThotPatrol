@@ -1,10 +1,12 @@
 package me.frep.thotpatrol.checks.movement.speed;
 
-import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.events.SharedEvents;
-import me.frep.thotpatrol.utils.*;
+import me.frep.thotpatrol.utils.UtilBlock;
+import me.frep.thotpatrol.utils.UtilMath;
+import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;

@@ -106,6 +106,7 @@ C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\commands
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\events\PacketHeldItemChangeEvent.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\criticals\CriticalsA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\fly\FlyC.java
+C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\combat\killaura\KillAuraN.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\packets\PacketPlayerType.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\misc\VClipA.java
 C:\Users\nickf\IdeaProjects\ThotPatrol\src\main\java\me\frep\thotpatrol\checks\movement\nofall\NoFallB.java

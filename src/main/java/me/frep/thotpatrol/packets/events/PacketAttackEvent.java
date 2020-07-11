@@ -1,11 +1,10 @@
 package me.frep.thotpatrol.packets.events;
 
+import me.frep.thotpatrol.packets.PacketPlayerType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import me.frep.thotpatrol.packets.PacketPlayerType;
 
 public class PacketAttackEvent extends Event {
 	

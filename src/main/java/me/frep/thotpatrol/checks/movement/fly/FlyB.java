@@ -1,5 +1,10 @@
 package me.frep.thotpatrol.checks.movement.fly;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.data.DataPlayer;
+import me.frep.thotpatrol.events.SharedEvents;
+import me.frep.thotpatrol.utils.*;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,16 +16,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.data.DataPlayer;
-import me.frep.thotpatrol.events.SharedEvents;
-import me.frep.thotpatrol.utils.UtilBlock;
-import me.frep.thotpatrol.utils.UtilMath;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilServer;
-import me.frep.thotpatrol.utils.UtilVelocity;
 
 public class FlyB extends Check {
 	

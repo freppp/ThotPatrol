@@ -1,11 +1,10 @@
 package me.frep.thotpatrol.checks;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.utils.TxtFile;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.utils.TxtFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;

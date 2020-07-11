@@ -1,9 +1,9 @@
 package me.frep.thotpatrol.checks.player.client;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,11 +12,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.json.simple.parser.JSONParser;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteStreams;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class HackedClientB extends Check implements PluginMessageListener, Listener {
 	

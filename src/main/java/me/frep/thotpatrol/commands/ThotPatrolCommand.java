@@ -1,18 +1,17 @@
 package me.frep.thotpatrol.commands;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.utils.ChecksGUI;
+import me.frep.thotpatrol.utils.Color;
 import me.frep.thotpatrol.utils.TxtFile;
+import me.frep.thotpatrol.utils.UtilMath;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.utils.ChecksGUI;
-import me.frep.thotpatrol.utils.Color;
-import me.frep.thotpatrol.utils.UtilMath;
 
 public class ThotPatrolCommand implements CommandExecutor {
 

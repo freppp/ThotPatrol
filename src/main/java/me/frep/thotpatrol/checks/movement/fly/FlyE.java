@@ -1,7 +1,7 @@
 package me.frep.thotpatrol.checks.movement.fly;
 
-import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedC;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilBlock;

@@ -1,18 +1,16 @@
 package me.frep.thotpatrol.checks.movement.fastclimb;
 
-import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.packets.events.PacketBlockPlaceEvent;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 
@@ -49,6 +47,7 @@ public class FastClimbA extends Check {
                 || !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1500)
                 || p.hasPermission("thotpatrol.bypass")
                 || !UtilPlayer.isOnClimbable(p, 1)
+                || p.hasPotionEffect(PotionEffectType.JUMP) // todo <--- fix
                 || !UtilPlayer.isOnClimbable(p, 0)
                 || p.getEyeLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)
                 || yDiff <= 0

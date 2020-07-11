@@ -2,12 +2,10 @@ package me.frep.thotpatrol.checks.movement.speed;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

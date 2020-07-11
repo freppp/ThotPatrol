@@ -2,7 +2,6 @@ package me.frep.thotpatrol.checks.movement.sprint;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.checks.movement.speed.SpeedC;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;

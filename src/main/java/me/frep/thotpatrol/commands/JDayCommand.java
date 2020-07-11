@@ -1,7 +1,9 @@
 package me.frep.thotpatrol.commands;
 
-import java.util.Calendar;
-
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.utils.Color;
+import me.frep.thotpatrol.utils.Config;
+import me.frep.thotpatrol.utils.UtilJDay;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -9,10 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.utils.Color;
-import me.frep.thotpatrol.utils.Config;
-import me.frep.thotpatrol.utils.UtilJDay;
+import java.util.Calendar;
 
 public class JDayCommand implements CommandExecutor {
 	

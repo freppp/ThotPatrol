@@ -1,7 +1,6 @@
 package me.frep.thotpatrol.utils;
 
 import me.frep.thotpatrol.ThotPatrol;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;

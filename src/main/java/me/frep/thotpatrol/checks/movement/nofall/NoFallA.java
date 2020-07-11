@@ -1,5 +1,9 @@
 package me.frep.thotpatrol.checks.movement.nofall;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.GameMode;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Damageable;
@@ -10,11 +14,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilTime;
 
 import java.util.*;
 

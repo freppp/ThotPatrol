@@ -1,6 +1,5 @@
 package me.frep.thotpatrol.checks.combat.aimpattern;
 
-import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

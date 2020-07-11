@@ -1,14 +1,13 @@
 package me.frep.thotpatrol.utils;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.data.DataPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.data.DataPlayer;
 
 public class UtilVelocity implements Listener {
 

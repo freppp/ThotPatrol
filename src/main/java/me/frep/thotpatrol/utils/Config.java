@@ -1,11 +1,10 @@
 package me.frep.thotpatrol.utils;
 
-import java.io.File;
-
+import me.frep.thotpatrol.ThotPatrol;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import me.frep.thotpatrol.ThotPatrol;
+import java.io.File;
 
 public class Config {
 	

@@ -19,7 +19,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class SpeedC extends Check {
 
@@ -53,9 +55,6 @@ public class SpeedC extends Check {
         int x = l.getBlockX();
         int y = l.getBlockY();
         int z = l.getBlockZ();
-		if (p.hasPermission("thotpatrol.bypass")) {
-			return;
-		}
         Location blockLoc = new Location(p.getWorld(), x, y - 1, z);
         Location loc = new Location(p.getWorld(), x, y, z);
         Location above = new Location(p.getWorld(), x, y + 2, z);
@@ -67,6 +66,7 @@ public class SpeedC extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || p.hasPermission("thotpatrol.bypass")
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double Airmaxspeed = 0.40;
@@ -99,10 +99,8 @@ public class SpeedC extends Check {
 				return;
 			}
 		}
-        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
-            if (b.getType().toString().contains("ICE")) {
-                Airmaxspeed += .35;
-            }
+        if (!UtilTime.elapsed(SpeedA.nearIce.getOrDefault(p.getUniqueId(), 0L), 4000)) {
+            Airmaxspeed += .65;
         }
 		if (p.getWalkSpeed() > 0.25) {
 			Airmaxspeed += p.getWalkSpeed() * 1;

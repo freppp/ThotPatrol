@@ -1,24 +1,16 @@
 package me.frep.thotpatrol.checks.movement.speed;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.utils.UtilBlock;
-import me.frep.thotpatrol.utils.UtilMath;
 
 public class SpeedD extends Check {
 
@@ -49,8 +41,8 @@ public class SpeedD extends Check {
                 || p.getAllowFlight()
                 || p.hasPermission("thotpatrol.bypass")) return;
         double newmaxspeed = 0.75;
-        if (isOnIce(p)) {
-            newmaxspeed = 1.0;
+        if (!UtilTime.elapsed(SpeedA.nearIce.getOrDefault(p.getUniqueId(), 0L), 4000)) {
+            newmaxspeed += .65;
         }
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         if (p.hasPotionEffect(PotionEffectType.SPEED)) {

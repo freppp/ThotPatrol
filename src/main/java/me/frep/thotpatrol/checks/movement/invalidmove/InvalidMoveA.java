@@ -3,7 +3,6 @@ package me.frep.thotpatrol.checks.movement.invalidmove;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedC;
-import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;

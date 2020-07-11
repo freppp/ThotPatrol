@@ -1,9 +1,9 @@
 package me.frep.thotpatrol.packets.events;
 
-import org.bukkit.event.HandlerList;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 
 public class PacketBlockPlaceEvent extends Event {
     public Player Player;

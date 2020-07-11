@@ -2,16 +2,10 @@ package me.frep.thotpatrol.checks.player.scaffold;
 
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilMath;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilTime;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.HashMap;

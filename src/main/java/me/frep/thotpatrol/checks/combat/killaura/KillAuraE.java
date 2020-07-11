@@ -1,15 +1,14 @@
 package me.frep.thotpatrol.checks.combat.killaura;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilMath;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 
 public class KillAuraE extends Check {
 	

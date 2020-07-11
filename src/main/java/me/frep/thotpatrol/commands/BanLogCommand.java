@@ -1,12 +1,11 @@
 package me.frep.thotpatrol.commands;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.utils.Color;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.utils.Color;
 
 import java.io.File;
 import java.util.List;

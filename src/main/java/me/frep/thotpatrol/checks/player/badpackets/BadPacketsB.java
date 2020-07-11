@@ -1,11 +1,10 @@
 package me.frep.thotpatrol.checks.player.badpackets;
 
-import org.bukkit.event.EventHandler;
-
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
+import org.bukkit.event.EventHandler;
 
 public class BadPacketsB extends Check {
 	

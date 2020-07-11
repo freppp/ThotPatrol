@@ -1,13 +1,11 @@
 package me.frep.thotpatrol.checks.movement.invalidmove;
 
-import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedH;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
-import org.bukkit.Bukkit;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,6 +37,7 @@ public class InvalidMoveD extends Check {
         if (!UtilPlayer.isOnGround(p)
             || p.getAllowFlight()
             || p.hasPermission("thotpatrol.bypass")
+            || !UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 1250L)
             || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500L)
             || !UtilTime.elapsed(SpeedH.airTicks.getOrDefault(p.getUniqueId(), 0L), 1000)) {
             return;

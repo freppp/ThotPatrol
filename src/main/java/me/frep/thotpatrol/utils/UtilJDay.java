@@ -1,10 +1,9 @@
 package me.frep.thotpatrol.utils;
 
+import me.frep.thotpatrol.ThotPatrol;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import me.frep.thotpatrol.ThotPatrol;
 
 public class UtilJDay {
 

@@ -1,11 +1,9 @@
 package me.frep.thotpatrol.checks.combat.criticals;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import org.bukkit.Location;
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.utils.UtilCheat;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -13,10 +11,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.utils.UtilCheat;
-import me.frep.thotpatrol.utils.UtilTime;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class CriticalsA extends Check {
 	

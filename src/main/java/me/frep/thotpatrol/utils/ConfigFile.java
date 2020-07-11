@@ -1,14 +1,12 @@
 package me.frep.thotpatrol.utils;
 
+import me.frep.thotpatrol.ThotPatrol;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import me.frep.thotpatrol.ThotPatrol;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

@@ -1,13 +1,12 @@
 package me.frep.thotpatrol.commands;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.utils.Color;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.utils.Color;
 
 public class AlertsCommand implements CommandExecutor {
 	

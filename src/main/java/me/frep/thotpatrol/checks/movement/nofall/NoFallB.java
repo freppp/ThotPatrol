@@ -1,5 +1,9 @@
 package me.frep.thotpatrol.checks.movement.nofall;
 
+import me.frep.thotpatrol.ThotPatrol;
+import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.data.DataPlayer;
+import me.frep.thotpatrol.utils.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,15 +14,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffectType;
-
-import me.frep.thotpatrol.ThotPatrol;
-import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.data.DataPlayer;
-import me.frep.thotpatrol.utils.UtilBlock;
-import me.frep.thotpatrol.utils.UtilPlayer;
-import me.frep.thotpatrol.utils.UtilServer;
-import me.frep.thotpatrol.utils.UtilTime;
-import me.frep.thotpatrol.utils.UtilVelocity;
 
 public class NoFallB extends Check {
 	
