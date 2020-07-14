@@ -3,7 +3,6 @@ package me.frep.thotpatrol.checks.combat.killaura;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilTime;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -42,12 +41,11 @@ public class KillAuraN extends Check {
         double tps = getThotPatrol().getLag().getTPS();
         double ping = getThotPatrol().getLag().getPing(p);
         double delta = System.currentTimeMillis() - lastClickTime;
-        if (delta < 14) {
-            count++;
-        }
+        if (delta < 14) count++;
         if (count > 4) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Delta: " + delta + " | Ping: " + ping + " | TPS: " + tps);
+            getThotPatrol().logToFile(p, this, "Packet", "Delta: " + delta + " | TPS: " + tps + " | Ping: " + ping);
         }
         verbose.put(p.getUniqueId(), count);
     }

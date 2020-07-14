@@ -48,7 +48,7 @@ public class SpeedF extends Check {
 				}
 			}
 			final double speed = UtilMath.getHorizontalDistance(from, to);
-			if(UtilMath.elapsed(data.getLastVelMS(), 3000)) {
+			if(UtilMath.elapsed(data.getLastVelMS(), 4000)) {
 				int verbose = data.getSpeedAVerbose();
 				final double speedEffect = UtilPlayer.getPotionEffectLevel(p, PotionEffectType.SPEED);
 				final double x = 0;

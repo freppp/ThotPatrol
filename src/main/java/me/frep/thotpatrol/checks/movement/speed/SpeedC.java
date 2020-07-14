@@ -80,7 +80,7 @@ public class SpeedC extends Check {
             if (b.getType().toString().contains("PISTON")) {
                 return;
             }
-            if (b.getType().equals(Material.TRAP_DOOR) || b.getType().equals(Material.IRON_TRAPDOOR)) {
+            if (b.getType().equals(Material.TRAP_DOOR) || b.getType().toString().equals("IRON_TRAPDOOR")) {
                 Airmaxspeed += .03;
             }
         }

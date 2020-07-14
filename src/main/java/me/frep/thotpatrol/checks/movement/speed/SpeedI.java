@@ -66,7 +66,7 @@ public class SpeedI extends Check {
         if (p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
                 || p.getEyeLocation().clone().add(0, 2, 0).getBlock().getType().isSolid()
                 || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.TRAP_DOOR)
-                || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.IRON_TRAPDOOR)) {
+                || p.getLocation().add(0, 1, 0).getBlock().getType().toString().equals("IRON_TRAPDOOR")) {
             belowBlock.put(p.getUniqueId(), System.currentTimeMillis());
         }
         if (e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getFrom().getZ()
@@ -89,8 +89,8 @@ public class SpeedI extends Check {
         }
         double delta = UtilMath.offset(getHV(e.getTo().toVector()), getHV(e.getFrom().toVector()));
         double maxDelta = .35;
-        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1200)) {
-            maxDelta += .4;
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1600)) {
+            maxDelta += .45;
         }
         if (!UtilTime.elapsed(bowBoost.getOrDefault(p.getUniqueId(), 0L), 2500)) {
             maxDelta += 1;

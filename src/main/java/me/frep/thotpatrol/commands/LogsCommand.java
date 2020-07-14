@@ -22,7 +22,7 @@ public class LogsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!sender.hasPermission("thotpatrol.log") && !sender.hasPermission("thotpatrol.admin")) {
+        if (!sender.hasPermission("thotpatrol.log")) {
             sender.sendMessage(Color.Red + "No permission.");
             return true;
         }

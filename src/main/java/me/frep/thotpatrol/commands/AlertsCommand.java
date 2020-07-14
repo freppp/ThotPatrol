@@ -21,13 +21,13 @@ public class AlertsCommand implements CommandExecutor {
             sender.sendMessage("You have to be a player to run this command!");
             return true;
         }
-        Player player = (Player) sender;
-        if (!player.hasPermission("thotpatrol.alerts")
-        		|| !player.hasPermission("thotpatrol.admin")) {
-            sender.sendMessage(Color.Red + "No permission.");
+        if (!sender.hasPermission("thotpatrol.alerts")) {
+            sender.sendMessage(ChatColor.DARK_GRAY + "No permission.");
             return true;
         }
-        if (this.ThotPatrol.hasAlertsOn(player)) {
+        Player player = (Player) sender;
+        if (player.hasPermission("thotpatrol.alerts") || player.hasPermission("thotpatrol.admin"))
+            if (this.ThotPatrol.hasAlertsOn(player)) {
             ThotPatrol.toggleAlerts(player);
             player.sendMessage(ChatColor.translateAlternateColorCodes('&',
             		ThotPatrol.PREFIX + ThotPatrol.getConfig().getString("alerts.primary") + "Alerts toggled " + Color.Red

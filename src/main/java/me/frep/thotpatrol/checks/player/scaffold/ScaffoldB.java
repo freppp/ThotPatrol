@@ -56,7 +56,7 @@ public class ScaffoldB extends Check {
         }
         if (count > 2) {
             count = 0;
-            getThotPatrol().logCheat(this, p, "delta=" + delta + " " + speed);
+            getThotPatrol().logCheat(this, p, "Tower | Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Tower", "Delta: " + delta
                     + " < " + 400 + " | TPS: " + tps + " | Ping: " + ping);
         }

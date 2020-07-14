@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -34,7 +35,8 @@ public class ReachB extends Check {
 	@EventHandler
 	public void onDamage(PacketAttackEvent e) {
 		Player d = e.getPlayer();
-		if (d == null) {
+		if (d == null
+			|| d.getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
 		Entity v = e.getEntity();

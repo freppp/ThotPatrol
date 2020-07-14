@@ -22,10 +22,10 @@ public class CriticalsC extends Check {
     private Map<UUID, Integer> verbose = new HashMap<>();
 
     public CriticalsC(ThotPatrol ThotPatrol) {
-        super("CriticalsC", "Criticals (Type C) [#]", ThotPatrol);
+        super("CriticalsC", "Criticals (Type C)", ThotPatrol);
         setEnabled(true);
-        setBannable(false);
-        setMaxViolations(4);
+        setBannable(true);
+        setMaxViolations(5);
     }
 
     @EventHandler

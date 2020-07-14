@@ -50,29 +50,28 @@ public class VClipA extends Check {
     @SuppressWarnings("deprecation")
 	@EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
-        if (e.getCause() != TeleportCause.UNKNOWN) {
+        if (!(e.getCause() != TeleportCause.UNKNOWN)) {
         	teleported.add(e.getPlayer().getUniqueId());
         	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, new Runnable() {
         		@Override
         		public void run() {
         			teleported.remove(e.getPlayer().getUniqueId());
         		}
-        	}, 100);
+        	}, 20);
         }
     }
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
-        if (p.hasPermission("thotpatrol.bypass")) return;
         Location to = e.getTo().clone();
         Location from = e.getFrom().clone();
-        if (p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")) {
-            return;
-        }
         if (from.getY() == to.getY()
                 || p.getAllowFlight()
                 || p.getVehicle() != null
+                || p.hasPermission("thotpatrol.bypass")
+                || SharedEvents.worldChange.contains(p.getUniqueId())
+                || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || teleported.contains(p.getUniqueId())
                 || e.getTo().getY() <= 0 || e.getTo().getY() >= p.getWorld().getMaxHeight()
                 || !UtilCheat.blocksNear(p)
@@ -81,9 +80,6 @@ public class VClipA extends Check {
 		double tps = getThotPatrol().getLag().getTPS();
 		int ping = getThotPatrol().getLag().getPing(p);
         double yDist = from.getBlockY() - to.getBlockY();
-        if (SharedEvents.worldChange.contains(p.getUniqueId())) {
-        	return;        
-        }
 		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
 			if (b.getType().toString().contains("SLIME")) {
 				return;

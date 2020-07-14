@@ -27,6 +27,8 @@ public class NoSlowdownB extends Check {
         setMaxViolations(6);
     }
 
+    //TODO RECODE  THIS
+
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         verbose.remove(e.getPlayer().getUniqueId());
@@ -36,10 +38,8 @@ public class NoSlowdownB extends Check {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (!UtilPlayer.isOnGround(e.getPlayer())) {
-            return;
-        }
-        if (e.getItem() == null) {
+        if (!UtilPlayer.isOnGround(e.getPlayer())
+            || e.getItem() == null) {
             return;
         }
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -47,6 +47,7 @@ public class NoSlowdownB extends Check {
                 blocking.add(e.getPlayer().getUniqueId());
             }
         }
+        blocking.remove(e.getPlayer().getUniqueId());
     }
 
     @EventHandler
@@ -55,24 +56,28 @@ public class NoSlowdownB extends Check {
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);
-        //todo calc walkspeed values
+        double dist = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
         if (e.getTo().getX() == e.getFrom().getX()
                 || e.getFrom().getZ() == e.getTo().getZ()
                 || !UtilPlayer.isOnGround(p)
+                || p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()
+                || p.getLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
                 || !blocking.contains(p.getUniqueId())
                 || p.getWalkSpeed() > .25) {
+            lastDist.put(p.getUniqueId(), 0D);
             return;
         }
-        double dist = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
         lastDist.put(p.getUniqueId(), dist);
         if (isActuallySprinting(p)) {
             count++;
+            blocking.remove(p.getUniqueId());
         } else {
             if (count > 0) {
-                count--;
+                count -= 2;
+                blocking.remove(p.getUniqueId());
             }
         }
-        if (count > 5 && isActuallySprinting(p)) {
+        if (count > 8 && isActuallySprinting(p)) {
             count = 0;
             blocking.remove(p.getUniqueId());
             getThotPatrol().logCheat(this, p, "Ping: " + ping + " | TPS: " + tps);
@@ -83,21 +88,21 @@ public class NoSlowdownB extends Check {
     }
 
     private boolean isActuallySprinting(Player p) {
-        //todo calc walkSpeed values
         if (!UtilPlayer.isOnGround(p) || p.getWalkSpeed() > .23) {
             return false;
         }
         double lastAccel = lastDist.getOrDefault(p.getUniqueId(), 0D);
-        double maxAccel = .21;
+        double maxAccel = .26;
         for (PotionEffect e: p.getActivePotionEffects()) {
             if (e.getType().equals(PotionEffectType.SPEED)) {
-                maxAccel += (e.getAmplifier() + 1) * .0585;
+                maxAccel += (e.getAmplifier() + 1) * .0885;
             }
         }
         if (lastAccel > maxAccel) {
             blocking.remove(p.getUniqueId());
             return true;
         }
+        blocking.remove(p.getUniqueId());
         return false;
     }
 }

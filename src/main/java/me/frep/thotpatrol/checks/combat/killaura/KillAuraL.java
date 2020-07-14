@@ -3,7 +3,6 @@ package me.frep.thotpatrol.checks.combat.killaura;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilCheat;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
@@ -24,8 +23,9 @@ public class KillAuraL extends Check {
 
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
+        if (!(e.getEntity() instanceof Player)) return;
         Player p = e.getPlayer();
-        Entity victim = e.getEntity();
+        Player victim = (Player)e.getEntity();
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();

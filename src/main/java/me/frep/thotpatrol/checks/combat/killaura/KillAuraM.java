@@ -4,6 +4,7 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.PacketPlayerType;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -48,6 +49,11 @@ public class KillAuraM extends Check {
         double tps = getThotPatrol().getLag().getTPS();
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         long delta = System.currentTimeMillis() - lastPacket.getOrDefault(p.getUniqueId(), 0L);
+        if (p.hasPermission("thotpatrol.bypass")
+            || p.getAllowFlight()
+            || p.getGameMode().equals(GameMode.CREATIVE)) {
+            return;
+        }
         if (delta < 8 && ping < 400) {
             count++;
             getThotPatrol().verbose(this, p, ping, tps, delta + " < 10");

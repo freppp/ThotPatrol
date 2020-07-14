@@ -2,10 +2,8 @@ package me.frep.thotpatrol.checks.movement.step;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
-import me.frep.thotpatrol.utils.UtilBlock;
-import me.frep.thotpatrol.utils.UtilCheat;
-import me.frep.thotpatrol.utils.UtilMath;
-import me.frep.thotpatrol.utils.UtilPlayer;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.utils.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -72,6 +70,7 @@ public class StepA extends Check {
                 || player.hasPotionEffect(PotionEffectType.JUMP)
                 || getThotPatrol().LastVelocity.containsKey(player.getUniqueId())
                 || UtilPlayer.isOnClimbable(player, 0)
+                || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(player.getUniqueId(), 0l), 2000)
                 || player.hasPermission("thotpatrol.bypass")
                 || UtilCheat.slabsNear(player.getLocation())
                 || player.getLocation().getBlock().getType().equals(Material.WATER)

@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
@@ -40,7 +41,7 @@ public class InvalidMoveC extends Check {
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500L)) {
             return;
         }
-        if (p.getLocation().getBlock().isLiquid()) {
+        if (p.getLocation().getBlock().isLiquid() && !p.getEyeLocation().getBlock().getType().equals(Material.AIR)) {
             double dist = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
             double maxDist = .14;
             for (PotionEffect effect : p.getActivePotionEffects()) {
@@ -57,8 +58,8 @@ public class InvalidMoveC extends Check {
                 maxDist += p.getWalkSpeed() * 1.1;
             }
             if (p.getInventory().getBoots() != null) {
-                if (p.getInventory().getBoots().getEnchantmentLevel(Enchantment.DEPTH_STRIDER) > 0) {
-                    maxDist += .5 * p.getInventory().getBoots().getEnchantmentLevel(Enchantment.DEPTH_STRIDER);
+                if (p.getInventory().getBoots().getEnchantmentLevel(Enchantment.getByName("DEPTH_STRIDER")) > 0) {
+                    maxDist += .5 * p.getInventory().getBoots().getEnchantmentLevel(Enchantment.getByName("DEPTH_STRIDER"));
                 }
             }
             if (dist > maxDist) {

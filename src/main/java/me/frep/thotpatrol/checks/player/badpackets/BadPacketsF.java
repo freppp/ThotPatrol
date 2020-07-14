@@ -30,10 +30,7 @@ public class BadPacketsF extends Check {
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player p = (Player)e.getWhoClicked();
-        if (p.getAllowFlight()
-            || p.hasPermission("thotpatrol.bypasss")) {
-            return;
-        }
+        if (p.getAllowFlight()) return;
         double distance = lastDist.getOrDefault(p.getUniqueId(), 0D);
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         double maxDistance = .15;
@@ -67,7 +64,7 @@ public class BadPacketsF extends Check {
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         double distance = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
-        if (UtilPlayer.isOnGround(p)
+        if (!UtilPlayer.isOnGround(p)
                 || UtilCheat.isInWeb(p)
                 || UtilBlock.isNearLiquid(p)
                 || UtilPlayer.isOnClimbable(p)) {

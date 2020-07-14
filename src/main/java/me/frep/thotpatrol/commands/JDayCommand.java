@@ -24,7 +24,7 @@ public class JDayCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String alias,
 			final String[] args) {
-		if (!sender.hasPermission("anticheat.staff")) {
+		if (!sender.hasPermission("thotpatrol.admin")) {
 			sender.sendMessage(Color.Red + "No permission.");
 			return true;
 		}

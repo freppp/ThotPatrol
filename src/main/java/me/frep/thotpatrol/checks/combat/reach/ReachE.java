@@ -35,17 +35,13 @@ public class ReachE extends Check {
 
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
-        if (!(e.getEntity() instanceof Player)) {
-            return;
-        }
+        if (!(e.getEntity() instanceof Player)) return;
         Player d = e.getPlayer();
         Player p = (Player) e.getEntity();
         if (e.getType() != PacketPlayerType.USE
                 || d.hasPermission("thotpatrol.bypass")
                 || d.getAllowFlight()
-                || d.getGameMode().equals(GameMode.CREATIVE)) {
-            return;
-        }
+                || d.getGameMode().equals(GameMode.CREATIVE)) return;
         double yDist = Math.abs(UtilPlayer.getEyeLocation(d).getY() - UtilPlayer.getEyeLocation(p).getY()) > 0.5
                 ? Math.abs(UtilPlayer.getEyeLocation(d).getY() - UtilPlayer.getEyeLocation(p).getY()) : 0;
         double yawDiff = Math.abs(180 - Math.abs(d.getLocation().getYaw() - p.getLocation().getYaw()));

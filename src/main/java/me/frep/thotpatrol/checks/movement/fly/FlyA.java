@@ -48,6 +48,7 @@ public class FlyA extends Check {
                 || player.hasPermission("thotpatrol.bypass")
                 || getThotPatrol().getLag().getTPS() < getThotPatrol().getTPSCancel()
                 || UtilPlayer.isInWater(player)
+                || UtilCheat.nearWeb(player, 2)
                 || UtilCheat.isInWeb(player)
                 || Latency.getLag(player) > 92) return;
         if (UtilCheat.blocksNear(player.getLocation())) {

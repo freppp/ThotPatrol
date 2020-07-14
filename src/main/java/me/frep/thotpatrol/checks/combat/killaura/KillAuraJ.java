@@ -7,9 +7,7 @@ import me.frep.thotpatrol.utils.UtilPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -37,24 +35,35 @@ public class KillAuraJ extends Check {
     }
 
     @EventHandler
+    public void onTeleport(PlayerTeleportEvent e) {
+        blocking.remove(e.getPlayer().getUniqueId());
+        verbose.remove(e.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onWorldChange(PlayerChangedWorldEvent e) {
+        blocking.remove(e.getPlayer().getUniqueId());
+        verbose.remove(e.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (!UtilPlayer.isOnGround(e.getPlayer())) {
-            return;
-        }
-        if (e.getItem() == null) {
+        if (!UtilPlayer.isOnGround(e.getPlayer())
+            || e.getItem() == null) {
             return;
         }
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             if (e.getItem().getType().toString().contains("SWORD")) {
                 blocking.add(e.getPlayer().getUniqueId());
             }
+        } else {
+            blocking.remove(e.getPlayer().getUniqueId());
         }
     }
 
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
         Player d = e.getPlayer();
-        //TODO calc walkSpeed values for this
         if (d.getWalkSpeed() > .5) {
             return;
         }
@@ -84,11 +93,12 @@ public class KillAuraJ extends Check {
         if (e.getTo().getX() == e.getFrom().getX()
                 || e.getFrom().getZ() == e.getTo().getZ()
                 || !UtilPlayer.isOnGround(p)
+                || p.getLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
+                || p.getEyeLocation().clone().add(0, 1,0).getBlock().getType().isSolid()
                 || !blocking.contains(p.getUniqueId())) {
-            return;
+            lastDist.put(p.getUniqueId(), 0D);
         }
         double dist = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
-        float yaw = p.getLocation().getYaw();
         lastDist.put(p.getUniqueId(), dist);
         blocking.remove(p.getUniqueId());
     }
@@ -96,6 +106,9 @@ public class KillAuraJ extends Check {
     private boolean isActuallySprinting(Player p) {
         double lastAccel = lastDist.getOrDefault(p.getUniqueId(), 0D);
         double maxAccel = .21;
+        if (p.getWalkSpeed() > .21) {
+            maxAccel += p.getWalkSpeed() * 1.1;
+        }
         for (PotionEffect e: p.getActivePotionEffects()) {
             if (e.getType().equals(PotionEffectType.SPEED)) {
                 maxAccel += (e.getAmplifier() + 1) * .0585;

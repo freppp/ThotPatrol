@@ -4,6 +4,7 @@ me\frep\thotpatrol\checks\movement\jesus\JesusA$1.class
 me\frep\thotpatrol\packets\PacketCore$11.class
 me\frep\thotpatrol\utils\Config.class
 me\frep\thotpatrol\checks\movement\speed\SpeedI.class
+me\frep\thotpatrol\checks\movement\Spider\SpiderB.class
 me\frep\thotpatrol\packets\PacketCore$8.class
 me\frep\thotpatrol\packets\events\PacketKeepAliveEvent.class
 me\frep\thotpatrol\checks\movement\sprint\SprintA.class
@@ -85,6 +86,7 @@ me\frep\thotpatrol\checks\movement\sneak\SneakA.class
 me\frep\thotpatrol\events\SharedEvents$2.class
 me\frep\thotpatrol\utils\UtilActionMessage$ClickableType.class
 me\frep\thotpatrol\checks\movement\fly\FlyA$1.class
+me\frep\thotpatrol\checks\combat\velocity\VelocityA.class
 me\frep\thotpatrol\packets\PacketCore$1.class
 me\frep\thotpatrol\packets\PacketCore$4.class
 me\frep\thotpatrol\packets\events\PacketBlockPlaceEvent.class
@@ -114,6 +116,7 @@ me\frep\thotpatrol\checks\movement\speed\SpeedG.class
 me\frep\thotpatrol\checks\player\scaffold\ScaffoldB.class
 me\frep\thotpatrol\commands\JDayCommand.class
 me\frep\thotpatrol\checks\combat\reach\ReachD.class
+me\frep\thotpatrol\checks\movement\Spider\SpiderA.class
 me\frep\thotpatrol\packets\PacketCore$9.class
 me\frep\thotpatrol\data\DataPlayer.class
 me\frep\thotpatrol\packets\events\PacketPlayerEvent.class
@@ -155,3 +158,4 @@ me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveD.class
 me\frep\thotpatrol\utils\UtilMath.class
 me\frep\thotpatrol\checks\combat\aimpattern\AimPatternA.class
 me\frep\thotpatrol\packets\PacketCore$7.class
+me\frep\thotpatrol\checks\movement\Spider\SpiderC.class

@@ -95,7 +95,7 @@ public class JesusA extends Check {
             Count += 2;
         }
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
-            if (b.getType().equals(Material.CARPET)) {
+            if (b.getType().equals(Material.CARPET) || b.getType().toString().contains("SNOW")) {
                 return;
             }
         }

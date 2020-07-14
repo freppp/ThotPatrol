@@ -111,49 +111,8 @@ public class DataPlayer {
 	private int Speed_C3_Verbose = 0;
 	private int Jesus_Verbose = 0;
 
-	public int getJesus_Verbose() {
-		return Jesus_Verbose;
-	}
-
-	public void setJesus_Verbose(int jesus_Verbose) {
-		Jesus_Verbose = jesus_Verbose;
-	}
-
-	public int getSpeed_C3_Verbose() {
-		return Speed_C3_Verbose;
-	}
-	public boolean isVelocityTaken() {
-		return velXTicks > 0 || velYTicks > 0 || velZTicks > 0;
-	}
-
-	public void reduceVelocity() {
-		velXTicks = Math.max(0, velXTicks - 1);
-		velYTicks = Math.max(0,velYTicks - 1);
-		velZTicks = Math.max(0, velZTicks - 1);
-	}
-
-	public void setSpeed_C3_Verbose(int speed_C3_Verbose) {
-		Speed_C3_Verbose = speed_C3_Verbose;
-	}
-
-	public int getNEWSpeed_Verbose() {
-		return NEWSpeed_Verbose;
-	}
-
-	public void setNEWSpeed_Verbose(int NEWSpeed_Verbose) {
-		this.NEWSpeed_Verbose = NEWSpeed_Verbose;
-	}
-
 	public Player getPlayer() {
 		return player;
-	}
-
-	public boolean isAlerts() {
-		return alerts;
-	}
-
-	public void setAlerts(boolean alerts) {
-		this.alerts = alerts;
 	}
 
 	public double getFallDistance() {
@@ -194,22 +153,6 @@ public class DataPlayer {
 
 	public void setSpeedAVerbose(int speedAVerbose) {
 		this.speedAVerbose = speedAVerbose;
-	}
-
-	public static int getSlimeTicks() {
-		return slimeTicks;
-	}
-
-	public void setSlimeTicks(int slimeTicks) {
-		DataPlayer.slimeTicks = slimeTicks;
-	}
-
-	public long getSpeedGroundReset() {
-		return speedGroundReset;
-	}
-
-	public void setSpeedGroundReset(long speedGroundReset) {
-		this.speedGroundReset = speedGroundReset;
 	}
 
 	public int getCriticalsVerbose() {
@@ -315,14 +258,6 @@ public class DataPlayer {
 		GroundSpoofVL = groundSpoofVL;
 	}
 
-	public boolean isShouldSetBack() {
-		return ShouldSetBack;
-	}
-
-	public void setShouldSetBack(boolean shouldSetBack) {
-		ShouldSetBack = shouldSetBack;
-	}
-
 	public double getLastVelocityFlyY() {
 		return lastVelocityFlyY;
 	}
@@ -331,28 +266,8 @@ public class DataPlayer {
 		this.lastVelocityFlyY = lastVelocityFlyY;
 	}
 
-	public int getSetBackTicks() {
-		return setBackTicks;
-	}
-
-	public void setSetBackTicks(int setBackTicks) {
-		this.setBackTicks = setBackTicks;
-	}
-
 	public long getLastVelMS() {
 		return LastVelMS;
-	}
-
-	public void setLastVelMS(long lastVelMS) {
-		LastVelMS = lastVelMS;
-	}
-
-	public boolean isDidTakeVelocity() {
-		return DidTakeVelocity;
-	}
-
-	public void setDidTakeVelocity(boolean didTakeVelocity) {
-		DidTakeVelocity = didTakeVelocity;
 	}
 
 	public int getFlyVelocityVerbose() {
@@ -361,10 +276,6 @@ public class DataPlayer {
 
 	public void setFlyVelocityVerbose(int flyVelocityVerbose) {
 		this.flyVelocityVerbose = flyVelocityVerbose;
-	}
-
-	public long getLastDelayedPacket() {
-		return this.lastDelayedPacket;
 	}
 
 	public void setLastDelayedPacket(long l) {
@@ -389,10 +300,6 @@ public class DataPlayer {
 		return setbackLocation;
 	}
 
-	public void setSetbackLocation(Location setbackLocation) {
-		this.setbackLocation = setbackLocation;
-	}
-
 	public double getGoingUp_Blocks() {
 		return GoingUp_Blocks;
 	}
@@ -415,26 +322,6 @@ public class DataPlayer {
 
 	public void setGravity_VL(int gravity_VL) {
 		Gravity_VL = gravity_VL;
-	}
-
-	public int getAntiCactus_VL() {
-		return AntiCactus_VL;
-	}
-
-	public void setAntiCactus_VL(int antiCactus_VL) {
-		AntiCactus_VL = antiCactus_VL;
-	}
-
-	public long getSpeed_Ticks() {
-		return Speed_Ticks;
-	}
-
-	public boolean isSpeed_TicksSet() {
-		return Speed_TicksSet;
-	}
-
-	public void setSpeed_TicksSet(boolean speed_TicksSet) {
-		Speed_TicksSet = speed_TicksSet;
 	}
 
 	public boolean isNearIce() {
@@ -477,95 +364,6 @@ public class DataPlayer {
 		Speed2Verbose = speed2Verbose;
 	}
 
-
-	public int getSpeed_OnGround_Verbose() {
-		return Speed_OnGround_Verbose;
-	}
-
-	public void setSpeed_OnGround_Verbose(int speed_OnGround_Verbose) {
-		Speed_OnGround_Verbose = speed_OnGround_Verbose;
-	}
-
-	public long getLastPacketTimer() {
-		return lastPacketTimer;
-	}
-
-	public void setLastPacketTimer(long lastPacketTimer) {
-		this.lastPacketTimer = lastPacketTimer;
-	}
-
-	public long getLastTimeTimer() {
-		return LastTimeTimer;
-	}
-
-	public void setLastTimeTimer(long lastTimeTimer) {
-		LastTimeTimer = lastTimeTimer;
-	}
-
-	public int getTimerVerbose() {
-		return TimerVerbose;
-	}
-
-	public void setTimerVerbose(int timerVerbose) {
-		TimerVerbose = timerVerbose;
-	}
-
-	public int getLastPACKETSTimer() {
-		return LastPACKETSTimer;
-	}
-
-	public void setLastPACKETSTimer(int lastPACKETSTimer) {
-		LastPACKETSTimer = lastPACKETSTimer;
-	}
-
-	public long getWebFloatMS() {
-		return WebFloatMS;
-	}
-
-	public void setWebFloatMS(long webFloatMS) {
-		WebFloatMS = webFloatMS;
-	}
-
-	public boolean isWebFloatMS_Set() {
-		return WebFloatMS_Set;
-	}
-
-	public void setWebFloatMS_Set(boolean webFloatMS_Set) {
-		WebFloatMS_Set = webFloatMS_Set;
-	}
-
-	public int getWebFloat_BlockCount() {
-		return WebFloat_BlockCount;
-	}
-
-	public void setWebFloat_BlockCount(int webFloat_BlockCount) {
-		WebFloat_BlockCount = webFloat_BlockCount;
-	}
-
-	public long getAboveSpeedTicks() {
-		return AboveSpeedTicks;
-	}
-
-	public void setAboveSpeedTicks(long aboveSpeedTicks) {
-		AboveSpeedTicks = aboveSpeedTicks;
-	}
-
-	public boolean isAboveSpeedSet() {
-		return AboveSpeedSet;
-	}
-
-	public void setAboveSpeedSet(boolean aboveSpeedSet) {
-		AboveSpeedSet = aboveSpeedSet;
-	}
-
-	public int getSpeedAC2_Verbose() {
-		return SpeedAC2_Verbose;
-	}
-
-	public void setSpeedAC2_Verbose(int speedAC2_Verbose) {
-		SpeedAC2_Verbose = speedAC2_Verbose;
-	}
-
 	public long getHalfBlocks_MS() {
 		return HalfBlocks_MS;
 	}
@@ -580,30 +378,6 @@ public class DataPlayer {
 
 	public void setHalfBlocks_MS_Set(boolean halfBlocks_MS_Set) {
 		HalfBlocks_MS_Set = halfBlocks_MS_Set;
-	}
-
-	public boolean isSpeed_C_2_Set() {
-		return Speed_C_2_Set;
-	}
-
-	public void setSpeed_C_2_Set(boolean speed_C_2_Set) {
-		Speed_C_2_Set = speed_C_2_Set;
-	}
-
-	public long getSpeed_C_2_MS() {
-		return Speed_C_2_MS;
-	}
-
-	public void setSpeed_C_2_MS(long speed_C_2_MS) {
-		Speed_C_2_MS = speed_C_2_MS;
-	}
-
-	public int getSpeedC_Verbose() {
-		return SpeedC_Verbose;
-	}
-
-	public void setSpeedC_Verbose(int speedC_Verbose) {
-		SpeedC_Verbose = speedC_Verbose;
 	}
 
 	public long getGlideTicks() {
@@ -654,86 +428,6 @@ public class DataPlayer {
 		BlockAbove_Set = blockAbove_Set;
 	}
 
-	public int getSpeed_YPORT_Verbose() {
-		return Speed_YPORT_Verbose;
-	}
-
-	public void setSpeed_YPORT_Verbose(int speed_YPORT_Verbose) {
-		Speed_YPORT_Verbose = speed_YPORT_Verbose;
-	}
-
-	public long getSpeed_YPORT_MS() {
-		return Speed_YPORT_MS;
-	}
-
-	public void setSpeed_YPORT_MS(long speed_YPORT_MS) {
-		Speed_YPORT_MS = speed_YPORT_MS;
-	}
-
-	public boolean isSpeed_YPORT_Set() {
-		return Speed_YPORT_Set;
-	}
-
-	public void setSpeed_YPORT_Set(boolean speed_YPORT_Set) {
-		Speed_YPORT_Set = speed_YPORT_Set;
-	}
-
-	public long getSpeed_YPort2_MS() {
-		return Speed_YPort2_MS;
-	}
-
-	public void setSpeed_YPort2_MS(long speed_YPort2_MS) {
-		Speed_YPort2_MS = speed_YPort2_MS;
-	}
-
-	public boolean isSpeed_YPort2_Set() {
-		return Speed_YPort2_Set;
-	}
-
-	public void setSpeed_YPort2_Set(boolean speed_YPort2_Set) {
-		Speed_YPort2_Set = speed_YPort2_Set;
-	}
-
-	public int getSpeed_YPort2_Verbose() {
-		return Speed_YPort2_Verbose;
-	}
-
-	public void setSpeed_YPort2_Verbose(int speed_YPort2_Verbose) {
-		Speed_YPort2_Verbose = speed_YPort2_Verbose;
-	}
-
-	public List<Float> getPatterns() {
-		return patterns;
-	}
-
-	public void setPatterns(List<Float> patterns) {
-		this.patterns = patterns;
-	}
-
-	public float getLastRange() {
-		return lastRange;
-	}
-
-	public void setLastRange(float lastRange) {
-		this.lastRange = lastRange;
-	}
-
-	public int getSpeedThreshold() {
-		return speedThreshold;
-	}
-
-	public void setSpeedThreshold(int speedThreshold) {
-		this.speedThreshold = speedThreshold;
-	}
-
-	public LivingEntity getLastHitEntity() {
-		return lastHitEntity;
-	}
-
-	public void setLastHitEntity(LivingEntity lastHitEntity) {
-		this.lastHitEntity = lastHitEntity;
-	}
-
 	public boolean isOnGround() {
 		return onGround;
 	}
@@ -746,24 +440,9 @@ public class DataPlayer {
 		return inLiquid;
 	}
 
-	public void setInLiquid(boolean inLiquid) {
-		this.inLiquid = inLiquid;
-	}
-
-	public boolean isOnStairSlab() {
-		return onStairSlab;
-	}
-
-	public void setOnStairSlab(boolean onStairSlab) {
-		this.onStairSlab = onStairSlab;
-	}
 
 	public boolean isOnIce() {
 		return onIce;
-	}
-
-	public void setOnIce(boolean onIce) {
-		this.onIce = onIce;
 	}
 
 	public boolean isOnClimbable() {
@@ -776,10 +455,6 @@ public class DataPlayer {
 
 	public boolean isUnderBlock() {
 		return underBlock;
-	}
-
-	public void setUnderBlock(boolean underBlock) {
-		this.underBlock = underBlock;
 	}
 
 	public static int getWasFlying() {

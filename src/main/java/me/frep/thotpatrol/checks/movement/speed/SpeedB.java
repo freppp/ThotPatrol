@@ -143,7 +143,7 @@ public class SpeedB extends Check {
         if (p.getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()
                 || p.getEyeLocation().clone().add(0, 2, 0).getBlock().getType().isSolid()
                 || p.getLocation().add(0, 1, 0).getBlock().getType().equals(Material.TRAP_DOOR)
-                || p.getLocation().add(0 , 1, 0).getBlock().getType().equals(Material.IRON_TRAPDOOR)) {
+                || p.getLocation().add(0 , 1, 0).getBlock().getType().toString().equals("IRON_TRAPDOOR")) {
             maxSpeed += .15;
         }
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));

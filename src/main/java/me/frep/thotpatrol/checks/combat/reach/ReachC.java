@@ -7,6 +7,7 @@ import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -66,7 +67,8 @@ public class ReachC extends Check {
 		if(e.getType() != PacketPlayerType.USE) {
 			return;
 		}
-        if (damager.getAllowFlight()) {
+        if (damager.getAllowFlight()
+            || damager.getGameMode().equals(GameMode.CREATIVE)) {
         	return;
         }
         double ydist = Math.abs(damager.getEyeLocation().getY() - player.getLocation().getY());

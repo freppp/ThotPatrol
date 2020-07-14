@@ -14,6 +14,10 @@ import me.frep.thotpatrol.checks.combat.killaura.*;
 import me.frep.thotpatrol.checks.combat.misc.FastBowA;
 import me.frep.thotpatrol.checks.combat.misc.NoSwingA;
 import me.frep.thotpatrol.checks.combat.reach.*;
+import me.frep.thotpatrol.checks.combat.velocity.VelocityA;
+import me.frep.thotpatrol.checks.movement.spider.SpiderA;
+import me.frep.thotpatrol.checks.movement.spider.SpiderB;
+import me.frep.thotpatrol.checks.movement.spider.SpiderC;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionB;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionC;
@@ -280,6 +284,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new ReachC(this));
         Checks.add(new ReachD(this));
         Checks.add(new ReachE(this));
+        Checks.add(new VelocityA(this));
         Checks.add(new BadPacketsA(this));
         Checks.add(new BadPacketsB(this));
         Checks.add(new BadPacketsC(this));
@@ -287,6 +292,9 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         Checks.add(new BadPacketsE(this));
         Checks.add(new BadPacketsF(this));
         Checks.add(new FastClimbA(this));
+        Checks.add(new SpiderA(this));
+        Checks.add(new SpiderB(this));
+        Checks.add(new SpiderC(this));
         Checks.add(new AscensionA(this));
         Checks.add(new AscensionB(this));
         Checks.add(new AscensionC(this));
@@ -656,7 +664,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (Latency.getLag(p) < 250) {
+                if (Latency.getLag(p) < 1000) {
                     if (getConfig().getBoolean("testmode")) {
                         p.sendMessage(PREFIX + Color.Gray + "You would be banned right now for: " + Color.Red + check.getName());
                     } else {

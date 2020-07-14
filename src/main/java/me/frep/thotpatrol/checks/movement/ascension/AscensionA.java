@@ -5,7 +5,6 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -44,7 +43,7 @@ public class AscensionA extends Check {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
 		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
-			if (b.getType().equals(Material.SLIME_BLOCK)) {
+			if (b.getType().toString().equals("SLIME_BLOCK")) {
 				lastNearSlime.put(p.getUniqueId(), System.currentTimeMillis());
 			}
 		}

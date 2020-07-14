@@ -353,4 +353,13 @@ public final class UtilCheat {
 
         return offsetX;
     }
+
+    public static boolean nearWeb(Player p, int radius) {
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), radius)) {
+            if (b.getType().toString().contains("WEB")) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -3,9 +3,11 @@ package me.frep.thotpatrol.checks.movement.invalidmove;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedH;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
+import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +22,7 @@ import java.util.UUID;
 public class InvalidMoveD extends Check {
 
     private Map<UUID, Integer> verbose = new HashMap<>();
+    private Map<UUID, Long> nearSlime = new HashMap<>();
 
     public InvalidMoveD(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("InvalidMoveD", "Invalid Move (Type D) [#]", ThotPatrol);
@@ -49,6 +52,14 @@ public class InvalidMoveD extends Check {
                 if (effect.getType().equals(PotionEffectType.SPEED)) {
                     maxSpeed += (effect.getAmplifier() + 1) * .15;
                 }
+            }
+            for (Block b: UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+                if (b.getType().toString().contains("PISTON_") || b.getType().toString().contains("SLIME")) {
+                    nearSlime.put(p.getUniqueId(), System.currentTimeMillis());
+                }
+            }
+            if (!UtilTime.elapsed(nearSlime.getOrDefault(p.getUniqueId(), 0L), 1500L)) {
+                maxSpeed += .75;
             }
             if (p.getWalkSpeed() > .21) {
                 maxSpeed += p.getWalkSpeed() * 1.1;

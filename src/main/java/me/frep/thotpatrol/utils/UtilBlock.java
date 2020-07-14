@@ -36,6 +36,15 @@ public class UtilBlock {
 		return blocks;
 	}
 
+	public static boolean nearSlime(Player p, int radius) {
+		for (Block b : getNearbyBlocks(p.getLocation(), radius)) {
+			if (b.getType().toString().contains("SLIME")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static boolean containsBlockType(Material[] arrmaterial, Block block) {
 		final int n = arrmaterial.length;
 		int n2 = 0;

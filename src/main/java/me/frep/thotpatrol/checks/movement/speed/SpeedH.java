@@ -60,14 +60,17 @@ public class SpeedH extends Check {
                 || !UtilPlayer.isOnGround(p.getLocation())) {
             return;
         }
+        double maxSpeed = .29;
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
             if (b.getType().toString().contains("ICE")) {
                 return;
             }
+            if (b.getType().toString().contains("PISTON")) {
+                maxSpeed += .25;
+            }
         }
-        double maxSpeed = .29;
-        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)) {
-            maxSpeed += .15;
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1750)) {
+            maxSpeed += .25;
         }
         if (SpeedB.hadSpeed.contains(p.getUniqueId())) {
             maxSpeed += .5;

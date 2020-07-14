@@ -42,6 +42,8 @@ public class FlyE extends Check {
             || e.isCancelled()
             || deltaY <= 0
             || UtilPlayer.isOnClimbable(p)
+            || UtilPlayer.isFullyStuck(p)
+            || UtilPlayer.isPartiallyStuck(p)
             || UtilPlayer.isOnClimbable(p, 1)
             || UtilPlayer.isOnClimbable(p, 0)
             || !UtilTime.elapsed(SpeedI.belowBlock.getOrDefault(p.getUniqueId(), 0L), 2000L)
