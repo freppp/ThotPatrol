@@ -51,6 +51,7 @@ public class AscensionD extends Check {
             || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
             || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 4000)
             || p.getAllowFlight()
+            || p.getVehicle() != null
             || !inAir(p)) {
             return;
         }
