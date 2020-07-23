@@ -3,6 +3,7 @@ package me.frep.thotpatrol.checks.movement.spider;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
@@ -30,6 +31,7 @@ public class SpiderA extends Check {
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+        double delta = UtilMath.offset(UtilMath.getVerticalVector(e.getFrom().toVector()), UtilMath.getVerticalVector(e.getTo().toVector()));
         if (p.getAllowFlight()
             || p.getVehicle() != null
             || UtilBlock.isNearFence(p)
@@ -41,14 +43,17 @@ public class SpiderA extends Check {
             || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
             || UtilPlayer.isNearHalfBlock(p)
             || UtilPlayer.isOnClimbable(p)
+            || UtilBlock.isNearStair(p)
+            || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(p.getUniqueId(), 0L), 5000)
             || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
             || UtilPlayer.isOnClimbable(p, 1)
             || UtilPlayer.isOnClimbable(p, 0)
             || !p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().equals(Material.AIR)
-            || p.hasPotionEffect(PotionEffectType.JUMP)) {
+            || p.hasPotionEffect(PotionEffectType.JUMP)
+            || delta == .4453744695041024
+            || delta == .5926045976350451) {
             return;
         }
-        double delta = UtilMath.offset(UtilMath.getVerticalVector(e.getFrom().toVector()), UtilMath.getVerticalVector(e.getTo().toVector()));
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         List<Material> blocks = new ArrayList<>();

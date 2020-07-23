@@ -49,6 +49,7 @@ public class GravityA extends Check {
 					|| p.hasPermission("thotpatrol.bypass")
 					|| DataPlayer.getWasFlying() > 0
 					|| e.getPlayer().getVehicle() != null
+					|| p.getMaximumNoDamageTicks() < 16
 					|| p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE
 					|| UtilPlayer.isOnClimbable(p, 0)
 					|| UtilBlock.isNearLiquid(p)

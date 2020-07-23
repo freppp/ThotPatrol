@@ -39,16 +39,15 @@ public class CriticalsC extends Check {
             || p.hasPotionEffect(PotionEffectType.JUMP)
             || UtilCheat.slabsNear(p.getLocation())
             || UtilTime.elapsed(lastAttack.getOrDefault(p.getUniqueId(), 0L), 100)
-            || !UtilTime.elapsed(getThotPatrol().getLastVelocity().getOrDefault(p.getUniqueId(), 0L), 500)
+            || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
             || e.getPlayer().getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()
             || e.getPlayer().getEyeLocation().clone().add(0, 1, 0).getBlock().getType().isSolid()) {
             return;
         }
-        if (p.isOnGround() && UtilPlayer.isOnGround(p) && deltaY > 0 && deltaY < .4
-            || p.isOnGround() && UtilPlayer.isOnGround(p) && deltaY > 0 && deltaY > .42 && deltaY < .43) {
+        if (p.isOnGround() && UtilPlayer.isOnGround(p) && deltaY > 0 && deltaY < .15) {
             count++;
         }
-        if (count > 6) {
+        if (count > 7) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Packet | Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Packet", "DeltaY: " + deltaY + " | TPS: " + tps + " | Ping: " + ping);

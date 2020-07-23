@@ -54,7 +54,7 @@ public class KillAuraM extends Check {
             || p.getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }
-        if (delta < 8 && ping < 400) {
+        if (delta < 8 && ping < 300 && tps > 19.6) {
             count++;
             getThotPatrol().verbose(this, p, ping, tps, delta + " < 10");
             dumplog(p, "Delta: " + delta + " | Ping: " + ping + " | TPS: " + tps);

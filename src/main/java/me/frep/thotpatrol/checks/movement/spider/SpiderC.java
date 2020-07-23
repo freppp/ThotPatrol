@@ -3,6 +3,7 @@ package me.frep.thotpatrol.checks.movement.spider;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
@@ -45,12 +46,15 @@ public class SpiderC extends Check {
                 || UtilBlock.nearSlime(p, 5)
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || UtilPlayer.isNearHalfBlock(p)
+                || UtilBlock.isNearStair(p)
                 || UtilPlayer.isOnClimbable(p)
                 || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p, 0)
+                || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(p.getUniqueId(), 0L), 5000)
                 || !p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().equals(Material.AIR)
+                || !p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)
                 || p.hasPotionEffect(PotionEffectType.JUMP)) {
             return;
         }
@@ -68,6 +72,8 @@ public class SpiderC extends Check {
                 if (UtilPlayer.getDistanceToGround(p) > 2) {
                     if (delta > .1) {
                         count++;
+                    } else {
+                        if (count > 0) count--;
                     }
                     if (count > 5) {
                         count = 0;

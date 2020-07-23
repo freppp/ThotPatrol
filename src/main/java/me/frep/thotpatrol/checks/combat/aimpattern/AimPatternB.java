@@ -31,6 +31,7 @@ public class AimPatternB extends Check {
             || p.isBlocking()
             || p.getItemInHand().getType().equals(Material.BOW)
             || !UtilPlayer.isOnGround(p)
+            || e.isCancelled()
             || !p.isOnGround()
             || p.getNearbyEntities(5, 5, 5).isEmpty()) {
             return;

@@ -54,6 +54,7 @@ import me.frep.thotpatrol.packets.PacketCore;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -89,6 +90,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     public Map<String, Check> NamesBanned;
     public Map<UUID, Long> LastVelocity;
     public Map<UUID, Long> lastDamage;
+    public Map<UUID, Long> lastKnockback;
     public Integer pingToCancel = getConfig().getInt("settings.latency.ping");
     public Integer tpsToCancel = getConfig().getInt("settings.latency.tps");
 
@@ -103,6 +105,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         NamesBanned = new HashMap<>();
         LastVelocity = new HashMap<>();
         lastDamage = new HashMap<>();
+        lastKnockback = new HashMap<>();
     }
 
     public void onEnable() {
@@ -640,7 +643,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
                 public void run() {
                     NamesBanned.remove(player.getUniqueId());
                 }
-            }, 60);
+            }, 50);
         }
     }
 
@@ -652,10 +655,22 @@ public class ThotPatrol extends JavaPlugin implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
         if (!(e.getEntity() instanceof Player)
-            || !(e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))) {
+            || !(e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))
+            || e.isCancelled()) {
             return;
         }
         lastDamage.put(e.getEntity().getUniqueId(), System.currentTimeMillis());
+    }
+
+    @EventHandler
+    public void onKnockBack(EntityDamageByEntityEvent e) {
+        if (!(e.getEntity() instanceof Player)) return;
+        if (!(e.getDamager() instanceof Player)) return;
+        if (!(e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))) return;
+        Player p = (Player)e.getDamager();
+        if (p.getItemInHand().getEnchantmentLevel(Enchantment.KNOCKBACK) > 0) {
+            lastKnockback.put(e.getEntity().getUniqueId(), System.currentTimeMillis());
+        }
     }
 
     public void banPlayer(Player p, Check check) {

@@ -67,6 +67,9 @@ public class SpeedF extends Check {
 						speedAThreshold += 0.1;
 					}
 				}
+				if (UtilTime.elapsed(getThotPatrol().lastKnockback.getOrDefault(p.getUniqueId(), 0L), 2000)) {
+					return;
+				}
 				if(UtilPlayer.isOnStair(p.getLocation())
 						|| UtilPlayer.isOnSlab(p.getLocation())) {
 					speedAThreshold+= 0.12;

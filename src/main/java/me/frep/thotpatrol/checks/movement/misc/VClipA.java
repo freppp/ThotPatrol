@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -52,13 +53,14 @@ public class VClipA extends Check {
     public void onTeleport(PlayerTeleportEvent e) {
         if (!(e.getCause() != TeleportCause.UNKNOWN)) {
         	teleported.add(e.getPlayer().getUniqueId());
-        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, new Runnable() {
-        		@Override
-        		public void run() {
-        			teleported.remove(e.getPlayer().getUniqueId());
-        		}
-        	}, 20);
+        	Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> teleported.remove(e.getPlayer().getUniqueId()), 20);
         }
+    }
+
+    @EventHandler
+    public void onTeleport(PlayerChangedWorldEvent e) {
+        teleported.add(e.getPlayer().getUniqueId());
+        Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> teleported.remove(e.getPlayer().getUniqueId()), 40);
     }
 
     @EventHandler
@@ -70,7 +72,6 @@ public class VClipA extends Check {
                 || p.getAllowFlight()
                 || p.getVehicle() != null
                 || p.hasPermission("thotpatrol.bypass")
-                || SharedEvents.worldChange.contains(p.getUniqueId())
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || teleported.contains(p.getUniqueId())
                 || e.getTo().getY() <= 0 || e.getTo().getY() >= p.getWorld().getMaxHeight()

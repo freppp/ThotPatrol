@@ -51,6 +51,8 @@ public class FastClimbA extends Check {
                 || !UtilPlayer.isOnClimbable(p, 0)
                 || p.getEyeLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)
                 || yDiff <= 0
+                || UtilPlayer.isNearSlime(p)
+                || UtilPlayer.isNearPiston(p)
                 || jumpedValues.contains(yDiff)) {
             return;
         }

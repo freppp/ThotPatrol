@@ -2,9 +2,11 @@ package me.frep.thotpatrol.checks.movement.speed;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -36,7 +38,7 @@ public class SpeedD extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
-                || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)
+                || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2100)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()
                 || p.hasPermission("thotpatrol.bypass")) return;
@@ -50,6 +52,9 @@ public class SpeedD extends Check {
             if (level > 0) {
                 newmaxspeed = (newmaxspeed * (((level * 20) * 0.011) + 1));
             }
+        }
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 3)) {
+            if (b.getType().toString().contains("PISTON")) return;
         }
         if (SpeedB.hadSpeed.contains(p.getUniqueId())) {
             newmaxspeed += .5;

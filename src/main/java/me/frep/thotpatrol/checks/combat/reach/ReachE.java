@@ -21,11 +21,10 @@ public class ReachE extends Check {
     private HashMap<UUID, ArrayList<Double>> lastReaches = new HashMap<>();
 
     public ReachE(ThotPatrol ThotPatrol) {
-        super("ReachE", "Reach (Type E) [#]", ThotPatrol);
+        super("ReachE", "Reach (Type E)", ThotPatrol);
         setEnabled(true);
-        setBannable(false);
-        setMaxViolations(7);
-        setViolationResetTime(120000);
+        setBannable(true);
+        setMaxViolations(5);
     }
 
     @EventHandler

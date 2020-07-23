@@ -39,7 +39,6 @@ public class SprintA extends Check {
 				|| p.getLocation().getBlock().isLiquid()
     			|| p.hasPermission("thotpatrol.bypass")
     			|| p.getAllowFlight()
-				|| !UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 500)
     			|| p.isFlying()
 				|| e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getTo().getZ()) {
     		return;
@@ -50,12 +49,18 @@ public class SprintA extends Check {
     			direction = new Vector(-Math.sin(e.getPlayer().getEyeLocation().getYaw() * 3.141592653589F / 180.0F) * (float) 1 * 0.5F, 0, Math.cos(e.getPlayer().getEyeLocation().getYaw() * 3.1415927F / 180.0F) * (float) 1 * 0.5F);
     	double delta = movement.distanceSquared(direction);
     	double maxDelta = .35;
+    	if (!UtilTime.elapsed(getThotPatrol().LastVelocity.getOrDefault(p.getUniqueId(), 0L), 1500)) {
+    		maxDelta += .125;
+		}
     	if (ping > 250) {
     		maxDelta += .04;
     	}
 		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
 			if (b.getType().toString().contains("ICE")) {
 				maxDelta += .03;
+			}
+			if (b.getType().toString().contains("PISTON") && b.getType().toString().contains("ICE")) {
+				maxDelta += .15;
 			}
 		}
     	if (p.getWalkSpeed() > .21) {
@@ -68,7 +73,7 @@ public class SprintA extends Check {
     			count--;
 			}
 		}
-		if (count > 8
+		if (count > 9
 				&& getThotPatrol().getConfig().getBoolean("instantBans.SprintA.enabled")
 				&& delta > getThotPatrol().getConfig().getInt("instantBans.SprintA.maxDelta")
 				&& isBannable() && !getThotPatrol().getNamesBanned().containsKey(p.getName())

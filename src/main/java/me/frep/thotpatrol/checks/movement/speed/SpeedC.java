@@ -71,7 +71,7 @@ public class SpeedC extends Check {
                 || p.getAllowFlight()) return;
         double Airmaxspeed = 0.40;
         if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)) {
-            Airmaxspeed += .3;
+            Airmaxspeed += .35;
         }
         if (p.getMaximumNoDamageTicks() < 15) {
         	Airmaxspeed += .05;

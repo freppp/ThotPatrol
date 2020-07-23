@@ -41,6 +41,7 @@ public class FlyE extends Check {
             || UtilCheat.isInWeb(p)
             || e.isCancelled()
             || deltaY <= 0
+            || e.getFrom().getY() <= e.getTo().getY()
             || UtilPlayer.isOnClimbable(p)
             || UtilPlayer.isFullyStuck(p)
             || UtilPlayer.isPartiallyStuck(p)
@@ -63,10 +64,10 @@ public class FlyE extends Check {
             count++;
         } else {
             if (count > 0) {
-                count -= 2;
+                count -= 5;
             }
         }
-        if (count > 10) {
+        if (count > 15) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Glide | Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Glide", "TPS: " + tps + " | Ping: " + ping);

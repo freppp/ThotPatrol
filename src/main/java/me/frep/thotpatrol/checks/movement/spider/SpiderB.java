@@ -45,13 +45,16 @@ public class SpiderB extends Check {
                 || e.getTo().getY() <= e.getFrom().getY()
                 || UtilPlayer.isNearHalfBlock(p)
                 || UtilBlock.nearSlime(p, 5)
+                || UtilBlock.isNearStair(p)
                 || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || UtilPlayer.isOnClimbable(p)
+
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p, 0)
                 || !p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().equals(Material.AIR)
+                || !p.getLocation().clone().add(0, -1, 0).getBlock().getType().equals(Material.AIR)
                 || p.hasPotionEffect(PotionEffectType.JUMP)) {
             return;
         }
@@ -68,6 +71,9 @@ public class SpiderB extends Check {
             if (m.isSolid() && m != Material.LADDER && m != Material.VINE && m != Material.AIR) {
                 if (delta == lastDiff.getOrDefault(p.getUniqueId(), 0D)) {
                     count++;
+                }
+                else {
+                    if (count > 0) count--;
                 }
                 if (count > 5) {
                     count = 0;

@@ -29,6 +29,7 @@ public class AimPatternA extends Check {
             || p.getAllowFlight()
             || p.hasPermission("thotpatrol.bypass")
             || p.isBlocking()
+            || e.isCancelled()
             || p.getNearbyEntities(5, 5, 5).isEmpty()
             || p.getItemInHand().getType().equals(Material.BOW)) {
             return;

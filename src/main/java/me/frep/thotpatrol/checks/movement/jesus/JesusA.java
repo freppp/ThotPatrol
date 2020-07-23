@@ -67,6 +67,7 @@ public class JesusA extends Check {
         if (event.isCancelled()
                 || (event.getFrom().getX() == event.getTo().getX()) && (event.getFrom().getZ() == event.getTo().getZ())
                 || p.getAllowFlight()
+                || p.getVehicle() != null
                 || p.hasPermission("thotpatrol.bypass")
                 || UtilCheat.isOnLilyPad(p)
                 || p.getLocation().clone().add(0.0D, 0.4D, 0.0D).getBlock().getType().isSolid()

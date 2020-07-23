@@ -108,7 +108,7 @@ public class SpeedA extends Check {
                 LimitXZ += 1;
             }
             if (!UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(player.getUniqueId(), 0L), 2500)) {
-                LimitXZ += 1;
+                return;
             }
             Location below = event.getPlayer().getLocation().clone().add(0.0D, -1.0D, 0.0D);
             if (UtilCheat.isStair(below.getBlock())) {

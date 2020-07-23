@@ -4,12 +4,12 @@ me\frep\thotpatrol\checks\movement\jesus\JesusA$1.class
 me\frep\thotpatrol\packets\PacketCore$11.class
 me\frep\thotpatrol\utils\Config.class
 me\frep\thotpatrol\checks\movement\speed\SpeedI.class
-me\frep\thotpatrol\checks\movement\Spider\SpiderB.class
 me\frep\thotpatrol\packets\PacketCore$8.class
 me\frep\thotpatrol\packets\events\PacketKeepAliveEvent.class
 me\frep\thotpatrol\checks\movement\sprint\SprintA.class
 me\frep\thotpatrol\data\DataManager.class
 me\frep\thotpatrol\checks\combat\improbable\ImprobableA.class
+me\frep\thotpatrol\checks\movement\spider\SpiderC.class
 me\frep\thotpatrol\checks\combat\criticals\CriticalsA.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsC.class
 me\frep\thotpatrol\utils\ChecksGUI$1.class
@@ -81,7 +81,6 @@ me\frep\thotpatrol\packets\events\PacketKillAuraEvent.class
 me\frep\thotpatrol\utils\UtilJDay$1.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraK.class
 me\frep\thotpatrol\utils\Color.class
-me\frep\thotpatrol\checks\movement\misc\VClipA$1.class
 me\frep\thotpatrol\checks\movement\sneak\SneakA.class
 me\frep\thotpatrol\events\SharedEvents$2.class
 me\frep\thotpatrol\utils\UtilActionMessage$ClickableType.class
@@ -116,7 +115,6 @@ me\frep\thotpatrol\checks\movement\speed\SpeedG.class
 me\frep\thotpatrol\checks\player\scaffold\ScaffoldB.class
 me\frep\thotpatrol\commands\JDayCommand.class
 me\frep\thotpatrol\checks\combat\reach\ReachD.class
-me\frep\thotpatrol\checks\movement\Spider\SpiderA.class
 me\frep\thotpatrol\packets\PacketCore$9.class
 me\frep\thotpatrol\data\DataPlayer.class
 me\frep\thotpatrol\packets\events\PacketPlayerEvent.class
@@ -125,6 +123,7 @@ me\frep\thotpatrol\ThotPatrol$1.class
 me\frep\thotpatrol\packets\PacketCore$16.class
 me\frep\thotpatrol\checks\movement\speed\SpeedD.class
 me\frep\thotpatrol\packets\PacketCore$6.class
+me\frep\thotpatrol\checks\movement\spider\SpiderA.class
 me\frep\thotpatrol\ThotPatrol.class
 me\frep\thotpatrol\checks\movement\ascension\AscensionA.class
 me\frep\thotpatrol\packets\events\PacketHeldItemChangeEvent.class
@@ -152,10 +151,10 @@ me\frep\thotpatrol\checks\player\client\HackedClientA.class
 me\frep\thotpatrol\checks\movement\fly\FlyB.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsA.class
 me\frep\thotpatrol\checks\movement\timer\TimerA.class
+me\frep\thotpatrol\checks\movement\spider\SpiderB.class
 me\frep\thotpatrol\commands\AlertsCommand.class
 me\frep\thotpatrol\checks\combat\criticals\CriticalsC.class
 me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveD.class
 me\frep\thotpatrol\utils\UtilMath.class
 me\frep\thotpatrol\checks\combat\aimpattern\AimPatternA.class
 me\frep\thotpatrol\packets\PacketCore$7.class
-me\frep\thotpatrol\checks\movement\Spider\SpiderC.class

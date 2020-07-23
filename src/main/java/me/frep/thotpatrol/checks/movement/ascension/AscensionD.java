@@ -52,12 +52,13 @@ public class AscensionD extends Check {
             || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 4000)
             || p.getAllowFlight()
             || p.getVehicle() != null
-            || !inAir(p)) {
+            || !inAir(p)
+            || yDiff == 0.5926045976350451) {
             return;
         }
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 5)) {
             if (b.getType().toString().contains("SLIME") || b.getType().toString().contains("PISTON") || b.getType().toString().contains("BED")
-                || b.getType().toString().contains("STAIR")) {
+                || b.getType().toString().contains("STAIR") || b.getType().toString().contains("CAULDRON")) {
                 return;
             }
         }

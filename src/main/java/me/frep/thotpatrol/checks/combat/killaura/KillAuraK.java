@@ -43,7 +43,7 @@ public class KillAuraK extends Check {
                 || UtilPlayer.isOnGround4(p)
                 || p.getAllowFlight()
                 || nearIce(p)) {
-            return;
+            lastAirSpeed.put(p.getUniqueId(), 0D);
         }
         double airSpeed = UtilMath.offset(getHV(e.getTo().toVector()), getHV(e.getFrom().toVector()));
         lastAirSpeed.put(p.getUniqueId(), airSpeed);
@@ -52,8 +52,8 @@ public class KillAuraK extends Check {
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
         Player p = e.getPlayer();
+        if (!(e.getEntity() instanceof Player)) return;
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
-        //TODO calc walkSpeed valeus
         double lastSpeed = lastAirSpeed.getOrDefault(p.getUniqueId(), 0D);
         double lastLastSpeed = lastLastAirSpeed.getOrDefault(p.getUniqueId(), 0D);
         if (p.getWalkSpeed() > .25
@@ -81,27 +81,6 @@ public class KillAuraK extends Check {
         }
         lastLastAirSpeed.put(p.getUniqueId(), lastSpeed);
         verbose.put(p.getUniqueId(), count);
-    }
-
-    private boolean isActuallySprinting(Player p) {
-        double lastSpeed = lastAirSpeed.getOrDefault(p.getUniqueId(), 0D);
-        double maxAirSpeed = .27;
-        for (PotionEffect e: p.getActivePotionEffects()) {
-            if (e.getType().equals(PotionEffectType.SPEED)) {
-                int level = getPotionEffectLevel(p, PotionEffectType.SPEED);
-                maxAirSpeed = (maxAirSpeed * (((level * 20) * 0.05) + 1));
-            }
-        }
-        return lastSpeed > maxAirSpeed;
-    }
-
-    private int getPotionEffectLevel(Player p, PotionEffectType pet) {
-        for (PotionEffect pe : p.getActivePotionEffects()) {
-            if (pe.getType().getName().equals(pet.getName())) {
-                return pe.getAmplifier() + 1;
-            }
-        }
-        return 0;
     }
 
     private boolean nearIce(Player p) {

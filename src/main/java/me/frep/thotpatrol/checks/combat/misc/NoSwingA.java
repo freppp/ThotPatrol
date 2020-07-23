@@ -33,13 +33,14 @@ public class NoSwingA extends Check {
     public void onDamage(EntityDamageByEntityEvent e) {
         if (!(e.getDamager() instanceof Player)
             || !e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)
-            || getThotPatrol().getLag().getTPS() < 17) {
+            || getThotPatrol().getLag().getTPS() < 18) {
             return;
         }
         Player p = (Player)e.getDamager();
         if (!UtilTime.elapsed(SpeedE.teleported.getOrDefault(p.getUniqueId(), 0L), 2500)) return;
 		double tps = getThotPatrol().getLag().getTPS();
 		int ping = getThotPatrol().getLag().getPing(p);
+		if (ping > 500) return;
 		for (Plugin plugin : Bukkit.getServer().getPluginManager().getPlugins()) {
             if (plugin.getName().equals("StrikePractice")) {
                 if (p.getName().startsWith("BOT_") && p.getName().endsWith("Bot")) {

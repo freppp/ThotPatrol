@@ -52,6 +52,7 @@ public class SpeedH extends Check {
                 || p.getVehicle() != null
                 || p.getAllowFlight()
                 || e.isCancelled()
+                || UtilPlayer.isOnStair(p.getLocation())
                 || !UtilTime.elapsed(airTicks.getOrDefault(p.getUniqueId(), 0L), 500)
                 || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)

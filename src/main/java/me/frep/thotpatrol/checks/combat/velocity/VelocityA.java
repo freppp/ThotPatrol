@@ -7,6 +7,7 @@ import me.frep.thotpatrol.packets.events.PacketPlayerEvent;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -46,12 +47,18 @@ public class VelocityA extends Check {
             || p.hasPermission("thotpatrol.bypass")) {
             return;
         }
+        if (p.getLocation().getBlock().getRelative(BlockFace.NORTH).getType().isSolid()
+            || p.getLocation().getBlock().getRelative(BlockFace.SOUTH).getType().isSolid()
+            || p.getLocation().getBlock().getRelative(BlockFace.EAST).getType().isSolid()
+            || p.getLocation().getBlock().getRelative(BlockFace.WEST).getType().isSolid()) {
+            return;
+        }
         long lastPacket = this.lastPacket.getOrDefault(p.getUniqueId(), 0L);
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         double delta =  System.currentTimeMillis() - lastPacket;
         double deltaX = UtilMath.getHorizontalDistance(e.getFrom(), e.getTo());
         double deltaY = UtilMath.getVerticalDistance(e.getFrom(), e.getTo());
-        if (delta < 45 && deltaX < 0.01 && UtilPlayer.isOnGround(p) && deltaY < .01) {
+        if (delta < 40 && deltaX < 0.00 && UtilPlayer.isOnGround(p) && deltaY < .01) {
             count++;
         }
         else {

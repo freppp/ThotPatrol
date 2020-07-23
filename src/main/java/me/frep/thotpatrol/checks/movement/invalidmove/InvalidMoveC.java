@@ -43,7 +43,7 @@ public class InvalidMoveC extends Check {
         }
         if (p.getLocation().getBlock().isLiquid() && !p.getEyeLocation().getBlock().getType().equals(Material.AIR)) {
             double dist = UtilMath.getHorizontalDistance(e.getTo(), e.getFrom());
-            double maxDist = .14;
+            double maxDist = .16;
             for (PotionEffect effect : p.getActivePotionEffects()) {
                 if (effect.getType().equals(PotionEffectType.SPEED)) {
                     maxDist += (effect.getAmplifier() + 1) * .15;

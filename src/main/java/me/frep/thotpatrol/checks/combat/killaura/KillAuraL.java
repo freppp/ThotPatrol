@@ -3,6 +3,7 @@ package me.frep.thotpatrol.checks.combat.killaura;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
 import me.frep.thotpatrol.utils.UtilCheat;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
@@ -17,7 +18,7 @@ public class KillAuraL extends Check {
     public KillAuraL(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("KillAuraL", "Kill Aura (Type L)", ThotPatrol);
         setEnabled(true);
-        setBannable(true);
+        setBannable(false);
         setMaxViolations(8);
     }
 
@@ -29,8 +30,18 @@ public class KillAuraL extends Check {
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
-        //todo fix this
-        if (!p.hasLineOfSight(victim) && !UtilCheat.blocksNear(victim.getLocation())) {
+        if (victim.getLocation().getBlock().getRelative(BlockFace.NORTH).getType().isSolid()
+                || victim.getLocation().getBlock().getRelative(BlockFace.SOUTH).getType().isSolid()
+                || victim.getLocation().getBlock().getRelative(BlockFace.EAST).getType().isSolid()
+                || victim.getLocation().getBlock().getRelative(BlockFace.WEST).getType().isSolid()
+                || victim.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().isSolid()
+                || victim.getEyeLocation().getBlock().getRelative(BlockFace.NORTH).getType().isSolid()
+                || victim.getEyeLocation().getBlock().getRelative(BlockFace.EAST).getType().isSolid()
+                || victim.getEyeLocation().getBlock().getRelative(BlockFace.WEST).getType().isSolid()
+                || victim.getEyeLocation().getBlock().getRelative(BlockFace.SOUTH).getType().isSolid()) {
+            return;
+        }
+        if (!p.hasLineOfSight(victim)) {
             count++;
             getThotPatrol().verbose(this, p, ping, tps, Integer.toString(count));
         } else {
@@ -38,7 +49,7 @@ public class KillAuraL extends Check {
                 count--;
             }
         }
-        if (count >= 4) {
+        if (count >= 6) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Wall | Ping: " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Wall", "TPS: " + tps + " | Ping: " + ping);

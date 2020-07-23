@@ -92,7 +92,7 @@ public class StepA extends Check {
         }
         ArrayList<Block> blocks = UtilBlock.getBlocksAroundCenter(player.getLocation(), 1);
         String below = player.getLocation().clone().subtract(0.0D, 0.1D, 0.0D).getBlock().getType().toString();
-        if (yDist < 0) return;
+        if (yDist < 0 || yDist > 5) return;
         if (yDist > 0.95) {
             dumplog(player, "Height (Logged): " + yDist);
             getThotPatrol().logCheat(this, player, Math.round(yDist) + " blocks");
