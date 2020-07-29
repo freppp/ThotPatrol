@@ -3,7 +3,6 @@ package me.frep.thotpatrol.checks.movement.misc;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
-import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilCheat;
 import org.bukkit.Bukkit;

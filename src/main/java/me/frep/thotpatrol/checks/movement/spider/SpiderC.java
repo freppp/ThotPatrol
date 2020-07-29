@@ -46,6 +46,7 @@ public class SpiderC extends Check {
                 || UtilBlock.nearSlime(p, 5)
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || UtilPlayer.isNearHalfBlock(p)
+                || p.hasPermission("thotpatrol.bypass")
                 || UtilBlock.isNearStair(p)
                 || UtilPlayer.isOnClimbable(p)
                 || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
@@ -75,7 +76,7 @@ public class SpiderC extends Check {
                     } else {
                         if (count > 0) count--;
                     }
-                    if (count > 5) {
+                    if (count > 6) {
                         count = 0;
                         getThotPatrol().logCheat(this, p, "Distance | Ping: " + ping + " | TPS: " + tps);
                         getThotPatrol().logToFile(p, this, "Distance", "Distance: " + UtilPlayer.getDistanceToGround(p) + " Delta: " + delta + " TPS: " + tps + " | Ping: " + ping);

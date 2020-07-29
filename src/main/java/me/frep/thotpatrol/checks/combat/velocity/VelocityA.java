@@ -50,7 +50,11 @@ public class VelocityA extends Check {
         if (p.getLocation().getBlock().getRelative(BlockFace.NORTH).getType().isSolid()
             || p.getLocation().getBlock().getRelative(BlockFace.SOUTH).getType().isSolid()
             || p.getLocation().getBlock().getRelative(BlockFace.EAST).getType().isSolid()
-            || p.getLocation().getBlock().getRelative(BlockFace.WEST).getType().isSolid()) {
+            || p.getLocation().getBlock().getRelative(BlockFace.WEST).getType().isSolid()
+            || p.getEyeLocation().getBlock().getRelative(BlockFace.NORTH).getType().isSolid()
+            || p.getEyeLocation().getBlock().getRelative(BlockFace.SOUTH).getType().isSolid()
+            || p.getEyeLocation().getBlock().getRelative(BlockFace.EAST).getType().isSolid()
+            || p.getEyeLocation().getBlock().getRelative(BlockFace.WEST).getType().isSolid()) {
             return;
         }
         long lastPacket = this.lastPacket.getOrDefault(p.getUniqueId(), 0L);
@@ -58,7 +62,7 @@ public class VelocityA extends Check {
         double delta =  System.currentTimeMillis() - lastPacket;
         double deltaX = UtilMath.getHorizontalDistance(e.getFrom(), e.getTo());
         double deltaY = UtilMath.getVerticalDistance(e.getFrom(), e.getTo());
-        if (delta < 40 && deltaX < 0.00 && UtilPlayer.isOnGround(p) && deltaY < .01) {
+        if (delta < 40 && deltaX < 0.01 && UtilPlayer.isOnGround(p) && deltaY < .01) {
             count++;
         }
         else {

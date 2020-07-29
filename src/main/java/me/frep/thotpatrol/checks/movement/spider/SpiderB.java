@@ -45,11 +45,11 @@ public class SpiderB extends Check {
                 || e.getTo().getY() <= e.getFrom().getY()
                 || UtilPlayer.isNearHalfBlock(p)
                 || UtilBlock.nearSlime(p, 5)
+                || p.hasPermission("thotpatrol.bypass")
                 || UtilBlock.isNearStair(p)
                 || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || UtilPlayer.isOnClimbable(p)
-
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p, 0)

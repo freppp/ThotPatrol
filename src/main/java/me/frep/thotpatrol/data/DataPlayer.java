@@ -1,8 +1,5 @@
 package me.frep.thotpatrol.data;
 
-import com.google.common.collect.Lists;
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -20,73 +17,42 @@ public class DataPlayer {
 	private int waterTicks = 0;
 	private long LastBlockPlacedTicks = 0;
 	private boolean LastBlockPlaced_GroundSpoof = false;
-	public int velXTicks, velYTicks, velZTicks;
 	public int airTicks = 0;
 	public int groundTicks = 0;
-	private boolean ShouldSetBack = false;
-	private int setBackTicks = 0;
 	private long LastVelMS = 0;
-	private boolean DidTakeVelocity = false;
-	private long lastDelayedPacket;
 	private long lastPlayerPacket;
-	private Location setbackLocation;
 	private double GoingUp_Blocks;
 	private double LastY_Gravity;
 	private int Gravity_VL;
-	private int AntiCactus_VL;
 	private double lastVelocityFlyY = 0;
 	private double lastKillauraPitch = 0;
 	private double lastKillauraYaw = 0;
 	private long lastPacket = 0;
 	private long lastAimTime = System.currentTimeMillis();
-	private final long Speed_Ticks = 0;
-	private boolean Speed_TicksSet = false;
 	private boolean isNearIce = false;
 	private long isNearIceTicks = 0;
 	private long LastVelUpdate = 0;
 	private boolean LastVelUpdateBoolean = false;
 	private double lastKillauraYawDif = 0;
-	private long lastPacketTimer = 0;
-	private long LastTimeTimer = 0;
-	private int LastPACKETSTimer = 0;
-	private long WebFloatMS = 0;
-	private boolean WebFloatMS_Set = false;
-	private int WebFloat_BlockCount = 0;
-	private long AboveSpeedTicks = 0;
-	private boolean AboveSpeedSet = false;
 	private long HalfBlocks_MS = 0;
 	private boolean HalfBlocks_MS_Set = false;
-	private boolean Speed_C_2_Set = false;
-	private long Speed_C_2_MS = 0;
 	private long GlideTicks = 0;
 	private long Speed_PistonExpand_MS = 0;
 	private boolean Speed_PistonExpand_Set = false;
 	private long BlockAbove = 0;
+	private long lastDelayedPacket;
 	private boolean BlockAbove_Set = false;
-	private long Speed_YPORT_MS = 0;
-	private boolean Speed_YPORT_Set = false;
 	public int iceTicks = 0;
-	private long Speed_YPort2_MS = 0;
-	private boolean Speed_YPort2_Set = false;
-	private long speedGroundReset = 0;
-	public static int slimeTicks = 0;
-	public float lastDeltaXZ;
 	public Player player;
 	public boolean onGround;
 	public boolean inLiquid;
-	public boolean onStairSlab;
 	public boolean onIce;
 	public boolean onClimbable;
 	public boolean underBlock;
 	public int liquidTicks = 0;
 	public int blockTicks = 0;
-	public long lastVelocityTaken, lastAttack;
-	public LivingEntity lastHitEntity;
+	public long lastVelocityTaken;
 
-	public List<Float> patterns = Lists.newArrayList();
-	public float lastRange;
-
-	public int speedThreshold = 10;
 
 	public DataPlayer(Player player) {
 		this.player = player;
@@ -99,17 +65,8 @@ public class DataPlayer {
 	private int GroundSpoofVL = 0;
 	private int killauraAVerbose = 0;
 	private int Speed2Verbose = 0;
-	private int Speed_OnGround_Verbose = 0;
-	private int TimerVerbose = 0;
-	private int SpeedAC2_Verbose = 0;
-	private int SpeedC_Verbose = 0;
 	private int Speed_C_3_Verbose = 0;
-	private int Speed_YPORT_Verbose = 0;
-	private int Speed_YPort2_Verbose = 0;
-	private int NEWSpeed_Verbose = 0;
 	private int speedAVerbose = 0;
-	private int Speed_C3_Verbose = 0;
-	private int Jesus_Verbose = 0;
 
 	public Player getPlayer() {
 		return player;
@@ -278,9 +235,6 @@ public class DataPlayer {
 		this.flyVelocityVerbose = flyVelocityVerbose;
 	}
 
-	public void setLastDelayedPacket(long l) {
-		this.lastDelayedPacket = l;
-	}
 	public long getLastPlayerPacketDiff() {
 		return System.currentTimeMillis() - this.getLastPlayerPacket();
 	}
@@ -294,10 +248,6 @@ public class DataPlayer {
 
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-
-	public Location getSetbackLocation() {
-		return setbackLocation;
 	}
 
 	public double getGoingUp_Blocks() {
@@ -400,10 +350,6 @@ public class DataPlayer {
 		return Speed_PistonExpand_MS;
 	}
 
-	public void setSpeed_PistonExpand_MS(long speed_PistonExpand_MS) {
-		Speed_PistonExpand_MS = speed_PistonExpand_MS;
-	}
-
 	public boolean isSpeed_PistonExpand_Set() {
 		return Speed_PistonExpand_Set;
 	}
@@ -440,7 +386,6 @@ public class DataPlayer {
 		return inLiquid;
 	}
 
-
 	public boolean isOnIce() {
 		return onIce;
 	}
@@ -470,5 +415,9 @@ public class DataPlayer {
 
 	public static void setWasSpider(int wasSpider) {
 		DataPlayer.wasSpider = wasSpider;
+	}
+
+	public void setLastDelayedPacket(long l) {
+		this.lastDelayedPacket = l;
 	}
 }

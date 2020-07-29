@@ -36,6 +36,7 @@ public class InvalidMoveA extends Check {
         double tps = getThotPatrol().getLag().getTPS();
         if (p.getAllowFlight()
             || SpeedC.highKb.contains(p.getUniqueId())
+            || p.hasPermission("thotpatrol.bypass")
             || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500L)) {
             return;
         }

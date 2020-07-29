@@ -64,6 +64,7 @@ public class JesusA extends Check {
     @EventHandler
     public void CheckJesus(PlayerMoveEvent event) {
         Player p = event.getPlayer();
+        double yDiff = Math.abs(event.getFrom().getY() - event.getTo().getY());
         if (event.isCancelled()
                 || (event.getFrom().getX() == event.getTo().getX()) && (event.getFrom().getZ() == event.getTo().getZ())
                 || p.getAllowFlight()
@@ -74,7 +75,6 @@ public class JesusA extends Check {
                 || placedBlockOnWater.remove(p)
                 || p.isDead()
                 || fuckingSwimming.contains(p.getUniqueId())) return;
-        double yDiff = Math.abs(event.getFrom().getY() - event.getTo().getY());
         //todo fix this
         if (yDiff > .04) {
             fuckingSwimming.add(p.getUniqueId());

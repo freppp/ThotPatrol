@@ -40,6 +40,7 @@ public class KillAuraH extends Check {
 			int count = verbose.getOrDefault(p.getUniqueId(), 0);
 			double tps = getThotPatrol().getLag().getTPS();
 			int ping = getThotPatrol().getLag().getPing(p);
+			if (!p.hasPermission("thotpatrol.bypass")) return;
 			if (elapsed < 2 && ping < 350) {
 				count++;
 				getThotPatrol().verbose(this, p, ping, tps, elapsed + " < 3");

@@ -45,13 +45,9 @@ public class UtilPlayer {
 	@SuppressWarnings("deprecation")
 	public static boolean wasOnSlime(Player player) {
 		final DataPlayer user = ThotPatrol.getInstance().getDataManager().getData(player);
-		if (user != null
-				&& user.getSetbackLocation() != null) {
-			final Location location = user.getSetbackLocation().clone().subtract(0.0D, 1.0D, 0.0D);
+		final Location location = player.getLocation().clone().subtract(0.0D, 1.0D, 0.0D);
 
-			return location.getBlock().getType().getId() == 165;
-		}
-		return false;
+		return location.getBlock().getType().getId() == 165;
 	}
 
 	public static boolean isNearIce(Player p) {

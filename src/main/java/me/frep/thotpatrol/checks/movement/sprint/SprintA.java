@@ -53,7 +53,7 @@ public class SprintA extends Check {
     		maxDelta += .125;
 		}
     	if (ping > 250) {
-    		maxDelta += .04;
+    		maxDelta += .05;
     	}
 		for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
 			if (b.getType().toString().contains("ICE")) {

@@ -32,7 +32,8 @@ public class ImprobableA extends Check {
 	public void onAttack(PacketAttackEvent e) {
 		Player p = e.getPlayer();
 		UUID uuid = p.getUniqueId();
-		if(e.getType() != PacketPlayerType.USE) {
+		if(e.getType() != PacketPlayerType.USE
+            || p.hasPermission("thotpatrol.bypass")) {
 			return;
 		}
 		int ping = getThotPatrol().getLag().getPing(p);

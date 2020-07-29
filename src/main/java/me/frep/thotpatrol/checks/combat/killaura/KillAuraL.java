@@ -2,7 +2,6 @@ package me.frep.thotpatrol.checks.combat.killaura;
 
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.packets.events.PacketAttackEvent;
-import me.frep.thotpatrol.utils.UtilCheat;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

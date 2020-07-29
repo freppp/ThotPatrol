@@ -15,9 +15,6 @@ import me.frep.thotpatrol.checks.combat.misc.FastBowA;
 import me.frep.thotpatrol.checks.combat.misc.NoSwingA;
 import me.frep.thotpatrol.checks.combat.reach.*;
 import me.frep.thotpatrol.checks.combat.velocity.VelocityA;
-import me.frep.thotpatrol.checks.movement.spider.SpiderA;
-import me.frep.thotpatrol.checks.movement.spider.SpiderB;
-import me.frep.thotpatrol.checks.movement.spider.SpiderC;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionB;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionC;
@@ -37,6 +34,9 @@ import me.frep.thotpatrol.checks.movement.noslowdown.NoSlowdownA;
 import me.frep.thotpatrol.checks.movement.noslowdown.NoSlowdownB;
 import me.frep.thotpatrol.checks.movement.sneak.SneakA;
 import me.frep.thotpatrol.checks.movement.speed.*;
+import me.frep.thotpatrol.checks.movement.spider.SpiderA;
+import me.frep.thotpatrol.checks.movement.spider.SpiderB;
+import me.frep.thotpatrol.checks.movement.spider.SpiderC;
 import me.frep.thotpatrol.checks.movement.sprint.SprintA;
 import me.frep.thotpatrol.checks.movement.step.StepA;
 import me.frep.thotpatrol.checks.movement.timer.TimerA;
@@ -151,6 +151,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             getConfig().addDefault("settings.autoClickerAClickSpeed", 20);
             getConfig().addDefault("settings.disableLogFile", false);
             getConfig().addDefault("settings.disableAlertsToConsole", false);
+            getConfig().addDefault("settings.autoEnableAlertsOnJoin", true);
             getConfig().addDefault("instantBans.AutoClickerA.enabled", true);
             getConfig().addDefault("instantBans.AutoClickerA.maxCPS", 30);
             getConfig().addDefault("instantBans.AutoClickerA.maxPing", 200);
@@ -536,9 +537,12 @@ public class ThotPatrol extends JavaPlugin implements Listener {
 
     @EventHandler
     public void Join(PlayerJoinEvent e) {
-        if (!e.getPlayer().hasPermission("thotpatrol.alerts")
-                || !e.getPlayer().hasPermission("thotpatrol.admin")) return;
-        AlertsOn.add(e.getPlayer());
+        Player p = e.getPlayer();
+        if (p.hasPermission("thotpatrol.alerts") || p.hasPermission("thotpatrol.admin")) {
+            if (!getConfig().getBoolean("settings.autoEnableAlertsOnJoin")) {
+                AlertsOn.add(p);
+            }
+        }
     }
 
     public void verbose(Check check, Player player, Integer ping, Double tps, String info) {
@@ -664,17 +668,22 @@ public class ThotPatrol extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onKnockBack(EntityDamageByEntityEvent e) {
-        if (!(e.getEntity() instanceof Player)) return;
-        if (!(e.getDamager() instanceof Player)) return;
-        if (!(e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))) return;
+        if (!(e.getDamager() instanceof Player)
+                || !(e.getEntity() instanceof Player)
+                || !(e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK))) {
+            return;
+        }
         Player p = (Player)e.getDamager();
+        Player victim = (Player)e.getEntity();
+        if (p.getItemInHand() == null) return;
         if (p.getItemInHand().getEnchantmentLevel(Enchantment.KNOCKBACK) > 0) {
-            lastKnockback.put(e.getEntity().getUniqueId(), System.currentTimeMillis());
+            lastKnockback.put(victim.getUniqueId(), System.currentTimeMillis());
         }
     }
 
     public void banPlayer(Player p, Check check) {
         NamesBanned.put(p.getName(), check);
+        createLog(p, check);
         removeViolations(p, check);
         new BukkitRunnable() {
             @Override
@@ -764,7 +773,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             if (check.isJudgmentDay()) {
                 return;
             }
-            if (violations > check.getMaxViolations() && check.isBannable()) {
+            if (violations > check.getMaxViolations() - 1 && check.isBannable()) {
                 autoBan(check, player);
             }
         }
