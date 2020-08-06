@@ -2,6 +2,7 @@ package me.frep.thotpatrol.checks.movement.invalidmove;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Material;
@@ -38,6 +39,7 @@ public class InvalidMoveC extends Check {
         if (p.getAllowFlight()
                 || p.getVehicle() != null
                 || p.hasPermission("thotpatrol.bypass")
+                || !UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500L)) {
             return;
         }

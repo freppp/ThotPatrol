@@ -2,8 +2,10 @@ package me.frep.thotpatrol.checks.movement.jesus;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilCheat;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -71,6 +73,7 @@ public class JesusA extends Check {
                 || p.getVehicle() != null
                 || p.hasPermission("thotpatrol.bypass")
                 || UtilCheat.isOnLilyPad(p)
+                || !UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || p.getLocation().clone().add(0.0D, 0.4D, 0.0D).getBlock().getType().isSolid()
                 || placedBlockOnWater.remove(p)
                 || p.isDead()

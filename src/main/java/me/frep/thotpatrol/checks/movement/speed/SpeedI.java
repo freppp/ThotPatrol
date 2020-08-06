@@ -95,9 +95,7 @@ public class SpeedI extends Check {
         if (!UtilTime.elapsed(bowBoost.getOrDefault(p.getUniqueId(), 0L), 2500)) {
             maxDelta += 1;
         }
-        if (!UtilTime.elapsed(getThotPatrol().lastKnockback.getOrDefault(p.getUniqueId(), 0L), 2000)) {
-            maxDelta += 1.25;
-        }
+        if (!SpeedC.highKb.contains(p.getUniqueId())) return;
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 3)) {
             if (b.getType().toString().contains("ICE")) {
                 maxDelta += .2;

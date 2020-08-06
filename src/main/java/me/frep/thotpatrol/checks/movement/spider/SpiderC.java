@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
+import me.frep.thotpatrol.checks.movement.speed.SpeedI;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
@@ -49,6 +50,7 @@ public class SpiderC extends Check {
                 || p.hasPermission("thotpatrol.bypass")
                 || UtilBlock.isNearStair(p)
                 || UtilPlayer.isOnClimbable(p)
+                || !UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(p.getUniqueId(), 0L), 3000)
                 || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || UtilPlayer.isOnClimbable(p, 1)

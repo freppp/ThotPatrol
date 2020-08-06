@@ -49,7 +49,8 @@ public class ScaffoldB extends Check {
         double speed = lastSpeed.getOrDefault(p.getUniqueId(), 0D);
         long delta = time - lastPlace;
         if (delta < 400 && delta > 0 && speed == 0 && e.getBlockAgainst().getFace(e.getBlockPlaced()).equals(BlockFace.UP)
-            && lastDeltaY.getOrDefault(p.getUniqueId(), 0D) > 0) {
+                && e.getBlockPlaced().getLocation().getBlockX() == p.getLocation().getBlockX() && e.getBlockPlaced().getLocation().getBlockZ()
+                == p.getLocation().getBlockZ() && lastDeltaY.getOrDefault(p.getUniqueId(), 0D) > 0) {
             count++;
         } else {
             count = 0;

@@ -177,7 +177,7 @@ public class SpeedC extends Check {
         }
         Player p = (Player)e.getDamager();
         Player v = (Player)e.getEntity();
-        if (p.getItemInHand().getEnchantmentLevel(Enchantment.KNOCKBACK) > 3) {
+        if (p.getItemInHand().getEnchantmentLevel(Enchantment.KNOCKBACK) > 1) {
             highKb.add(v.getUniqueId());
             Bukkit.getScheduler().scheduleAsyncDelayedTask(ThotPatrol.Instance, () -> highKb.remove(v.getUniqueId()), 100);
         }

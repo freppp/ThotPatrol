@@ -152,6 +152,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
             getConfig().addDefault("settings.disableLogFile", false);
             getConfig().addDefault("settings.disableAlertsToConsole", false);
             getConfig().addDefault("settings.autoEnableAlertsOnJoin", true);
+            getConfig().addDefault("settings.bypassBelowOnePing", false);
             getConfig().addDefault("instantBans.AutoClickerA.enabled", true);
             getConfig().addDefault("instantBans.AutoClickerA.maxCPS", 30);
             getConfig().addDefault("instantBans.AutoClickerA.maxPing", 200);
@@ -741,6 +742,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
         if (player.isOp() && getConfig().getBoolean("settings.bypassOP")) {
             return;
         }
+        if (getLag().getPing(player) < 1 && getConfig().getBoolean("settings.bypassBelowOnePing")) return;
         addViolation(player, check);
         setViolationResetTime(player, check, System.currentTimeMillis() + check.getViolationResetTime());
         Integer violations = getViolations(player, check);

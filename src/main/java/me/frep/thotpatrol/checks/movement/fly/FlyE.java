@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedC;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilCheat;
 import me.frep.thotpatrol.utils.UtilPlayer;
@@ -41,9 +42,11 @@ public class FlyE extends Check {
             || UtilCheat.isInWeb(p)
             || e.isCancelled()
             || deltaY <= 0
+            || !UtilTime.elapsed(SharedEvents.placedBlock.getOrDefault(p, 0L), 3000)
             || e.getFrom().getY() <= e.getTo().getY()
             || UtilPlayer.isOnClimbable(p)
             || UtilPlayer.isFullyStuck(p)
+            || UtilPlayer.blocksAroundBelow(p)
             || UtilPlayer.isPartiallyStuck(p)
             || UtilPlayer.isOnClimbable(p, 1)
             || UtilPlayer.isOnClimbable(p, 0)

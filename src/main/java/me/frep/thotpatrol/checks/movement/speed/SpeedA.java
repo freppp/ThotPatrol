@@ -3,6 +3,7 @@ package me.frep.thotpatrol.checks.movement.speed;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -64,6 +65,7 @@ public class SpeedA extends Check {
                 || player.getVehicle() != null
                 || SpeedC.highKb.contains(player.getUniqueId())
                 || player.hasPermission("thotpatrol.bypass")
+                || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(player.getUniqueId(), 0L), 3000)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(player.getUniqueId(), 0L), 2000)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(uuid, 0L), 5000L)
                 && !player.hasPotionEffect(PotionEffectType.POISON)

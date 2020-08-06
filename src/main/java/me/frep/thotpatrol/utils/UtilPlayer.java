@@ -60,6 +60,18 @@ public class UtilPlayer {
 		return out;
 	}
 
+	public static boolean blocksAroundBelow(Player p) {
+		Block below = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
+		return below.getRelative(BlockFace.NORTH).getType().isSolid()
+				|| below.getRelative(BlockFace.EAST).getType().isSolid()
+				|| below.getRelative(BlockFace.SOUTH).getType().isSolid()
+				|| below.getRelative(BlockFace.WEST).getType().isSolid()
+				|| below.getRelative(BlockFace.NORTH_EAST).getType().isSolid()
+				|| below.getRelative(BlockFace.NORTH_WEST).getType().isSolid()
+				|| below.getRelative(BlockFace.SOUTH_EAST).getType().isSolid()
+				|| below.getRelative(BlockFace.SOUTH_WEST).getType().isSolid();
+	}
+
 	public static int getDistanceToGround(Player p) {
 		final Location loc = p.getLocation().clone();
 		final double y = loc.getBlockY();

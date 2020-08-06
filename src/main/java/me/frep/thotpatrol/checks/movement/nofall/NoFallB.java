@@ -31,6 +31,7 @@ public class NoFallB extends Check {
 		DataPlayer data = ThotPatrol.Instance.getDataManager().getData(p);
 		if (data != null) {
 			if (e.getTo().getY() > e.getFrom().getY()
+					|| UtilPlayer.blocksAroundBelow(p)
 					|| getThotPatrol().getLag().getTPS() < getThotPatrol().getTPSCancel()
 					|| getThotPatrol().getLag().getPing(p) > getThotPatrol().getPingCancel()) {
 				return;
