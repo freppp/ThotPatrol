@@ -2,6 +2,7 @@ package me.frep.thotpatrol.checks.movement.speed;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.data.DataPlayer;
 import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
@@ -46,7 +47,7 @@ public class SpeedC extends Check {
     }
 
 	@SuppressWarnings("deprecation")
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler
     public void onMove(PlayerMoveEvent e) {
         Location from = e.getFrom().clone();
         Location to = e.getTo().clone();
@@ -66,13 +67,17 @@ public class SpeedC extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || e.isCancelled()
+                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
                 || p.hasPermission("thotpatrol.bypass")
+                || !UtilTime.elapsed(SharedEvents.lastTeleport.getOrDefault(p.getUniqueId(), 0L), 4000)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()) return;
         double Airmaxspeed = 0.40;
-        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1500)) {
-            Airmaxspeed += .35;
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 3000)) {
+            Airmaxspeed += .85;
         }
+        if (!UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(p.getUniqueId(), 0L), 3000)) return;
         if (p.getMaximumNoDamageTicks() < 15) {
         	Airmaxspeed += .05;
         }
@@ -94,11 +99,6 @@ public class SpeedC extends Check {
         int ping = getThotPatrol().getLag().getPing(p);
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         Material below = p.getLocation().subtract(0, 1.5, 0).getBlock().getType();
-		if (DataPlayer.lastNearSlime !=null) {
-			if (DataPlayer.lastNearSlime.contains(p.getPlayer().getName().toString())) {
-				return;
-			}
-		}
         if (!UtilTime.elapsed(SpeedA.nearIce.getOrDefault(p.getUniqueId(), 0L), 4000)) {
             Airmaxspeed += .65;
         }

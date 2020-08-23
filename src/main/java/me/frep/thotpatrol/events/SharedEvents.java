@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.*;
 
@@ -22,6 +23,9 @@ public class SharedEvents implements Listener {
 	public static Set<UUID> teleported = new HashSet<>();
 	public static Set<UUID> worldChange = new HashSet<>();
 	public static Map<Player, Long> placedBlock = new HashMap<>();
+	public static Map<UUID, Long> bucketEmpty = new HashMap<>();
+	public static Map<UUID, Long> lastTeleport = new HashMap<>();
+	public static Map<UUID, Long> lastPearl = new HashMap<>();
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
 	public void onPlace(BlockPlaceEvent e) {
@@ -31,6 +35,7 @@ public class SharedEvents implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
 	public void onInteract(PlayerInteractEvent e) {
 		final Player p = e.getPlayer();
+		if (e.getItem() == null) return;
 		if (e.isCancelled()) {
 			if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
 				return;
@@ -42,6 +47,9 @@ public class SharedEvents implements Listener {
 					placedBlock.remove(p);
 				}
 			}, 100);
+		}
+		if (e.getItem().getType().toString().contains("_BUCKET")) {
+			bucketEmpty.put(p.getUniqueId(), System.currentTimeMillis());
 		}
 	}
 
@@ -55,6 +63,14 @@ public class SharedEvents implements Listener {
 		lastSprintStop.remove(p);
 		ThotPatrol.getInstance().getDataManager().addPlayerData(p);
 		ThotPatrol.getInstance().getDataManager().add(p);
+	}
+
+	@EventHandler
+	public void onTeleport(PlayerTeleportEvent e) {
+		if (!e.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
+			lastTeleport.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
+		}
+		if (e.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) lastPearl.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
 	}
 	
 	@SuppressWarnings("deprecation")

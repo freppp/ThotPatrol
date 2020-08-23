@@ -2,6 +2,7 @@ package me.frep.thotpatrol.checks.movement.ascension;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
@@ -50,6 +51,9 @@ public class AscensionD extends Check {
             || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
             || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
             || !UtilTime.elapsed(explosionTicks.getOrDefault(p.getUniqueId(), 0L), 4000)
+            || !UtilTime.elapsed(SharedEvents.lastTeleport.getOrDefault(p.getUniqueId(), 0L), 4000)
+            || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
+            || !UtilTime.elapsed(SharedEvents.lastPearl.getOrDefault(p.getUniqueId(), 0L), 2000)
             || p.getAllowFlight()
             || p.getVehicle() != null
             || !inAir(p)

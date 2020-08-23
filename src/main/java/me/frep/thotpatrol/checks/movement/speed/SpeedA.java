@@ -67,7 +67,7 @@ public class SpeedA extends Check {
                 || player.hasPermission("thotpatrol.bypass")
                 || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(player.getUniqueId(), 0L), 3000)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(player.getUniqueId(), 0L), 2000)
-                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(uuid, 0L), 5000L)
+                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(uuid, 0L), 6000L)
                 && !player.hasPotionEffect(PotionEffectType.POISON)
                 && !player.hasPotionEffect(PotionEffectType.WITHER) && player.getFireTicks() == 0) return;
         int Count = 0;

@@ -5,11 +5,13 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,16 +52,21 @@ public class SpiderC extends Check {
                 || p.hasPermission("thotpatrol.bypass")
                 || UtilBlock.isNearStair(p)
                 || UtilPlayer.isOnClimbable(p)
+                || !UtilTime.elapsed(SharedEvents.bucketEmpty.getOrDefault(p.getUniqueId(), 0L), 3000)
                 || !UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(p.getUniqueId(), 0L), 3000)
                 || !UtilTime.elapsed(AscensionA.lastNearSlime.getOrDefault(p.getUniqueId(), 0l), 2000)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p, 0)
                 || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(p.getUniqueId(), 0L), 5000)
+                || !UtilTime.elapsed(SharedEvents.lastPearl.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || !p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().equals(Material.AIR)
                 || !p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)
                 || p.hasPotionEffect(PotionEffectType.JUMP)) {
             return;
+        }
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+            if (b.getType().toString().contains("CHEST")) return;
         }
         double delta = UtilMath.offset(UtilMath.getVerticalVector(e.getFrom().toVector()), UtilMath.getVerticalVector(e.getTo().toVector()));
         List<Material> blocks = new ArrayList<>();

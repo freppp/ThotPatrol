@@ -57,6 +57,7 @@ public class InvalidMoveD extends Check {
                 if (b.getType().toString().contains("PISTON_") || b.getType().toString().contains("SLIME")) {
                     nearSlime.put(p.getUniqueId(), System.currentTimeMillis());
                 }
+                if (b.getType().toString().contains("FENCE")) return;
             }
             if (!UtilTime.elapsed(nearSlime.getOrDefault(p.getUniqueId(), 0L), 1500L)) {
                 maxSpeed += .75;

@@ -17,9 +17,9 @@ public class KillAuraN extends Check {
     private Map<UUID, Integer> verbose = new HashMap<>();
 
     public KillAuraN(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
-        super("KillAuraN", "Kill Aura (Type N) [#]", ThotPatrol);
+        super("KillAuraN", "Kill Aura (Type N)", ThotPatrol);
         setEnabled(true);
-        setBannable(false);
+        setBannable(true);
         setMaxViolations(8);
         setViolationResetTime(120000);
     }

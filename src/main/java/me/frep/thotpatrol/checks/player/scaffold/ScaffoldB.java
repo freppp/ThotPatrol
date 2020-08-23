@@ -38,6 +38,7 @@ public class ScaffoldB extends Check {
     public void onPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();
         if (p.getAllowFlight()
+            || e.isCancelled()
             || p.hasPermission("thotpatrol.bypass")) {
             return;
         }

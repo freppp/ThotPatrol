@@ -61,7 +61,7 @@ public class TimerA extends Check {
             this.lastPacket.put(uuid, System.currentTimeMillis());
             return;
         }
-        if (SharedEvents.worldChange.contains(uuid)) return;
+        if (SharedEvents.worldChange.contains(uuid) || !UtilTime.elapsed(SharedEvents.lastTeleport.getOrDefault(p.getUniqueId(), 0L), 4000)) return;
         double tps = getThotPatrol().getLag().getTPS();
         int ping = getThotPatrol().getLag().getPing(p);
         if (ping > 10000) return;

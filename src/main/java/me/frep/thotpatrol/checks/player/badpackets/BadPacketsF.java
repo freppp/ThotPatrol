@@ -3,6 +3,7 @@ package me.frep.thotpatrol.checks.player.badpackets;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.speed.SpeedH;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,11 +34,12 @@ public class BadPacketsF extends Check {
         if (p.getAllowFlight()) return;
         double distance = lastDist.getOrDefault(p.getUniqueId(), 0D);
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
-        double maxDistance = .15;
+        double maxDistance = .17;
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();
         if (!UtilTime.elapsed(SpeedH.airTicks.getOrDefault(p.getUniqueId(), 0L), 1000)
-            || !UtilTime.elapsed(getThotPatrol().getLastVelocity().getOrDefault(p.getUniqueId(), 0L), 1200)) {
+            || !UtilTime.elapsed(SharedEvents.lastTeleport.getOrDefault(p.getUniqueId(), 0L), 4000)
+            || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)) {
             maxDistance += .3;
         }
         for (PotionEffect effect : p.getActivePotionEffects()) {
@@ -50,6 +52,9 @@ public class BadPacketsF extends Check {
         }
         if (distance > maxDistance) {
             count++;
+        }
+        else {
+            if (count > 0) count -= .5;
         }
         if (count > 3) {
             count = 0;

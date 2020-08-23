@@ -2,6 +2,8 @@ package me.frep.thotpatrol.checks.movement.speed;
 
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
+import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilTime;
@@ -23,7 +25,7 @@ public class SpeedD extends Check {
         setMaxViolations(6);
     }
 
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler
     public void onMove(PlayerMoveEvent e) {
         Location from = e.getFrom().clone();
         Location to = e.getTo().clone();
@@ -38,13 +40,18 @@ public class SpeedD extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
-                || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2100)
+                || e.isCancelled()
+                || !UtilTime.elapsed(SharedEvents.lastTeleport.getOrDefault(p.getUniqueId(), 0L), 5000L)
+                || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)
                 || p.getGameMode().equals(GameMode.CREATIVE)
                 || p.getAllowFlight()
                 || p.hasPermission("thotpatrol.bypass")) return;
         double newmaxspeed = 0.75;
         if (!UtilTime.elapsed(SpeedA.nearIce.getOrDefault(p.getUniqueId(), 0L), 4000)) {
             newmaxspeed += .65;
+        }
+        if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 3000)) {
+            newmaxspeed += 1;
         }
         double speed = UtilMath.offset(getHV(to.toVector()), getHV(from.toVector()));
         if (p.hasPotionEffect(PotionEffectType.SPEED)) {
@@ -90,16 +97,6 @@ public class SpeedD extends Check {
         	getThotPatrol().logToFile(p, this, "Limit", "Speed: " + speed + " > " + newmaxspeed 
         			+ " | TPS: " + tps + " | Ping: " + ping);
         }
-    }
-    
-    public boolean isOnIce(final Player player) {
-        final Location a = player.getLocation();
-        a.setY(a.getY() - 1.0);
-        if (a.getBlock().getType().equals(Material.ICE)) {
-            return true;
-        }
-        a.setY(a.getY() - 1.0);
-        return a.getBlock().getType().equals(Material.ICE);
     }
 
     private int getPotionEffectLevel(Player p, PotionEffectType pet) {

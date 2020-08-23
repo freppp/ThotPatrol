@@ -28,9 +28,9 @@ public class SpeedH extends Check {
     private Map<UUID, Integer> verbose = new HashMap<>();
 
     public SpeedH(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
-        super("SpeedH", "Speed (Type H) [#]", ThotPatrol);
+        super("SpeedH", "Speed (Type H)", ThotPatrol);
         setEnabled(true);
-        setBannable(false);
+        setBannable(true);
         setMaxViolations(8);
     }
 
@@ -52,6 +52,7 @@ public class SpeedH extends Check {
                 || p.getVehicle() != null
                 || p.getAllowFlight()
                 || e.isCancelled()
+                || UtilPlayer.isWearingDepthStrider(p) && p.getLocation().getBlock().isLiquid()
                 || UtilPlayer.isOnStair(p.getLocation())
                 || !UtilTime.elapsed(airTicks.getOrDefault(p.getUniqueId(), 0L), 500)
                 || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)

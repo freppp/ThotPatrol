@@ -4,6 +4,7 @@ import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
+import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -103,6 +104,7 @@ public class SpeedE extends Check {
                 && (e.getTo().getY() == e.getFrom().getY())
                 || p.getNoDamageTicks() != 0
                 || p.getVehicle() != null
+                || UtilPlayer.isWearingDepthStrider(p) && p.getLocation().getBlock().isLiquid()
                 || !UtilTime.elapsed(teleported.getOrDefault(p.getUniqueId(), 0L), 2500)
                 || p.hasPermission("thotpatrol.bypass")
                 || p.getAllowFlight()) return;

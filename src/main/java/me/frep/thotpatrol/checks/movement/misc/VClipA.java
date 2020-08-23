@@ -3,8 +3,10 @@ package me.frep.thotpatrol.checks.movement.misc;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.data.DataPlayer;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilCheat;
+import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,6 +73,7 @@ public class VClipA extends Check {
                 || p.getAllowFlight()
                 || p.getVehicle() != null
                 || p.hasPermission("thotpatrol.bypass")
+                || !UtilTime.elapsed(SharedEvents.lastPearl.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || teleported.contains(p.getUniqueId())
                 || e.getTo().getY() <= 0 || e.getTo().getY() >= p.getWorld().getMaxHeight()

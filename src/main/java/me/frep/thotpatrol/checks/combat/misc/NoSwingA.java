@@ -43,20 +43,17 @@ public class NoSwingA extends Check {
 		if (ping > 500) return;
 		for (Plugin plugin : Bukkit.getServer().getPluginManager().getPlugins()) {
             if (plugin.getName().equals("StrikePractice")) {
-                if (p.getName().startsWith("BOT_") && p.getName().endsWith("Bot")) {
+                if (p.getName().contains("BOT")) {
                     return;
                 }
             }
         }
         if (getThotPatrol().isEnabled()) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask((Plugin)getThotPatrol(), new Runnable(){
-                @Override
-                public void run() {
-                    if (!hasSwung(p, 1200L)) {
-                        getThotPatrol().logCheat(NoSwingA.this, p, null);
-            			getThotPatrol().logToFile(p, NoSwingA.this, "Packet", "Ping: " 
-            					+ ping + " | TPS: " + tps);
-                    }
+            Bukkit.getScheduler().scheduleSyncDelayedTask(getThotPatrol(), () -> {
+                if (!hasSwung(p, 1200L)) {
+                    getThotPatrol().logCheat(NoSwingA.this, p, null);
+                    getThotPatrol().logToFile(p, NoSwingA.this, "Packet", "Ping: "
+                            + ping + " | TPS: " + tps);
                 }
             }, 10);
         }

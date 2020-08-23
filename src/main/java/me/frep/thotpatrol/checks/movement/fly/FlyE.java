@@ -62,6 +62,7 @@ public class FlyE extends Check {
             if (b.isLiquid()) {
                 return;
             }
+            if (b.toString().contains("SKULL") || b.getType().toString().contains("HEAD")) return;
         }
         if (deltaY < .25 && distanceToGround > 5) {
             count++;

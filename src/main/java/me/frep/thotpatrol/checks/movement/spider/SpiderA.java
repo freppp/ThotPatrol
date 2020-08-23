@@ -5,11 +5,13 @@ import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionD;
 import me.frep.thotpatrol.checks.movement.speed.SpeedI;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -49,6 +51,7 @@ public class SpiderA extends Check {
             || !UtilTime.elapsed(SpeedI.bowBoost.getOrDefault(p.getUniqueId(), 0L), 3000)
             || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(p.getUniqueId(), 0L), 5000)
             || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
+            || !UtilTime.elapsed(SharedEvents.lastPearl.getOrDefault(p.getUniqueId(), 0L), 2000)
             || UtilPlayer.isOnClimbable(p, 1)
             || UtilPlayer.isOnClimbable(p, 0)
             || !p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().equals(Material.AIR)
@@ -56,6 +59,9 @@ public class SpiderA extends Check {
             || delta == .4453744695041024
             || delta == .5926045976350451) {
             return;
+        }
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+            if (b.getType().toString().contains("CHEST")) return;
         }
         int ping = getThotPatrol().getLag().getPing(p);
         double tps = getThotPatrol().getLag().getTPS();

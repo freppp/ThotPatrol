@@ -35,9 +35,9 @@ public class SpeedI extends Check {
     public static Map<UUID, Long> bowBoost = new HashMap<>();
 
     public SpeedI(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
-        super("SpeedI", "Speed (Type I) [#]", ThotPatrol);
+        super("SpeedI", "Speed (Type I)", ThotPatrol);
         setEnabled(true);
-        setBannable(false);
+        setBannable(true);
         setMaxViolations(8);
     }
 
@@ -71,7 +71,6 @@ public class SpeedI extends Check {
         }
         if (e.getFrom().getX() == e.getTo().getX() && e.getFrom().getZ() == e.getFrom().getZ()
                 || UtilPlayer.isOnGround(p)
-                || SpeedC.highKb.contains(p.getUniqueId())
                 || p.getAllowFlight()
                 || p.getVehicle() != null
                 || e.isCancelled()
@@ -83,19 +82,17 @@ public class SpeedI extends Check {
                 || !UtilTime.elapsed(AscensionD.explosionTicks.getOrDefault(p.getUniqueId(), 0L), 2500)
                 || !UtilTime.elapsed(belowBlock.getOrDefault(p.getUniqueId(), 0L), 750L)
                 || !UtilTime.elapsed(invalidBlock.getOrDefault(p.getUniqueId(), 0L), 1000L)
-                || !UtilTime.elapsed(SharedEvents.getLastJoin().getOrDefault(p.getUniqueId(), 0L), 1500)
                 || !UtilTime.elapsed(AscensionA.toggleFlight.getOrDefault(p.getUniqueId(), 0L), 5000L)) {
             return;
         }
         double delta = UtilMath.offset(getHV(e.getTo().toVector()), getHV(e.getFrom().toVector()));
         double maxDelta = .35;
         if (!UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 1600)) {
-            maxDelta += .45;
+            maxDelta += .75;
         }
         if (!UtilTime.elapsed(bowBoost.getOrDefault(p.getUniqueId(), 0L), 2500)) {
             maxDelta += 1;
         }
-        if (!SpeedC.highKb.contains(p.getUniqueId())) return;
         for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 3)) {
             if (b.getType().toString().contains("ICE")) {
                 maxDelta += .2;

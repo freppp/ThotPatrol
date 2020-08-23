@@ -3,11 +3,13 @@ package me.frep.thotpatrol.checks.movement.spider;
 import me.frep.thotpatrol.ThotPatrol;
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.movement.ascension.AscensionA;
+import me.frep.thotpatrol.events.SharedEvents;
 import me.frep.thotpatrol.utils.UtilBlock;
 import me.frep.thotpatrol.utils.UtilMath;
 import me.frep.thotpatrol.utils.UtilPlayer;
 import me.frep.thotpatrol.utils.UtilTime;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -51,12 +53,16 @@ public class SpiderB extends Check {
                 || p.getWorld().getHighestBlockAt(p.getLocation()).getType().toString().contains("SLIME")
                 || UtilPlayer.isOnClimbable(p)
                 || !UtilTime.elapsed(getThotPatrol().lastDamage.getOrDefault(p.getUniqueId(), 0L), 2000)
+                || !UtilTime.elapsed(SharedEvents.lastPearl.getOrDefault(p.getUniqueId(), 0L), 2000)
                 || UtilPlayer.isOnClimbable(p, 1)
                 || UtilPlayer.isOnClimbable(p, 0)
                 || !p.getEyeLocation().clone().add(0, .5, 0).getBlock().getType().equals(Material.AIR)
                 || !p.getLocation().clone().add(0, -1, 0).getBlock().getType().equals(Material.AIR)
                 || p.hasPotionEffect(PotionEffectType.JUMP)) {
             return;
+        }
+        for (Block b : UtilBlock.getNearbyBlocks(p.getLocation(), 2)) {
+            if (b.getType().toString().contains("CHEST")) return;
         }
         int count = verbose.getOrDefault(p.getUniqueId(), 0);
         int ping = getThotPatrol().getLag().getPing(p);

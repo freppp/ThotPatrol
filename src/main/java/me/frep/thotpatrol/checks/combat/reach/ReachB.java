@@ -44,6 +44,7 @@ public class ReachB extends Check {
 			return;
 		}
 		double reach = Math.hypot(d.getLocation().getX() - v.getLocation().getX(), d.getLocation().getZ() - v.getLocation().getZ()) - .28;
+		if (reach > 7) return;
 		double maxReach = 3.4;
 		double yawDiff = Math.abs(180.0 - Math.abs(d.getLocation().getYaw() - v.getLocation().getYaw()));
 		double yDiff = Math.abs(d.getEyeLocation().getY() - v.getLocation().getY());

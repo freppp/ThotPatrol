@@ -40,7 +40,6 @@ me\frep\thotpatrol\utils\UtilJDay.class
 me\frep\thotpatrol\checks\combat\autoclicker\AutoClickerC.class
 me\frep\thotpatrol\checks\combat\killaura\KillAuraI.class
 me\frep\thotpatrol\checks\movement\misc\GravityA.class
-me\frep\thotpatrol\checks\combat\misc\NoSwingA$1.class
 me\frep\thotpatrol\checks\movement\invalidmove\InvalidMoveA.class
 me\frep\thotpatrol\checks\player\badpackets\BadPacketsD.class
 me\frep\thotpatrol\utils\UtilCheat.class

@@ -81,7 +81,7 @@ public class BadPacketsD extends Check {
         if (!blacklist.contains(player.getUniqueId())) {
             Count++;
             if ((packetTicks.containsKey(player.getUniqueId())) && (UtilTime.elapsed(Time, 1000L))) {
-                int maxPackets = 75;
+                int maxPackets = 80;
                 if (Count > maxPackets) {
                     if (!UtilPlayer.isFullyStuck(player) && !UtilPlayer.isPartiallyStuck(player)) {
                     	getThotPatrol().logCheat(this, player, "More Packets: " + Count + " | Ping:" + ping + " | TPS: " + tps);

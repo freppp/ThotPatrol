@@ -1,5 +1,5 @@
 name: ThotPatrol
-version: 1.4.8
+version: 1.5.1
 author: frep
 main: me.frep.thotpatrol.ThotPatrol
 load: STARTUP

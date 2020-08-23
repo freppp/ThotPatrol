@@ -48,6 +48,8 @@ public class GravityA extends Check {
 					|| p.getAllowFlight()
 					|| p.hasPermission("thotpatrol.bypass")
 					|| DataPlayer.getWasFlying() > 0
+					|| !UtilTime.elapsed(SharedEvents.lastPearl.getOrDefault(p.getUniqueId(), 0L), 2000)
+					|| !UtilTime.elapsed(SharedEvents.bucketEmpty.getOrDefault(p.getUniqueId(), 0L), 3000)
 					|| e.getPlayer().getVehicle() != null
 					|| p.getMaximumNoDamageTicks() < 16
 					|| p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SPONGE

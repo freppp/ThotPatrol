@@ -34,26 +34,6 @@ public class NoSlowdownA extends Check {
         speedTicks.remove(e.getPlayer().getUniqueId());
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onMove(PlayerMoveEvent e) {
-        Player player = e.getPlayer();
-        if (player.hasPermission("thotpatrol.bypass")) {
-        	return;
-        }
-        double OffsetXZ = UtilMath.offset(UtilMath.getHorizontalVector(e.getFrom().toVector()), UtilMath.getHorizontalVector(e.getTo().toVector()));
-        if (e.getTo().getX() == e.getFrom().getX()
-                && e.getFrom().getY() == e.getTo().getY()
-                && e.getTo().getZ() == e.getFrom().getZ()) return;
-        if (player.getAllowFlight()
-                || !player.getLocation().getBlock().getType().equals(Material.WEB)
-                || OffsetXZ < 0.2) return;
-		double tps = getThotPatrol().getLag().getTPS();
-		int ping = getThotPatrol().getLag().getPing(player);
-        getThotPatrol().logCheat(this, player, "[0] Offset: " + OffsetXZ);
-    	getThotPatrol().logToFile(player, this, "Ticks [B]", "Offset: " + 
-    			OffsetXZ + " | TPS: " + tps + " | Ping: " + ping);
-    }
-
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
     	Player player = event.getPlayer();

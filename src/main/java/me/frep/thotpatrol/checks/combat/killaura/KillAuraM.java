@@ -16,10 +16,8 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 public class KillAuraM extends Check {
 
-    // credits @funkemunky <3
-
-    private Map<UUID, Long> lastPacket = new ConcurrentSkipListMap<>();
-    private Map<UUID, Integer> verbose = new HashMap<>();
+    private final Map<UUID, Long> lastPacket = new HashMap<>();
+    private final Map<UUID, Integer> verbose = new HashMap<>();
 
     public KillAuraM(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("KillAuraM", "Kill Aura (Type M)", ThotPatrol);
@@ -37,7 +35,8 @@ public class KillAuraM extends Check {
 
     @EventHandler
     public void onPacket(PacketPlayerEvent e) {
-        if (e.getType().equals(PacketPlayerType.FLYING) || e.getType().equals(PacketPlayerType.POSLOOK) || e.getType().equals(PacketPlayerType.POSITION)) {
+        if (e.getType().equals(PacketPlayerType.FLYING) || e.getType().equals(PacketPlayerType.POSLOOK) || e.getType().equals(PacketPlayerType.POSITION)
+            || e.getType().equals(PacketPlayerType.LOOK)) {
             lastPacket.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
         }
     }
@@ -54,16 +53,14 @@ public class KillAuraM extends Check {
             || p.getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }
-        if (delta < 8 && ping < 300 && tps > 19.6) {
+        if (delta < 8 && ping < 250 && tps > 19.5) {
             count++;
             getThotPatrol().verbose(this, p, ping, tps, delta + " < 10");
             dumplog(p, "Delta: " + delta + " | Ping: " + ping + " | TPS: " + tps);
         } else {
-            if (count > 0) {
-                count--;
-            }
+            if (count > 0) count -= 3;
         }
-        if (count >= 6) {
+        if (count > 8) {
             count = 0;
             getThotPatrol().logCheat(this, p, "Packet | Ping " + ping + " | TPS: " + tps);
             getThotPatrol().logToFile(p, this, "Packet", "Delta: " + delta + " | TPS: " + tps + " | Ping: " + ping);

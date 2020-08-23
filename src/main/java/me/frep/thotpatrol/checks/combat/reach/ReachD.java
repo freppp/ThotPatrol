@@ -69,13 +69,13 @@ public class ReachD extends Check {
 			maxReach += .23;
 		}
 		maxReach += yawDiff > 100 && yDist < 0.1 ? yawDiff * 0.01 : yawDiff * 0.001;
-		maxReach += speed * .5;
+		maxReach += speed * .58;
 		maxReach += yDist * .75;
 		maxReach += ((ping + ping2) / 2) * 0.0034;
 		for (PotionEffect effect : d.getActivePotionEffects()) {
 			if (effect.getType().equals(PotionEffectType.SPEED)) {
 				int level = effect.getAmplifier() + 1;
-				maxReach += level * .06;
+				maxReach += level * .125;
 			}
 		}
 		if (reach > maxReach) {

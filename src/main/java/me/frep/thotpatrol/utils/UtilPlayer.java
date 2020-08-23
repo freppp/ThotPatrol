@@ -60,6 +60,13 @@ public class UtilPlayer {
 		return out;
 	}
 
+	public static boolean isWearingDepthStrider(Player p) {
+		if (p.getInventory().getBoots() != null) {
+			if (p.getInventory().getBoots().getEnchantmentLevel(Enchantment.getByName("DEPTH_STRIDER")) > 0) return true;
+		}
+		return false;
+	}
+
 	public static boolean blocksAroundBelow(Player p) {
 		Block below = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
 		return below.getRelative(BlockFace.NORTH).getType().isSolid()
