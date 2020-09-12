@@ -240,7 +240,7 @@ public class ThotPatrol extends JavaPlugin implements Listener {
                 for (Player online : Bukkit.getServer().getOnlinePlayers()) {
                     if (getConfig().getBoolean("settings.resetViolationsAutomatically")) {
                         if (online.hasPermission("thotpatrol.admin")) {
-                            System.out.println("[Thot Patrol] Reset violations for all players!");
+                            System.out.println("[Thot Patrol] Reset violations for all players.");
                             online.sendMessage(PREFIX + ChatColor.translateAlternateColorCodes('&', "&7Reset violations for all players!"));
                         }
                     }
