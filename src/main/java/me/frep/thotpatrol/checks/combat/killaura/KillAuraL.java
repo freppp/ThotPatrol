@@ -21,6 +21,8 @@ public class KillAuraL extends Check {
         setMaxViolations(8);
     }
 
+    //simple wall check
+
     @EventHandler
     public void onAttack(PacketAttackEvent e) {
         if (!(e.getEntity() instanceof Player)) return;

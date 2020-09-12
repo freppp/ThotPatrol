@@ -29,6 +29,8 @@ public class HackedClientB extends Check implements PluginMessageListener, Liste
 		setMaxViolations(0);
 	}
 
+	//i dont think this even works
+
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	public void onJoin(PlayerJoinEvent e) {
 		getClientType(e.getPlayer());

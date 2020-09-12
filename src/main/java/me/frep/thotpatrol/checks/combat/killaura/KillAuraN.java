@@ -16,6 +16,8 @@ public class KillAuraN extends Check {
     private Map<UUID, Long> lastClick = new HashMap<>();
     private Map<UUID, Integer> verbose = new HashMap<>();
 
+    // i dont know what this is either LOL
+
     public KillAuraN(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("KillAuraN", "Kill Aura (Type N)", ThotPatrol);
         setEnabled(true);

@@ -19,6 +19,8 @@ public class KillAuraJ extends Check {
     private List<UUID> blocking = new ArrayList<>();
     private Map<UUID, Double> lastDist = new HashMap<>();
 
+    // this is an auto block check, again you can make these in about 3 lines using packets, rather than this mess
+
     public KillAuraJ(me.frep.thotpatrol.ThotPatrol ThotPatrol) {
         super("KillAuraJ", "Kill Aura (Type J)", ThotPatrol);
         setEnabled(true);

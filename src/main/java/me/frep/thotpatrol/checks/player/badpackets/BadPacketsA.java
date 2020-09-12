@@ -28,6 +28,8 @@ public class BadPacketsA extends Check {
         setMaxViolations(3);
     }
 
+    //regen check that i dont even think works?
+
     @EventHandler
     public void onLog(PlayerQuitEvent e) {
         Player p = e.getPlayer();

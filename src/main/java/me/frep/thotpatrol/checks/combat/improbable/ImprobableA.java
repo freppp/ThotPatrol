@@ -22,6 +22,8 @@ public class ImprobableA extends Check {
         setBannable(true);
         setMaxViolations(2);
     }
+
+    //this literally just combines all of the combat violations into one check, very poorly optimized LOL
     
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {

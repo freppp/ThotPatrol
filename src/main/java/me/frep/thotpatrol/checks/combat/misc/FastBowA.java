@@ -27,6 +27,8 @@ public class FastBowA extends Check {
         count = new HashMap<>();
     }
 
+    //simple fast bow check, just getting delays between shots
+
     @EventHandler
     public void Interact(PlayerInteractEvent e) {
         Player p = e.getPlayer();

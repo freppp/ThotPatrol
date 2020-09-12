@@ -33,6 +33,8 @@ public class KillAuraI extends Check {
         setMaxViolations(8);
 		setViolationResetTime(120000);
 	}
+
+	// a really poorly made keep sprint check LOL, if you want an actually good keep sprint check then look at mine in Medusa here https://github.com/GladUrBad/Medusa/blob/master/src/main/java/com/gladurbad/medusa/check/impl/combat/killaura/KillauraB.java
     
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {

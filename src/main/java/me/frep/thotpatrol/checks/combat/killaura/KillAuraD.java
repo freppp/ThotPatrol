@@ -24,6 +24,8 @@ public class KillAuraD extends Check {
         setMaxViolations(6);
     }
 
+    //simple multi aura check, attacking multiple entities in a short period of time (this is much easier to do/much more accurate with flying packets)
+
     @EventHandler
     public void onLog(PlayerQuitEvent e) {
         lastAttack.remove(e.getPlayer());

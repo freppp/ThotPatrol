@@ -32,6 +32,8 @@ public class BadPacketsD extends Check {
         packetTicks = new HashMap<>();
     }
 
+    //more packets check
+
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent event) {
         blacklist.add(event.getPlayer().getUniqueId());

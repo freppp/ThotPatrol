@@ -16,6 +16,8 @@ public class HackedClientA extends Check implements PluginMessageListener {
         setMaxViolations(0);
     }
 
+    //cracked vape check lol
+
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent e) {
         e.getPlayer().sendMessage("§8 §8 §1 §3 §3 §7 §8 ");

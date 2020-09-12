@@ -27,6 +27,8 @@ public class KillAuraM extends Check {
         setViolationResetTime(120000);
     }
 
+    // this is post check, again, poorly made; look at Frequency for an actually good post check https://github.com/ElevatedDev/Frequency/blob/master/src/main/java/xyz/elevated/frequency/check/impl/killaura/KillAuraA.java
+
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         lastPacket.remove(e.getPlayer().getUniqueId());

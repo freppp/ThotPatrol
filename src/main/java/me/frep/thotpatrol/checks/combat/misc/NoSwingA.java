@@ -28,6 +28,8 @@ public class NoSwingA extends Check {
         setBannable(true);
     }
 
+    //very poorly made noswing check from janitor i think i dnt even know, again,  packets much better way to check for this
+
     //todo recode this
     @EventHandler(ignoreCancelled=true, priority=EventPriority.MONITOR)
     public void onDamage(EntityDamageByEntityEvent e) {

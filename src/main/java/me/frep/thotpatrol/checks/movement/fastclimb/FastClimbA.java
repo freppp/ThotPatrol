@@ -53,7 +53,7 @@ public class FastClimbA extends Check {
                 || yDiff <= 0
                 || UtilPlayer.isNearSlime(p)
                 || UtilPlayer.isNearPiston(p)
-                || jumpedValues.contains(yDiff)) {
+                || jumpedValues.contains(yDiff)) { // this is a really stupid way to fix this LOL
             return;
         }
         double offset = UtilMath.offset(UtilMath.getVerticalVector(e.getFrom().toVector()), UtilMath.getVerticalVector(e.getTo().toVector()));

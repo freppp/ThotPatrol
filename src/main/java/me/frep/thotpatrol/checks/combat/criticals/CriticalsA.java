@@ -38,6 +38,8 @@ public class CriticalsA extends Check {
         }
     }
 
+    //simple criticals check
+
     @SuppressWarnings("deprecation")
 	@EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {

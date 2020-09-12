@@ -34,6 +34,8 @@ public class ScaffoldB extends Check {
         lastSpeed.put(e.getPlayer().getUniqueId(), speed);
     }
 
+    //todo a somewhat decent tower check
+
     @EventHandler
     public void onPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();

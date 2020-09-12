@@ -21,6 +21,9 @@ public class HackedClientC extends Check {
         setMaxViolations(25);
     }
 
+
+    //this will detect every client ever
+
     @EventHandler //for the memes lool
     public void onTabComplete(PlayerChatTabCompleteEvent e) {
         if (e.getChatMessage().startsWith(".") && UtilTime.elapsed(lastViolation.getOrDefault(e.getPlayer().getUniqueId(), 0L), 5000)) {

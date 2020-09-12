@@ -17,6 +17,8 @@ public class ScaffoldA extends Check {
         setMaxViolations(3);
     }
 
+    // todo this check is 500 iq you can ban off of 1 vl
+
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();

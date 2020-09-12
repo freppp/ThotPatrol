@@ -21,4 +21,6 @@ public class KillAuraH extends Check {
 		setMaxViolations(9);
 		setViolationResetTime(120000);
 	}
+
+	//this was a double click check but i removed it since everyone it complained when people were annoying and butterfly clicked
 }

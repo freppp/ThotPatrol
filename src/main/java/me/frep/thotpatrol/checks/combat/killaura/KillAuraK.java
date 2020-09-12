@@ -30,6 +30,8 @@ public class KillAuraK extends Check {
         setViolationResetTime(120000);
     }
 
+    // this checks if they are moving in the air and attacking too quickly, could be a good check but poor execution (bukkit events :( )
+
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();

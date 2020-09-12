@@ -31,6 +31,8 @@ public class ReachD extends Check {
         setMaxViolations(7);
 		setViolationResetTime(120000);
     }
+
+    //todo this is a somewhat decent blatant reach check, it shouldnt false too much, but obviously using PacketPlayOutRelEntityMove and AABB is much more accurate than anything that will be found in here
     
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {

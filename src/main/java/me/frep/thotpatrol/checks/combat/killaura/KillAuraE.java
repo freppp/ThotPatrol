@@ -19,6 +19,8 @@ public class KillAuraE extends Check {
         setMaxViolations(13);
         setViolationResetTime(120000);
     }
+
+    //one of funke's checks, pretty good at detecting some auras
 	
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	private void onAttack(PacketAttackEvent e) {

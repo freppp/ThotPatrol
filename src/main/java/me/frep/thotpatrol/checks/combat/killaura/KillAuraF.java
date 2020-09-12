@@ -22,6 +22,8 @@ public class KillAuraF extends Check {
         setBannable(true);
         setMaxViolations(10);
     }
+
+    //i dont even know what this is either
     
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	public void onHit(EntityDamageByEntityEvent e) {

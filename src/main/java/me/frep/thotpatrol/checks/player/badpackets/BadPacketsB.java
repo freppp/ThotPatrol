@@ -14,6 +14,8 @@ public class BadPacketsB extends Check {
         setBannable(true);
         setMaxViolations(1);
     }
+
+    // simple pitch > 90 check
     
     @EventHandler
     public void Player(PacketPlayerEvent e) {
@@ -23,7 +25,7 @@ public class BadPacketsB extends Check {
         }
         int ping = getThotPatrol().getLag().getPing(e.getPlayer());
         double tps = getThotPatrol().getLag().getTPS();
-        if ((e.getPitch() > 90.1F) || (e.getPitch() < -90.1F)) {
+        if ((e.getPitch() > 90.1F) || (e.getPitch() < -90.1F)) { // use Math.abs wtf
         	getThotPatrol().logCheat(this, e.getPlayer(), "Invalid Look Packets | Ping:" + ping + " | TPS: " + tps);
         	getThotPatrol().logToFile(e.getPlayer(), this, "Twitch", "Pitch: " + e.getPitch() + 
         			" | TPS: " + tps + " | Ping: " + ping);

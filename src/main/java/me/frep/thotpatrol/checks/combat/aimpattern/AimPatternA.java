@@ -22,6 +22,9 @@ public class AimPatternA extends Check {
         setMaxViolations(7);
     }
 
+    /*This checks for consistent yaw differences in some aim assists (this is very poorly made as you can see LOL)
+    should probably put that lastYaw variable up there in a map*/
+
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();

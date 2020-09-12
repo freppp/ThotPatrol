@@ -25,6 +25,8 @@ public class BadPacketsC extends Check {
         crashTicks2 = new HashMap<>();
         crashers = new ArrayList<>();
     }
+
+    //catches some crashers
     
     @EventHandler
     public void Swing(final PacketSwingArmEvent e) {

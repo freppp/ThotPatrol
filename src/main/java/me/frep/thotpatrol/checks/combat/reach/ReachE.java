@@ -27,6 +27,8 @@ public class ReachE extends Check {
         setMaxViolations(5);
     }
 
+    //todo average reach check, idek
+
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         lastReaches.remove(e.getPlayer().getUniqueId());

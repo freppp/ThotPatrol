@@ -19,6 +19,8 @@ public class CriticalsB extends Check {
         setBannable(true);
         setMaxViolations(4);
     }
+
+    // i dont even know what this is
 	
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
 	private void onAttack(EntityDamageByEntityEvent e) {

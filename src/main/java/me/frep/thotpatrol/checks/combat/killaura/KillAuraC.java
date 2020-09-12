@@ -33,6 +33,8 @@ public class KillAuraC extends Check {
         setViolationResetTime(120000);
     }
 
+    // what are naming conventions (i didnt make this ok) but another hitbox check
+
     @EventHandler
     public void onLogout(PlayerQuitEvent e) {
         AimbotTicks.remove(e.getPlayer().getUniqueId());

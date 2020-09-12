@@ -25,6 +25,8 @@ public class ReachA extends Check {
         setBannable(true);
         setMaxViolations(8);
     }
+
+    //this was the first check i ever made in like 2017 probably the worst thing ever but LOL
     
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {

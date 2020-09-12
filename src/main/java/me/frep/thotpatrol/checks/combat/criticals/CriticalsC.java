@@ -28,6 +28,8 @@ public class CriticalsC extends Check {
         setMaxViolations(5);
     }
 
+    //todo i dont even know if this works anymore, but if it does then it should catch most criticals
+
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();

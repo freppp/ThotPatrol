@@ -27,6 +27,8 @@ public class AutoClickerC extends Check {
         ClickTicks = new HashMap<>();
     }
 
+    // this is like the same thing as Kill Aura (Type A) im not even sure why its here
+
     @EventHandler
     public void onLog(PlayerQuitEvent e) {
         Player p = e.getPlayer();
@@ -40,6 +42,7 @@ public class AutoClickerC extends Check {
 
     @EventHandler
     public void UseEntity(PacketUseEntityEvent e) {
+        // using arm animations/flyings for autoclickers is a lot more accurate
         if (e.getAction() != EnumWrappers.EntityUseAction.ATTACK) return;
         Player damager = e.getAttacker();
         UUID uuid = damager.getUniqueId();

@@ -20,6 +20,8 @@ public class KillAuraG extends Check {
         setBannable(true);
         setMaxViolations(6);
     }
+
+    //this checks if they are sending attack packets while in a GUI, simple, but better with packets
 	
 	private List<UUID> inInventory = new ArrayList<UUID>();
 	private Map<UUID, Integer> count = new HashMap<UUID, Integer>();

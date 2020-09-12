@@ -2,7 +2,6 @@ package me.frep.thotpatrol;
 
 import me.frep.thotpatrol.checks.Check;
 import me.frep.thotpatrol.checks.combat.aimpattern.AimPatternA;
-import me.frep.thotpatrol.checks.combat.aimpattern.AimPatternB;
 import me.frep.thotpatrol.checks.combat.autoclicker.AutoClickerA;
 import me.frep.thotpatrol.checks.combat.autoclicker.AutoClickerB;
 import me.frep.thotpatrol.checks.combat.autoclicker.AutoClickerC;
@@ -31,7 +30,6 @@ import me.frep.thotpatrol.checks.movement.misc.VClipA;
 import me.frep.thotpatrol.checks.movement.nofall.NoFallA;
 import me.frep.thotpatrol.checks.movement.nofall.NoFallB;
 import me.frep.thotpatrol.checks.movement.noslowdown.NoSlowdownA;
-import me.frep.thotpatrol.checks.movement.noslowdown.NoSlowdownB;
 import me.frep.thotpatrol.checks.movement.sneak.SneakA;
 import me.frep.thotpatrol.checks.movement.speed.*;
 import me.frep.thotpatrol.checks.movement.spider.SpiderA;

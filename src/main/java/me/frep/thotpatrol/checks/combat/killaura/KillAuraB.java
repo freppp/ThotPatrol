@@ -34,6 +34,8 @@ public class KillAuraB extends Check {
         AuraTicks.remove(uuid);
     }
 
+    // hitbox check
+
     @EventHandler
     public void UseEntity(PacketAttackEvent e) {
 		Player damager = e.getPlayer();

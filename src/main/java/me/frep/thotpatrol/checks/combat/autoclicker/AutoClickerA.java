@@ -26,15 +26,19 @@ public class AutoClickerA extends Check {
         setBannable(true);
         setMaxViolations(7);
     }
+
+    //A simple click speed check
     
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
     	if (attackTicks.containsKey(e.getPlayer().getUniqueId())) {
+    	    attackTicks.remove(e.getPlayer().getUniqueId());
         }
     }
     
 	@EventHandler(ignoreCancelled=true, priority=EventPriority.HIGH)
     public void UseEntity(PacketUseEntityEvent e) {
+        //using arm animations/flyings for autoclickers is much better
         if (e.getAction() != EnumWrappers.EntityUseAction.ATTACK
         		|| e.getAttacker() == null) {
             return;

@@ -39,6 +39,8 @@ public class KillAuraA extends Check {
         ClickTicks.remove(uuid);
     }
 
+    //click pattern check
+
     @EventHandler
     public void UseEntity(PacketUseEntityEvent e) {
         if (e.getAction() != EnumWrappers.EntityUseAction.ATTACK) {
